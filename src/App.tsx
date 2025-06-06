@@ -9,7 +9,9 @@ import Education from './components/Education';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import particlesOptions from "./components/particles.json";
+import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
+import StarsCanvas from "./components/StarCanvas";
 
 function App() {
   // Dark mode state (auto-detect system preference)
@@ -34,8 +36,9 @@ function App() {
 
   return (
     <div className={`app-root${darkMode ? ' dark' : ''}`}>
-      {init && <Particles options={particlesOptions as unknown as RecursivePartial<IOptions>} />}
+      {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <StarsCanvas />
       <main>
         <Hero />
         <Projects />

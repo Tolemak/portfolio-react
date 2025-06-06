@@ -10,16 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "@react-three/drei": "^10.1.2",
+    "@react-three/fiber": "^9.1.2",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/plugin-emitters": "^3.8.0",
     "@tsparticles/plugin-emitters-shape-circle": "^3.8.1",
     "@tsparticles/plugin-emitters-shape-square": "^3.7.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-tsparticles": "^2.12.2",
-    "tsparticles": "^3.8.1"
+    "tsparticles": "^3.8.1",
+    "maath": "^0.10.8",
+       "random": "^5.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
