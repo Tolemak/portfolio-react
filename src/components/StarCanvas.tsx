@@ -136,8 +136,12 @@ const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
   );
 };
 
-const StarsCanvas = () => {
+const StarsCanvas = ({ onSplashEnd }: { onSplashEnd?: () => void }) => {
   const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    if (!showSplash && onSplashEnd) onSplashEnd();
+  }, [showSplash, onSplashEnd]);
 
   return showSplash ? (
     <StarSplash onFadeOut={() => setShowSplash(false)} />
