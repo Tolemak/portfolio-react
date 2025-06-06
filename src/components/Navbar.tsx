@@ -1,4 +1,5 @@
 import React from 'react';
+import { navbar } from '../data/navbar';
 
 type NavbarProps = {
   darkMode: boolean;
@@ -9,11 +10,11 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
   return (
     <nav className="navbar">
       <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#projects">Projekty</a></li>
-        <li><a href="#skills">Umiejętności</a></li>
-        <li><a href="#experience">Doświadczenie</a></li>
-        <li><a href="#education">Edukacja</a></li>
+        {navbar.map((item) => (
+          <li key={item.to}>
+            <a href={item.to}>{item.title}</a>
+          </li>
+        ))}
       </ul>
       <button
         className="theme-toggle"
