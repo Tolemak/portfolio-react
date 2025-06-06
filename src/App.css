@@ -6,12 +6,13 @@ html, body, #root, .app-root {
   box-sizing: border-box;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   background: var(--bg-main);
+  background-attachment: fixed;
   color: var(--text-main);
   transition: background 0.3s, color 0.3s;
 }
 
 :root {
-  --bg-main: #f7f7fa;
+  --bg-main: linear-gradient(135deg, #fff 0%, #b3e0ff 100%);
   --bg-section: #fff;
   --text-main: #1a1a1a;
   --accent: #646cff;
@@ -21,7 +22,7 @@ html, body, #root, .app-root {
   --shadow: 0 2px 16px 0 rgba(40,40,80,0.08);
 }
 [data-theme='dark'] {
-  --bg-main: #181a20;
+  --bg-main: linear-gradient(135deg, #12002b 0%, #000 100%);
   --bg-section: #23262f;
   --text-main: #f7f7fa;
   --accent: #8ab4f8;
