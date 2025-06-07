@@ -1,11 +1,39 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
-import { Mesh, MeshStandardMaterial } from 'three';
+import { Mesh, MeshStandardMaterial, Object3D } from 'three';
 
 export default function SatelliteModel(props: Record<string, unknown>) {
   const { scene } = useGLTF('/assets/satelite/scene.gltf');
   const [hovered, setHovered] = React.useState(false);
+  // Klonujemy scene, aby satelita był niezależnym obiektem
   const cloned = React.useMemo(() => scene.clone(true), [scene]);
+
+  // Odchudzenie modelu: wyłącz cienie i zmniejsz jakość materiałów
+  React.useEffect(() => {
+    cloned.traverse((obj: Object3D) => {
+      if ((obj as Mesh).isMesh) {
+        const mesh = obj as Mesh;
+        mesh.castShadow = false;
+        mesh.receiveShadow = false;
+        // Zmień materiał na MeshStandardMaterial o uproszczonych parametrach
+        if (mesh.material) {
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach((mat) => {
+              if ((mat as MeshStandardMaterial).metalness !== undefined) {
+                (mat as MeshStandardMaterial).metalness = 0.1;
+                (mat as MeshStandardMaterial).roughness = 0.9;
+              }
+            });
+          } else if ((mesh.material as MeshStandardMaterial).metalness !== undefined) {
+            (mesh.material as MeshStandardMaterial).metalness = 0.1;
+            (mesh.material as MeshStandardMaterial).roughness = 0.9;
+          }
+        }
+      }
+    });
+  }, [cloned]);
+
+  // Ustawienie koloru wszystkich meshów w modelu
   const setColor = React.useCallback((color: string) => {
     cloned.traverse((obj) => {
       if ((obj as Mesh).isMesh) {
@@ -22,17 +50,20 @@ export default function SatelliteModel(props: Record<string, unknown>) {
       }
     });
   }, [cloned]);
+
   React.useEffect(() => {
     setColor(hovered ? '#b3e0ff' : '#888');
   }, [hovered, setColor]);
+
   return (
     <primitive
       object={cloned}
       {...props}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      castShadow
-      receiveShadow
+      // Wyłącz cienie na poziomie komponentu
+      castShadow={false}
+      receiveShadow={false}
     />
   );
 }

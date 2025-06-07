@@ -36,6 +36,31 @@ export default function MeteorModel(props: Record<string, unknown>) {
     setColor(hovered ? HIGHLIGHT_COLOR : DEFAULT_COLOR);
   }, [hovered, setColor]);
 
+  // Odchudzenie modelu: wyłącz cienie i zmniejsz jakość materiałów
+  React.useEffect(() => {
+    cloned.traverse((obj: Object3D) => {
+      if ((obj as Mesh).isMesh) {
+        const mesh = obj as Mesh;
+        mesh.castShadow = false;
+        mesh.receiveShadow = false;
+        // Zmień materiał na MeshStandardMaterial o uproszczonych parametrach
+        if (mesh.material) {
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach((mat) => {
+              if ((mat as MeshStandardMaterial).metalness !== undefined) {
+                (mat as MeshStandardMaterial).metalness = 0.1;
+                (mat as MeshStandardMaterial).roughness = 0.9;
+              }
+            });
+          } else if ((mesh.material as MeshStandardMaterial).metalness !== undefined) {
+            (mesh.material as MeshStandardMaterial).metalness = 0.1;
+            (mesh.material as MeshStandardMaterial).roughness = 0.9;
+          }
+        }
+      }
+    });
+  }, [cloned]);
+
   return (
     <primitive
       object={cloned}
