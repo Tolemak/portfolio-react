@@ -7,10 +7,11 @@ import particlesOptions from "./components/particles.json";
 import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import StarsCanvas from "./components/StarCanvas";
+import About from './components/About';
 
 function App() {
   // Dark mode state (auto-detect system preference)
-  const [darkMode] = useState(() =>
+  const [darkMode, setDarkMode] = useState(() =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const [init, setInit] = useState(false);
@@ -35,10 +36,13 @@ function App() {
       {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
       {/* Splash + ISSMenu logic */}
       {showISSMenu ? (
-        <ISSMenu />
+        <ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />
       ) : (
         <StarsCanvas onSplashEnd={() => setShowISSMenu(true)} />
       )}
+      {/* About section always available for /about route */}
+      {/* Routing logic for About (simple version) */}
+      {window.location.pathname === '/about' && <About />}
     </div>
   );
 }

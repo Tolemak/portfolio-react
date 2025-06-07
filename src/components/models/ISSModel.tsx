@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { Mesh, MeshStandardMaterial, Object3D } from 'three';
 
+const HIGHLIGHT_COLOR = '#b3e0ff';
+const DEFAULT_COLOR = '#888';
+
 export default function ISSModel(props: Record<string, unknown>) {
   const { scene } = useGLTF('/assets/la_station_spatiale_internationale_iss/scene.gltf');
+  const [hovered, setHovered] = useState(false);
+  const cloned = useMemo(() => scene.clone(true), [scene]);
+
   // Optimize: disable shadows, simplify materials
   React.useEffect(() => {
-    scene.traverse((obj: Object3D) => {
+    cloned.traverse((obj: Object3D) => {
       if ((obj as Mesh).isMesh) {
         const mesh = obj as Mesh;
         mesh.castShadow = false;
@@ -26,6 +32,36 @@ export default function ISSModel(props: Record<string, unknown>) {
         }
       }
     });
-  }, [scene]);
-  return <primitive object={scene} {...props} />;
+  }, [cloned]);
+
+  // Highlight on hover
+  const setColor = useCallback((color: string) => {
+    cloned.traverse((obj: Object3D) => {
+      if ((obj as Mesh).isMesh) {
+        const mesh = obj as Mesh;
+        if (Array.isArray(mesh.material)) {
+          mesh.material.forEach((mat) => {
+            if ((mat as MeshStandardMaterial).color) {
+              (mat as MeshStandardMaterial).color.set(color);
+            }
+          });
+        } else if ((mesh.material as MeshStandardMaterial).color) {
+          (mesh.material as MeshStandardMaterial).color.set(color);
+        }
+      }
+    });
+  }, [cloned]);
+
+  React.useEffect(() => {
+    setColor(hovered ? HIGHLIGHT_COLOR : DEFAULT_COLOR);
+  }, [hovered, setColor]);
+
+  return (
+    <primitive
+      object={cloned}
+      {...props}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    />
+  );
 }
