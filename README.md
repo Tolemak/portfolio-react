@@ -29,3 +29,4 @@ Aplikacja będzie dostępna domyślnie pod adresem http://localhost:5173
 ---
 
 Portfolio Kamil Gałkowski
+
