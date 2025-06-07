@@ -8,6 +8,7 @@ import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
 import ISSModel from './models/ISSModel';
 import SpacemanModel from './models/SpacemanModel';
+import SputnikModel from './models/SputnikModel';
 
 const AnimatedCamera = () => {
   const ref = useRef<PerspectiveCameraType>(null);
@@ -37,7 +38,7 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-const METEOR_SCALE = 2.5 * 4;
+const METEOR_SCALE = 2.5 * 3;
 
 const ISSMenu: React.FC = () => {
   return (
@@ -75,6 +76,7 @@ const ISSMenu: React.FC = () => {
           <MeteorModel position={[85, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
           <SatelliteModel position={[-30, -60, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
           <SpacemanModel position={[40, 110, 80]} scale={METEOR_SCALE * 0.15} rotation={[0, Math.PI / 2 + Math.PI, 0]} />
+          <SputnikModel position={[-10, 80, 60]} scale={METEOR_SCALE} rotation={[0, Math.PI / 3, 0]} />
           {/* Tutaj możesz dodać kolejne elementy 3D */}
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
         </Canvas>
