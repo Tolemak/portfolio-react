@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { experience } from '../data/experience';
 import { skills } from '../data/skills';
 import type { SkillItem } from '../data/skills';
-import Modal from './Modal';
+import SkillModal from './SkillModal';
+import SkillTag from './SkillTag';
 import { useT } from '../data/i18n';
 
 const Experience: React.FC = () => {
@@ -12,6 +13,14 @@ const Experience: React.FC = () => {
   // Helper: znajdź skill po slug
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
 
+  // Helper do tłumaczenia opisu doświadczenia
+  const getExperienceDesc = (item: typeof experience[number]) => {
+    // Spróbuj pobrać tłumaczenie z t.experience["tiles"][item.slug]?.desc
+    // Jeśli nie istnieje, zwróć item.description
+    // @ts-expect-error: tiles może nie istnieć
+    return t.experience && t.experience["tiles"] && t.experience["tiles"][item.slug]?.desc ? t.experience["tiles"][item.slug].desc : item.description;
+  };
+
   return (
     <section id="experience" className="experience-section">
       <h2>{t.experience.title}</h2>
@@ -19,7 +28,7 @@ const Experience: React.FC = () => {
         {experience.map((item) => (
           <div key={item.slug} className="experience-item fancy-card" style={{ borderColor: item.color }}>
             <div className="experience-header">
-              <strong>{item.name}</strong> <span>({item.company})</span>
+              <strong>{((t.experience.tiles as Record<string, {desc:string;name:string}>)[item.slug]?.name || item.name)}</strong> <span>({item.company})</span>
             </div>
             <div className="experience-period-location">
               <span>{item.location}</span>
@@ -27,55 +36,23 @@ const Experience: React.FC = () => {
                 {item.period.from.getFullYear()} - {item.period.to ? item.period.to.getFullYear() : 'obecnie'}
               </span>
             </div>
-            <div className="experience-description">{item.description}</div>
+            <div className="experience-description">
+              {getExperienceDesc(item)}
+            </div>
             <div className="experience-skills">
               <strong>{t.experience.stack}</strong>{' '}
               {item.skills.map((slug) => {
                 const skill = getSkillBySlug(slug);
                 if (!skill) return null;
                 return (
-                  <span
-                    key={slug}
-                    className="skill-tag"
-                    style={{ borderColor: skill.color, color: skill.color }}
-                    onClick={() => setModalSkill(skill)}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={e => { if (e.key === 'Enter') setModalSkill(skill); }}
-                  >
-                    <img src={skill.logo} alt={skill.name} className="skill-tag-logo" />
-                    {skill.name}
-                  </span>
+                  <SkillTag key={slug} skill={skill} onClick={setModalSkill} />
                 );
               })}
             </div>
           </div>
         ))}
       </div>
-      <Modal isOpen={!!modalSkill} onClose={() => setModalSkill(null)}>
-        {modalSkill && (
-          <div className="modal-skill-details">
-            <div className="modal-skill-header">
-              <img src={modalSkill.logo} alt={modalSkill.name} className="modal-skill-logo" />
-              <div>
-                <h3>{modalSkill.name}</h3>
-                <span className="modal-skill-category">{modalSkill.category}</span>
-              </div>
-            </div>
-            <p>{modalSkill.description}</p>
-            <div className="modal-skill-used-in">
-              <strong>{t.experience.usedIn}</strong>
-              <ul>
-                {experience.filter((exp) => exp.skills.includes(modalSkill.slug)).map((exp) => (
-                  <li key={exp.slug}>
-                    <span style={{ color: exp.color }}>{exp.name}</span> <span>({exp.company})</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-      </Modal>
+      <SkillModal skill={modalSkill} isOpen={!!modalSkill} onClose={() => setModalSkill(null)} />
       <style>{`
         .experience-section {
           background: none !important;
@@ -126,55 +103,6 @@ const Experience: React.FC = () => {
         }
         .experience-skills {
           margin-top: 0.5em;
-        }
-        .skill-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5em;
-          border: 1.5px solid;
-          border-radius: 1em;
-          padding: 0.2em 0.7em 0.2em 0.4em;
-          margin: 0 0.3em 0.3em 0;
-          font-size: 0.98em;
-          background: #f5faff;
-          cursor: pointer;
-          transition: background 0.15s, box-shadow 0.15s;
-          box-shadow: 0 1px 6px 0 rgba(0,0,0,0.08);
-        }
-        .skill-tag-logo {
-          width: 1.3em;
-          height: 1.3em;
-          object-fit: contain;
-          background: #fff;
-          border-radius: 50%;
-          box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
-        }
-        .skill-tag:hover, .skill-tag:focus {
-          background: #e3f1ff;
-        }
-        .modal-skill-header {
-          display: flex;
-          align-items: center;
-          gap: 1.2rem;
-        }
-        .modal-skill-logo {
-          width: 48px;
-          height: 48px;
-          border-radius: 0.5em;
-          background: #fff;
-          object-fit: contain;
-          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-        }
-        .modal-skill-category {
-          font-size: 0.95em;
-          color: #aaa;
-        }
-        .modal-skill-used-in ul {
-          margin: 0.5em 0 0 1em;
-          padding: 0;
-        }
-        .modal-skill-used-in li {
-          margin-bottom: 0.2em;
         }
         @media (prefers-color-scheme: dark) {
           .experience-item.fancy-card {

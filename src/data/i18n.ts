@@ -19,7 +19,13 @@ export const translations = {
     experience: {
       title: 'Doświadczenie',
       stack: 'Stack:',
-      usedIn: 'Używane w doświadczeniach:'
+      usedIn: 'Używane w doświadczeniach:',
+      tiles: {
+        'software-freelance-junior': {
+          desc: 'Rozwój i utrzymanie aplikacji webowej łączącej ERP i CRM. Tworzenie nowych funkcjonalności oraz integracje z REST API w odpowiedzi na potrzeby klienta.',
+          name: 'Web Developer (Freelancer)'
+        }
+      }
     },
     skills: {
       title: 'Umiejętności',
@@ -63,7 +69,7 @@ export const translations = {
       title: 'Edukacja',
       subjects: 'Przedmioty:',
       degree: {
-        'Bachelor degree of biomedical engineering': 'Inżynieria biomedyczna (licencjat)',
+        'Bachelor degree of biomedical engineering': 'Inżynieria biomedyczna (inżynier)',
         'Master degree of IT project management': 'Zarządzanie projektami IT (magister)',
       }
     },
@@ -97,7 +103,13 @@ export const translations = {
     experience: {
       title: 'Experience',
       stack: 'Stack:',
-      usedIn: 'Used in experience:'
+      usedIn: 'Used in experience:',
+      tiles: {
+        'software-freelance-junior': {
+          desc: 'Development and maintenance of a web application combining ERP and CRM. Creating new functionalities and integrations with REST API in response to customer needs.',
+          name: 'Web Developer (Freelancer)'
+        }
+      }
     },
     skills: {
       title: 'Skills',

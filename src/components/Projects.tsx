@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { projects } from '../data/projects';
 import { skills } from '../data/skills';
-import Modal from './Modal';
+import SkillModal from './SkillModal';
+import SkillTag from './SkillTag';
 import type { SkillItem } from '../data/skills';
 import { useT } from '../data/i18n';
 
@@ -34,18 +35,7 @@ const Projects: React.FC = () => {
                 const skill = getSkillBySlug(slug);
                 if (!skill) return null;
                 return (
-                  <span
-                    key={slug}
-                    className="skill-tag"
-                    style={{ borderColor: skill.color, color: skill.color }}
-                    onClick={() => setModalSkill(skill)}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={e => { if (e.key === 'Enter') setModalSkill(skill); }}
-                  >
-                    <img src={skill.logo} alt={skill.name} className="skill-tag-logo" />
-                    {skill.name}
-                  </span>
+                  <SkillTag key={slug} skill={skill} onClick={(skill) => setModalSkill(skill)} />
                 );
               })}
             </div>
@@ -55,20 +45,7 @@ const Projects: React.FC = () => {
           </div>
         ))}
       </div>
-      <Modal isOpen={!!modalSkill} onClose={() => setModalSkill(null)}>
-        {modalSkill && (
-          <div className="modal-skill-details">
-            <div className="modal-skill-header">
-              <img src={modalSkill.logo} alt={modalSkill.name} className="modal-skill-logo" />
-              <div>
-                <h3>{modalSkill.name}</h3>
-                <span className="modal-skill-category">{modalSkill.category}</span>
-              </div>
-            </div>
-            <p>{modalSkill.description}</p>
-          </div>
-        )}
-      </Modal>
+      <SkillModal skill={modalSkill} isOpen={!!modalSkill} onClose={() => setModalSkill(null)} />
       <style>{`
         .projects-section {
           background: none !important;
@@ -131,54 +108,10 @@ const Projects: React.FC = () => {
         .project-skills {
           margin-top: 0.5em;
         }
-        .skill-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5em;
-          border: 1.5px solid;
-          border-radius: 1em;
-          padding: 0.2em 0.7em 0.2em 0.4em;
-          margin: 0 0.3em 0.3em 0;
-          font-size: 0.98em;
-          background: rgba(255,255,255,0.07);
-          cursor: pointer;
-          transition: background 0.15s, box-shadow 0.15s;
-          box-shadow: 0 1px 6px 0 rgba(0,0,0,0.08);
-        }
-        .skill-tag-logo {
-          width: 1.3em;
-          height: 1.3em;
-          object-fit: contain;
-          background: #fff;
-          border-radius: 50%;
-          box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
-        }
-        .skill-tag:hover, .skill-tag:focus {
-          background: rgba(25,118,210,0.13);
-          box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
-          outline: none;
-        }
         .project-desc {
           margin-top: 0.7em;
           font-size: 1.05em;
           color: #222b3a;
-        }
-        .modal-skill-header {
-          display: flex;
-          align-items: center;
-          gap: 1.2rem;
-        }
-        .modal-skill-logo {
-          width: 48px;
-          height: 48px;
-          border-radius: 0.5em;
-          background: #fff;
-          object-fit: contain;
-          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-        }
-        .modal-skill-category {
-          font-size: 0.95em;
-          color: #aaa;
         }
         @media (prefers-color-scheme: dark) {
           .project-card.fancy-card {

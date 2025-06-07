@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { skills } from '../data/skills';
-import { experience } from '../data/experience';
-import Modal from './Modal';
+import SkillModal from './SkillModal';
 import type { SkillItem } from '../data/skills';
 import { useT } from '../data/i18n';
 
@@ -9,10 +8,6 @@ const Skills: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
   const t = useT();
   const lang: 'pl' | 'en' = (window.localStorage.getItem('lang') as 'pl' | 'en') || 'en';
-
-  // Helper: znajdź doświadczenia, gdzie skill był użyty
-  const getExperienceWithSkill = (slug: string) =>
-    experience.filter((exp) => exp.skills.includes(slug));
 
   // Helper do tłumaczenia opisu umiejętności
   const getSkillDesc = (slug: string, fallback: string | {pl:string;en:string}) => {
@@ -45,9 +40,9 @@ const Skills: React.FC = () => {
                   key={skill.slug}
                   className="skill-item fancy-card"
                   style={{ borderColor: skill.color }}
-                  onClick={() => setModalSkill(skill)}
                   tabIndex={0}
                   role="button"
+                  onClick={() => setModalSkill(skill)}
                   onKeyDown={e => { if (e.key === 'Enter') setModalSkill(skill); }}
                 >
                   <div className="skill-logo-wrap">
@@ -64,40 +59,42 @@ const Skills: React.FC = () => {
           </div>
         ))}
       </div>
-      <Modal isOpen={!!modalSkill} onClose={() => setModalSkill(null)}>
-        {modalSkill && (
-          <div className="modal-skill-details">
-            <div className="modal-skill-header">
-              <img src={modalSkill.logo} alt={modalSkill.name} className="modal-skill-logo" />
-              <div>
-                <h3>{modalSkill.name}</h3>
-                <span className="modal-skill-category">{t.skills.categories[modalSkill.category as keyof typeof t.skills.categories] || modalSkill.category}</span>
-              </div>
-            </div>
-            <p>{getSkillDesc(modalSkill.slug, modalSkill.description)}</p>
-            <div className="modal-skill-used-in">
-              <strong>{t.skills.usedIn}</strong>
-              <ul>
-                {getExperienceWithSkill(modalSkill.slug).map((exp) => (
-                  <li key={exp.slug}>
-                    <span style={{ color: exp.color }}>{exp.name}</span> <span>({exp.company})</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-      </Modal>
+      <SkillModal skill={modalSkill} isOpen={!!modalSkill} onClose={() => setModalSkill(null)} />
       <style>{`
         .skills-section {
           background: none !important;
           max-width: 900px;
           margin: 4rem auto;
           padding: 2.5rem 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          min-height: 100vh;
+        }
+        /* Remove forced fixed modal centering */
+        /* .ReactModal__Content, .modal-skill-details {
+          top: 50% !important;
+          left: 50% !important;
+          right: auto !important;
+          bottom: auto !important;
+          margin-right: -50%;
+          transform: translate(-50%, -50%) !important;
+          position: fixed !important;
+          max-height: 90vh;
+          overflow-y: auto;
+        } */
+        /* Center modal section in parent using flex */
+        .skills-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          min-height: 100vh;
         }
         .skills-list {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          grid-template-columns: repeat(4, 1fr);
           gap: 2.2rem;
           margin-top: 2.5rem;
         }
