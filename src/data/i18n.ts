@@ -32,6 +32,21 @@ export const translations = {
         'devtools': 'Narzędzia',
         'db': 'Bazy danych',
         'other': 'Inne'
+      },
+      descs: {
+        js: 'JavaScript – nowoczesny frontend, interaktywność, animacje, dynamiczne UI.',
+        php: 'PHP – backend, API, integracje, przetwarzanie danych.',
+        python: 'Python – automatyzacja, przetwarzanie danych, skrypty.',
+        html: 'HTML – semantyczne struktury stron, dostępność.',
+        css: 'CSS – stylowanie, responsywność, animacje.',
+        symfony: 'Symfony – framework PHP do dużych aplikacji webowych.',
+        bootstrap: 'Bootstrap – szybkie prototypowanie, responsywne layouty.',
+        twig: 'Twig – szablony, makra, formatowanie danych.',
+        ts: 'TypeScript – typowany JavaScript, bezpieczeństwo, skalowalność.',
+        react: 'React – nowoczesne SPA, komponenty, hooki.',
+        sql: 'SQL – relacyjne bazy danych, zapytania, optymalizacja.',
+        vscode: 'Visual Studio Code – główne narzędzie pracy, pluginy, personalizacja.',
+        docker: 'Docker – konteneryzacja, DevOps, CI/CD.'
       }
     },
     projects: {
@@ -95,6 +110,21 @@ export const translations = {
         'devtools': 'Dev Tools',
         'db': 'Databases',
         'other': 'Other'
+      },
+      descs: {
+        js: 'JavaScript – modern frontend, interactivity, animation, dynamic UI.',
+        php: 'PHP – backend, APIs, integrations, data processing.',
+        python: 'Python – automation, data processing, scripting.',
+        html: 'HTML – semantic page structures, accessibility.',
+        css: 'CSS – styling, responsiveness, animation.',
+        symfony: 'Symfony – PHP framework for large web apps.',
+        bootstrap: 'Bootstrap – rapid prototyping, responsive layouts.',
+        twig: 'Twig – templates, macros, data formatting.',
+        ts: 'TypeScript – typed JavaScript, safety, scalability.',
+        react: 'React – modern SPA, components, hooks.',
+        sql: 'SQL – relational databases, queries, optimization.',
+        vscode: 'Visual Studio Code – main dev tool, plugins, customization.',
+        docker: 'Docker – containerization, DevOps, CI/CD.'
       }
     },
     projects: {

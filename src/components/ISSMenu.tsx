@@ -62,7 +62,7 @@ const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: Re
         justifyContent: 'flex-start',
       }}
     >
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} />
+      <Navbar onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} darkMode={darkMode} setDarkMode={setDarkMode} />
       {window.location.pathname === '/' && (
         <div
           style={{

@@ -70,6 +70,12 @@ const Projects: React.FC = () => {
         )}
       </Modal>
       <style>{`
+        .projects-section {
+          background: none !important;
+          max-width: 900px;
+          margin: 4rem auto;
+          padding: 2.5rem 2rem;
+        }
         .projects-list {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -77,21 +83,23 @@ const Projects: React.FC = () => {
           margin-top: 2.5rem;
         }
         .project-card.fancy-card {
-          background: rgba(30,40,60,0.85);
+          background: rgba(255,255,255,0.85);
           border-radius: 1.2rem;
           border: 2.5px solid;
-          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.10);
           padding: 2.2rem 1.5rem 1.5rem 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1.1rem;
-          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s;
           position: relative;
+          color: inherit;
         }
         .project-card.fancy-card:hover, .project-card.fancy-card:focus {
+          background: rgba(227,241,255,0.92);
           transform: translateY(-6px) scale(1.03);
-          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.28);
-          border-color: #fff;
+          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.18);
+          border-color: #1976d2;
           outline: none;
         }
         .project-header {
@@ -115,7 +123,7 @@ const Projects: React.FC = () => {
           margin-bottom: 0.5em;
         }
         .project-links a {
-          color: #61dafb;
+          color: #1976d2;
           margin-right: 1.2em;
           text-decoration: underline;
           font-weight: 500;
@@ -146,9 +154,14 @@ const Projects: React.FC = () => {
           box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
         }
         .skill-tag:hover, .skill-tag:focus {
-          background: rgba(255,255,255,0.18);
+          background: rgba(25,118,210,0.13);
           box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
           outline: none;
+        }
+        .project-desc {
+          margin-top: 0.7em;
+          font-size: 1.05em;
+          color: #222b3a;
         }
         .modal-skill-header {
           display: flex;
@@ -166,6 +179,20 @@ const Projects: React.FC = () => {
         .modal-skill-category {
           font-size: 0.95em;
           color: #aaa;
+        }
+        @media (prefers-color-scheme: dark) {
+          .project-card.fancy-card {
+            background: rgba(35,43,58,0.92) !important;
+            color: #e3eaf7;
+            box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          }
+          .project-card.fancy-card:hover, .project-card.fancy-card:focus {
+            background: rgba(34,48,74,0.98) !important;
+            border-color: #fff;
+          }
+          .project-desc {
+            color: #e3eaf7;
+          }
         }
       `}</style>
     </section>

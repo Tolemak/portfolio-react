@@ -8,10 +8,20 @@ import { useT } from '../data/i18n';
 const Skills: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
   const t = useT();
+  const lang: 'pl' | 'en' = (window.localStorage.getItem('lang') as 'pl' | 'en') || 'en';
 
   // Helper: znajdź doświadczenia, gdzie skill był użyty
   const getExperienceWithSkill = (slug: string) =>
     experience.filter((exp) => exp.skills.includes(slug));
+
+  // Helper do tłumaczenia opisu umiejętności
+  const getSkillDesc = (slug: string, fallback: string | {pl:string;en:string}) => {
+    if (typeof fallback === 'object' && fallback !== null) {
+      return fallback[lang] || Object.values(fallback)[0];
+    }
+    // @ts-expect-error: tiles może nie istnieć
+    return t.skills && t.skills["descs"] && t.skills["descs"][slug] ? t.skills["descs"][slug] : fallback;
+  };
 
   // Grupowanie po kategorii
   const grouped = Object.entries(
@@ -46,7 +56,7 @@ const Skills: React.FC = () => {
                   <div className="skill-info">
                     <strong>{skill.name}</strong>
                     <span className="skill-category">{t.skills.categories[skill.category as keyof typeof t.skills.categories] || skill.category}</span>
-                    <p className="skill-desc">{skill.description}</p>
+                    <p className="skill-desc">{getSkillDesc(skill.slug, skill.description)}</p>
                   </div>
                 </div>
               ))}
@@ -64,7 +74,7 @@ const Skills: React.FC = () => {
                 <span className="modal-skill-category">{t.skills.categories[modalSkill.category as keyof typeof t.skills.categories] || modalSkill.category}</span>
               </div>
             </div>
-            <p>{modalSkill.description}</p>
+            <p>{getSkillDesc(modalSkill.slug, modalSkill.description)}</p>
             <div className="modal-skill-used-in">
               <strong>{t.skills.usedIn}</strong>
               <ul>
@@ -79,6 +89,12 @@ const Skills: React.FC = () => {
         )}
       </Modal>
       <style>{`
+        .skills-section {
+          background: none !important;
+          max-width: 900px;
+          margin: 4rem auto;
+          padding: 2.5rem 2rem;
+        }
         .skills-list {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -86,23 +102,42 @@ const Skills: React.FC = () => {
           margin-top: 2.5rem;
         }
         .skill-item.fancy-card {
-          background: rgba(30,40,60,0.85);
+          background: rgba(255,255,255,0.85);
           border-radius: 1.2rem;
           border: 2.5px solid;
-          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.10);
           padding: 2.2rem 1.5rem 1.5rem 1.5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           cursor: pointer;
-          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s;
           position: relative;
+          color: inherit;
         }
         .skill-item.fancy-card:hover, .skill-item.fancy-card:focus {
+          background: rgba(227,241,255,0.92);
           transform: translateY(-6px) scale(1.03);
-          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.28);
-          border-color: #fff;
+          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.18);
+          border-color: #1976d2;
           outline: none;
+        }
+        .skill-desc {
+          color: #222b3a;
+        }
+        @media (prefers-color-scheme: dark) {
+          .skill-item.fancy-card {
+            background: rgba(35,43,58,0.92) !important;
+            color: #e3eaf7;
+            box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          }
+          .skill-item.fancy-card:hover, .skill-item.fancy-card:focus {
+            background: rgba(34,48,74,0.98) !important;
+            border-color: #fff;
+          }
+          .skill-desc {
+            color: #e3eaf7;
+          }
         }
         .skill-logo-wrap {
           background: #fff;
@@ -125,11 +160,8 @@ const Skills: React.FC = () => {
         }
         .skill-category {
           font-size: 0.95em;
-          color: #aaa;
-        }
-        .skill-desc {
-          margin-top: 0.7em;
-          font-size: 1.05em;
+          color: #1976d2;
+          margin-top: 0.5em;
         }
         .modal-skill-header {
           display: flex;
@@ -175,8 +207,8 @@ const Skills: React.FC = () => {
         }
         .skills-category-list {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-          gap: 2rem;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 2.2rem;
         }
       `}</style>
     </section>
