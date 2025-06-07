@@ -3,35 +3,53 @@ import { skills } from '../data/skills';
 import { experience } from '../data/experience';
 import Modal from './Modal';
 import type { SkillItem } from '../data/skills';
+import { useT } from '../data/i18n';
 
 const Skills: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
+  const t = useT();
 
   // Helper: znajdź doświadczenia, gdzie skill był użyty
   const getExperienceWithSkill = (slug: string) =>
     experience.filter((exp) => exp.skills.includes(slug));
 
+  // Grupowanie po kategorii
+  const grouped = Object.entries(
+    skills.reduce<Record<string, SkillItem[]>>((acc, skill) => {
+      acc[skill.category] = acc[skill.category] || [];
+      acc[skill.category].push(skill);
+      return acc;
+    }, {})
+  );
+
   return (
     <section id="skills" className="skills-section">
-      <h2>Umiejętności</h2>
+      <h2>{t.skills.title}</h2>
       <div className="skills-list">
-        {skills.map((skill) => (
-          <div
-            key={skill.slug}
-            className="skill-item fancy-card"
-            style={{ borderColor: skill.color }}
-            onClick={() => setModalSkill(skill)}
-            tabIndex={0}
-            role="button"
-            onKeyDown={e => { if (e.key === 'Enter') setModalSkill(skill); }}
-          >
-            <div className="skill-logo-wrap">
-              <img src={skill.logo} alt={skill.name} className="skill-logo" />
-            </div>
-            <div className="skill-info">
-              <strong>{skill.name}</strong>
-              <span className="skill-category">{skill.category}</span>
-              <p className="skill-desc">{skill.description}</p>
+        {grouped.map(([cat, items]) => (
+          <div key={cat} className="skills-category">
+            <h3 className="skills-category-title">{t.skills.categories[cat as keyof typeof t.skills.categories] || cat}</h3>
+            <div className="skills-category-list">
+              {items.map((skill) => (
+                <div
+                  key={skill.slug}
+                  className="skill-item fancy-card"
+                  style={{ borderColor: skill.color }}
+                  onClick={() => setModalSkill(skill)}
+                  tabIndex={0}
+                  role="button"
+                  onKeyDown={e => { if (e.key === 'Enter') setModalSkill(skill); }}
+                >
+                  <div className="skill-logo-wrap">
+                    <img src={skill.logo} alt={skill.name} className="skill-logo" />
+                  </div>
+                  <div className="skill-info">
+                    <strong>{skill.name}</strong>
+                    <span className="skill-category">{t.skills.categories[skill.category as keyof typeof t.skills.categories] || skill.category}</span>
+                    <p className="skill-desc">{skill.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ))}
@@ -43,12 +61,12 @@ const Skills: React.FC = () => {
               <img src={modalSkill.logo} alt={modalSkill.name} className="modal-skill-logo" />
               <div>
                 <h3>{modalSkill.name}</h3>
-                <span className="modal-skill-category">{modalSkill.category}</span>
+                <span className="modal-skill-category">{t.skills.categories[modalSkill.category as keyof typeof t.skills.categories] || modalSkill.category}</span>
               </div>
             </div>
             <p>{modalSkill.description}</p>
             <div className="modal-skill-used-in">
-              <strong>Używane w doświadczeniach:</strong>
+              <strong>{t.skills.usedIn}</strong>
               <ul>
                 {getExperienceWithSkill(modalSkill.slug).map((exp) => (
                   <li key={exp.slug}>
@@ -136,6 +154,29 @@ const Skills: React.FC = () => {
         }
         .modal-skill-used-in li {
           margin-bottom: 0.2em;
+        }
+        .skills-category {
+          margin-bottom: 3rem;
+        }
+        .skills-category-title {
+          font-size: 1.5rem;
+          margin-bottom: 1.2rem;
+          position: relative;
+          display: inline-block;
+        }
+        .skills-category-title:after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background: linear-gradient(to right, transparent, #0070f3, transparent);
+        }
+        .skills-category-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 2rem;
         }
       `}</style>
     </section>

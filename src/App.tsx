@@ -14,6 +14,7 @@ import Projects from './components/Projects';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Navbar from './components/Navbar';
+import { LangContext, type Lang } from './data/i18n';
 
 function App() {
   // Dark mode state (auto-detect system preference)
@@ -28,6 +29,7 @@ function App() {
   const [showSplash, setShowSplash] = useState(() => {
     return !sessionStorage.getItem('splashShown');
   });
+  const [lang, setLang] = useState<Lang>('pl');
 
   useEffect(() => {
     if (!init) {
@@ -56,26 +58,48 @@ function App() {
   }, [init, showISSMenu, showSplash]);
 
   return (
-    <div className={`app-root${darkMode ? ' dark' : ''}`}>
-      {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
-      {/* Splash + ISSMenu logic */}
-      {showSplash ? (
-        <StarsCanvas key="splash" onSplashEnd={() => {
-          setShowSplash(false);
-          sessionStorage.setItem('splashShown', '1');
-          setShowISSMenu(true);
-        }} />
-      ) : (
-        <Routes>
-          <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
-          <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
-          <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
-          <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
-          <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
-          <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
-        </Routes>
-      )}
-    </div>
+    <LangContext.Provider value={lang}>
+      <div className={`app-root${darkMode ? ' dark' : ''}`}>
+        {/* Language Switcher */}
+        <div style={{ position: 'fixed', top: 18, right: 18, zIndex: 2000 }}>
+          <button
+            onClick={() => setLang(l => l === 'pl' ? 'en' : 'pl')}
+            style={{
+              background: 'rgba(30,40,60,0.85)',
+              color: '#fff',
+              border: '1.5px solid #61dafb',
+              borderRadius: '1.2em',
+              padding: '0.4em 1.2em',
+              fontWeight: 600,
+              fontSize: '1em',
+              cursor: 'pointer',
+              marginRight: 8
+            }}
+            aria-label={lang === 'pl' ? 'Switch to English' : 'Przełącz na polski'}
+          >
+            {lang === 'pl' ? 'EN' : 'PL'}
+          </button>
+        </div>
+        {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
+        {/* Splash + ISSMenu logic */}
+        {showSplash ? (
+          <StarsCanvas key="splash" onSplashEnd={() => {
+            setShowSplash(false);
+            sessionStorage.setItem('splashShown', '1');
+            setShowISSMenu(true);
+          }} />
+        ) : (
+          <Routes>
+            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
+            <Route path="/about" element={<><Navbar /><About /></>} />
+            <Route path="/experience" element={<><Navbar /><Experience /></>} />
+            <Route path="/projects" element={<><Navbar /><Projects /></>} />
+            <Route path="/education" element={<><Navbar /><Education /></>} />
+            <Route path="/skills" element={<><Navbar /><Skills /></>} />
+          </Routes>
+        )}
+      </div>
+    </LangContext.Provider>
   );
 }
 

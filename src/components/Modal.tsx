@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { useT } from '../data/i18n';
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,6 +9,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const t = useT();
   useEffect(() => {
     if (!isOpen) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -28,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         role="dialog"
         aria-modal="true"
       >
-        <button className="modal-close" onClick={onClose} aria-label="Zamknij">&times;</button>
+        <button className="modal-close" onClick={onClose} aria-label={t.modal.close}>&times;</button>
         {children}
       </div>
       <style>{`

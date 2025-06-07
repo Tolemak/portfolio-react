@@ -3,16 +3,18 @@ import { experience } from '../data/experience';
 import { skills } from '../data/skills';
 import type { SkillItem } from '../data/skills';
 import Modal from './Modal';
+import { useT } from '../data/i18n';
 
 const Experience: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
+  const t = useT();
 
   // Helper: znajdź skill po slug
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
 
   return (
     <section id="experience" className="experience-section">
-      <h2>Doświadczenie</h2>
+      <h2>{t.experience.title}</h2>
       <div className="experience-list">
         {experience.map((item) => (
           <div key={item.slug} className="experience-item fancy-card" style={{ borderColor: item.color }}>
@@ -27,7 +29,7 @@ const Experience: React.FC = () => {
             </div>
             <div className="experience-description">{item.description}</div>
             <div className="experience-skills">
-              <strong>Stack:</strong>{' '}
+              <strong>{t.experience.stack}</strong>{' '}
               {item.skills.map((slug) => {
                 const skill = getSkillBySlug(slug);
                 if (!skill) return null;
@@ -62,7 +64,7 @@ const Experience: React.FC = () => {
             </div>
             <p>{modalSkill.description}</p>
             <div className="modal-skill-used-in">
-              <strong>Używane w doświadczeniach:</strong>
+              <strong>{t.experience.usedIn}</strong>
               <ul>
                 {experience.filter((exp) => exp.skills.includes(modalSkill.slug)).map((exp) => (
                   <li key={exp.slug}>

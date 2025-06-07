@@ -3,16 +3,18 @@ import { projects } from '../data/projects';
 import { skills } from '../data/skills';
 import Modal from './Modal';
 import type { SkillItem } from '../data/skills';
+import { useT } from '../data/i18n';
 
 const Projects: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
+  const t = useT();
 
   // Helper: znajdź skill po slug
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
 
   return (
     <section id="projects" className="projects-section">
-      <h2>Projekty</h2>
+      <h2>{t.projects.title}</h2>
       <div className="projects-list">
         {projects.map((project) => (
           <div key={project.slug} className="project-card fancy-card" style={{ borderColor: project.color }}>
@@ -20,14 +22,14 @@ const Projects: React.FC = () => {
               <img src={`/logos/${project.logo}`} alt={project.name} className="project-logo" />
               <h3>{project.name}</h3>
             </div>
-            <p className="project-short">{project.shortDescription}</p>
+            <p className="project-short">{(t.projects.tiles as Record<string, { short: string; desc: string }>)[project.name]?.short || project.shortDescription}</p>
             <div className="project-links">
               {project.links.map((link) => (
                 <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer">{link.label}</a>
               ))}
             </div>
             <div className="project-skills">
-              <strong>Stack:</strong>{' '}
+              <strong>{t.projects.stack}</strong>{' '}
               {project.skills.map((slug) => {
                 const skill = getSkillBySlug(slug);
                 if (!skill) return null;
@@ -46,6 +48,9 @@ const Projects: React.FC = () => {
                   </span>
                 );
               })}
+            </div>
+            <div className="project-desc">
+              {(t.projects.tiles as Record<string, { short: string; desc: string }>)[project.name]?.desc || project.description}
             </div>
           </div>
         ))}

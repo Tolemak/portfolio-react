@@ -1,15 +1,17 @@
 import React from 'react';
 import { education } from '../data/education';
+import { useT } from '../data/i18n';
 
 const logos: Record<string, string> = {
-  'Gdańsk University of Technology': '/logos/after-effects.svg', // przykładowa ikona, podmień na właściwą jeśli masz
-  'The Gdańsk School of Banking': '/logos/vite.png', // przykładowa ikona
+  'Gdańsk University of Technology': '/logos/after-effects.svg',
+  'The Gdańsk School of Banking': '/logos/vite.png',
 };
 
 const Education: React.FC = () => {
+  const t = useT();
   return (
     <section id="education" className="education-section">
-      <h2>Edukacja</h2>
+      <h2>{t.education.title}</h2>
       <div className="education-list">
         {education.map((item) => (
           <div key={item.slug} className="education-item fancy-card" style={{ borderColor: '#61dafb' }}>
@@ -17,7 +19,7 @@ const Education: React.FC = () => {
               <img src={logos[item.organization] || '/logos/no-img.svg'} alt={item.organization} className="education-logo" />
               <div>
                 <span className="education-degree">{item.degree}</span>
-                <span className="education-organization">{item.organization}</span>
+                <span className="education-organization">{(t.about.schools as Record<string, string>)[item.organization] || item.organization}</span>
               </div>
             </div>
             <div className="education-period-location">
@@ -27,7 +29,7 @@ const Education: React.FC = () => {
               </span>
             </div>
             <div className="education-subjects">
-              <strong>Przedmioty:</strong> {item.subjects.join(', ')}
+              <strong>{t.education.subjects}</strong> {item.subjects.join(', ')}
             </div>
           </div>
         ))}

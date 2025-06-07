@@ -1,16 +1,16 @@
 import React from 'react';
 import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
+import { useT } from '../data/i18n';
 
 type NavbarProps = {
-  darkMode: boolean;
-  setDarkMode: (val: boolean) => void;
   onSectionHover?: (section: string | null) => void;
   highlightedSection?: string | null;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onSectionHover, highlightedSection }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) => {
   const location = useLocation();
+  const t = useT();
   // Ustal aktywną sekcję na podstawie ścieżki
   const activeSection = React.useMemo(() => {
     if (location.pathname === '/') return null;
@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onSectionHover, 
     >
       <ul style={{ display: 'flex', alignItems: 'center', gap: 32, margin: 0, padding: 0, listStyle: 'none', position: 'relative' }}>
         <li key="home" style={{ marginRight: 8, position: 'relative' }}>
-          <Link to="/" aria-label="Home" style={{
+          <Link to="/" aria-label={t.navbar.home} style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: '50%',
             background: highlightedSection === null && location.pathname === '/' ? 'rgba(179,224,255,0.22)' : 'rgba(30,30,60,0.7)',
             boxShadow: highlightedSection === null && location.pathname === '/' ? '0 0 16px 4px #b3e0ff88, 0 2px 8px #0004' : '0 2px 8px #0004',
@@ -103,63 +103,13 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onSectionHover, 
                 filter: isActive ? 'drop-shadow(0 0 8px #b3e0ff)' : 'none',
               }}
             >
-              <Link
-                to={item.to}
-                style={{
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  position: 'relative',
-                }}
-              >
-                {item.icon && <span className={item.icon} style={{ fontSize: 20, opacity: 0.8 }} />}
-                {item.title}
-                {/* Animated underline for active section */}
-                {isActive && (
-                  <span style={{
-                    position: 'absolute',
-                    left: 8,
-                    right: 8,
-                    bottom: -6,
-                    height: 4,
-                    borderRadius: 2,
-                    background: 'linear-gradient(90deg, #b3e0ff 0%, #1976d2 100%)',
-                    boxShadow: '0 0 12px #b3e0ff88',
-                    opacity: 0.95,
-                    transition: 'all 0.25s',
-                    animation: 'navbar-underline 1.2s cubic-bezier(.4,1.6,.6,1)'
-                  }} />
-                )}
+              <Link to={item.to} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                {t.navbar[item.title.toLowerCase() as keyof typeof t.navbar] || item.title}
               </Link>
             </li>
           );
         })}
       </ul>
-      <button
-        className="theme-toggle"
-        aria-label="Przełącz motyw"
-        onClick={() => setDarkMode(!darkMode)}
-        style={{
-          marginLeft: 24,
-          background: 'rgba(30,30,60,0.7)',
-          border: '2px solid #b3e0ff',
-          borderRadius: '50%',
-          width: 40,
-          height: 40,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 22,
-          color: darkMode ? '#b3e0ff' : '#1976d2',
-          boxShadow: '0 2px 8px #0004',
-          cursor: 'pointer',
-          transition: 'all 0.18s',
-        }}
-      >
-        {darkMode ? '🌙' : '☀️'}
-      </button>
     </nav>
   );
 };
