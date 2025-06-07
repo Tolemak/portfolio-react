@@ -1,14 +1,15 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-
-// Import typu z drei/three
 import { PerspectiveCamera as PerspectiveCameraType } from 'three';
 import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
 import ISSModel from './models/ISSModel';
 import SpacemanModel from './models/SpacemanModel';
 import SputnikModel from './models/SputnikModel';
+import Navbar from './Navbar';
+
+const METEOR_SCALE = 2.5 * 3;
 
 const AnimatedCamera = () => {
   const ref = useRef<PerspectiveCameraType>(null);
@@ -29,7 +30,6 @@ const AnimatedCamera = () => {
     ref.current.lookAt(0, 0, 0);
     if (progress >= 1) {
       finished.current = true;
-      // Synchronizuj kamerę z OrbitControls
       state.camera.position.set(0, 0, z);
       state.camera.lookAt(0, 0, 0);
     }
@@ -38,9 +38,13 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-const METEOR_SCALE = 2.5 * 3;
+// Dodaj typy do propsów
+interface ISSMenuProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const ISSMenu: React.FC = () => {
+const ISSMenu: React.FC<ISSMenuProps> = ({ darkMode, setDarkMode }) => {
   return (
     <div
       style={{
@@ -51,34 +55,35 @@ const ISSMenu: React.FC = () => {
         height: '100vh',
         zIndex: 10,
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        // background: 'none', // brak tła
+        justifyContent: 'flex-start',
       }}
     >
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <div
         style={{
-          width: '99vw',
-          height: '99vh',
+          width: '100vw',
+          height: '100vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '2rem',
-          boxShadow: '0 0 32px #000a',
-          // Usunięto background, aby tło 3D było przezroczyste
         }}
       >
-        <Canvas shadows style={{ width: '100%', height: '100%', background: 'transparent' }} gl={{ alpha: true }}>
+        <Canvas
+          shadows
+          style={{ width: '100%', height: '100%', background: 'transparent' }}
+          gl={{ alpha: true }}
+        >
           <AnimatedCamera />
           <ambientLight intensity={0.7} />
           <directionalLight position={[10, 10, 10]} intensity={1.2} />
           <ISSModel scale={2.5} />
-          <MeteorModel position={[85, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
-          <SatelliteModel position={[-30, -60, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
+          <MeteorModel position={[185, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
+          <SatelliteModel position={[-20, -80, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
           <SpacemanModel position={[40, 110, 80]} scale={METEOR_SCALE * 0.15} rotation={[0, Math.PI / 2 + Math.PI, 0]} />
-          <SputnikModel position={[-10, 80, 60]} scale={METEOR_SCALE} rotation={[0, Math.PI / 3, 0]} />
-          {/* Tutaj możesz dodać kolejne elementy 3D */}
-          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+          <SputnikModel position={[10, 100, 60]} scale={METEOR_SCALE} rotation={[0, Math.PI / 3, 0]} />
+          <OrbitControls enablePan enableZoom enableRotate />
         </Canvas>
       </div>
       {/* Tu można dodać interaktywne menu na overlay */}
