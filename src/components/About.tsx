@@ -19,7 +19,11 @@ const About: React.FC = () => {
 						/>
 						<div>
 							<h3>{card.title}</h3>
-							<p>{card.desc}</p>
+							{card.link ? (
+								<p dangerouslySetInnerHTML={{ __html: card.desc }} />
+							) : (
+								<p>{card.desc}</p>
+							)}
 						</div>
 					</div>
 				))}
@@ -78,6 +82,17 @@ const About: React.FC = () => {
         .about-card p {
           margin: 0;
           color: #222b3a;
+        }
+        .about-link {
+          color: #1976d2;
+          text-decoration: underline;
+          font-weight: 500;
+          transition: color 0.15s;
+          word-break: break-all;
+        }
+        .about-link:hover, .about-link:focus {
+          color: #0d47a1;
+          text-decoration: underline wavy;
         }
         @media (prefers-color-scheme: dark) {
           .about-card.fancy-card {
