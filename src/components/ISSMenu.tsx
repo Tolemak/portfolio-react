@@ -63,64 +63,66 @@ const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: Re
       }}
     >
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} />
-      <div
-        style={{
-          width: '100vw',
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Canvas
-          shadows
-          style={{ width: '100%', height: '100%', background: 'transparent' }}
-          gl={{ alpha: true }}
+      {window.location.pathname === '/' && (
+        <div
+          style={{
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
-          <AnimatedCamera />
-          <ambientLight intensity={0.7} />
-          <directionalLight position={[10, 10, 10]} intensity={1.2} />
-          <ISSModel
-            scale={2.5}
-            highlighted={highlightedSection === 'about'}
-            onPointerOver={() => handleModelHover('about')}
-            onPointerOut={() => handleModelHover(null)}
-          />
-          <MeteorModel
-            position={[185, 40, 30]}
-            scale={METEOR_SCALE}
-            rotation={[0, 0, 0]}
-            highlighted={highlightedSection === 'skills'}
-            onPointerOver={() => handleModelHover('skills')}
-            onPointerOut={() => handleModelHover(null)}
-          />
-          <SatelliteModel
-            position={[-20, -80, 50]}
-            scale={METEOR_SCALE}
-            rotation={[0, Math.PI / 5, 0]}
-            highlighted={highlightedSection === 'projects'}
-            onPointerOver={() => handleModelHover('projects')}
-            onPointerOut={() => handleModelHover(null)}
-          />
-          <SpacemanModel
-            position={[40, 110, 80]}
-            scale={METEOR_SCALE * 0.15}
-            rotation={[0, Math.PI / 2 + Math.PI, 0]}
-            highlighted={highlightedSection === 'education'}
-            onPointerOver={() => handleModelHover('education')}
-            onPointerOut={() => handleModelHover(null)}
-          />
-          <SputnikModel
-            position={[10, 100, 60]}
-            scale={METEOR_SCALE}
-            rotation={[0, Math.PI / 3, 0]}
-            highlighted={highlightedSection === 'experience'}
-            onPointerOver={() => handleModelHover('experience')}
-            onPointerOut={() => handleModelHover(null)}
-          />
-          <OrbitControls enablePan enableZoom enableRotate />
-        </Canvas>
-      </div>
+          <Canvas
+            shadows
+            style={{ width: '100%', height: '100%', background: 'transparent' }}
+            gl={{ alpha: true }}
+          >
+            <AnimatedCamera />
+            <ambientLight intensity={0.7} />
+            <directionalLight position={[10, 10, 10]} intensity={1.2} />
+            <ISSModel
+              scale={2.5}
+              highlighted={highlightedSection === 'about'}
+              onPointerOver={() => handleModelHover('about')}
+              onPointerOut={() => handleModelHover(null)}
+            />
+            <MeteorModel
+              position={[185, 40, 30]}
+              scale={METEOR_SCALE}
+              rotation={[0, 0, 0]}
+              highlighted={highlightedSection === 'skills'}
+              onPointerOver={() => handleModelHover('skills')}
+              onPointerOut={() => handleModelHover(null)}
+            />
+            <SatelliteModel
+              position={[-20, -80, 50]}
+              scale={METEOR_SCALE}
+              rotation={[0, Math.PI / 5, 0]}
+              highlighted={highlightedSection === 'projects'}
+              onPointerOver={() => handleModelHover('projects')}
+              onPointerOut={() => handleModelHover(null)}
+            />
+            <SpacemanModel
+              position={[40, 110, 80]}
+              scale={METEOR_SCALE * 0.15}
+              rotation={[0, Math.PI / 2 + Math.PI, 0]}
+              highlighted={highlightedSection === 'education'}
+              onPointerOver={() => handleModelHover('education')}
+              onPointerOut={() => handleModelHover(null)}
+            />
+            <SputnikModel
+              position={[10, 100, 60]}
+              scale={METEOR_SCALE}
+              rotation={[0, Math.PI / 3, 0]}
+              highlighted={highlightedSection === 'experience'}
+              onPointerOver={() => handleModelHover('experience')}
+              onPointerOut={() => handleModelHover(null)}
+            />
+            <OrbitControls enablePan enableZoom enableRotate />
+          </Canvas>
+        </div>
+      )}
     </div>
   );
 };
