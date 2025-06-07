@@ -29,10 +29,10 @@ const About: React.FC = () => {
           max-width: 900px;
           margin: 4rem auto;
           padding: 2.5rem 2rem;
-          background: rgba(30,40,60,0.85);
+          background: none;
           border-radius: 1.5rem;
           color: var(--text-color);
-          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          box-shadow: none;
         }
         .about-intro {
           margin-bottom: 2.5rem;
@@ -44,22 +44,23 @@ const About: React.FC = () => {
           gap: 2rem;
         }
         .about-card.fancy-card {
-          background: rgba(40,50,80,0.92);
+          background: rgba(255,255,255,0.85);
           border-radius: 1.2rem;
-          border: 2.5px solid #61dafb;
-          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
-          padding: 2rem 1.2rem 1.2rem 1.2rem;
+          border: 2.5px solid;
+          box-shadow: 0 4px 32px 0 rgba(31,38,135,0.10);
+          padding: 2.2rem 1.5rem 1.5rem 1.5rem;
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           align-items: center;
-          gap: 1.1rem;
-          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+          gap: 1.2rem;
+          transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.18s;
           position: relative;
         }
         .about-card.fancy-card:hover, .about-card.fancy-card:focus {
+          background: rgba(227,241,255,0.92);
           transform: translateY(-6px) scale(1.03);
-          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.28);
-          border-color: #fff;
+          box-shadow: 0 8px 48px 0 rgba(31,38,135,0.18);
+          border-color: #1976d2;
           outline: none;
         }
         .about-card-icon {
@@ -69,7 +70,31 @@ const About: React.FC = () => {
           background: #fff;
           border-radius: 0.5em;
           box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-          margin-bottom: 0.7em;
+        }
+        .about-card h3 {
+          margin: 0 0 0.5em 0;
+          color: #1976d2;
+        }
+        .about-card p {
+          margin: 0;
+          color: #222b3a;
+        }
+        @media (prefers-color-scheme: dark) {
+          .about-card.fancy-card {
+            background: rgba(35,43,58,0.92) !important;
+            color: #e3eaf7;
+            box-shadow: 0 4px 32px 0 rgba(31,38,135,0.18);
+          }
+          .about-card.fancy-card:hover, .about-card.fancy-card:focus {
+            background: rgba(34,48,74,0.98) !important;
+            border-color: #fff;
+          }
+          .about-card h3 {
+            color: #61dafb;
+          }
+          .about-card p {
+            color: #e3eaf7;
+          }
         }
       `}</style>
 		</section>

@@ -91,11 +91,11 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
-            <Route path="/about" element={<><Navbar /><About /></>} />
-            <Route path="/experience" element={<><Navbar /><Experience /></>} />
-            <Route path="/projects" element={<><Navbar /><Projects /></>} />
-            <Route path="/education" element={<><Navbar /><Education /></>} />
-            <Route path="/skills" element={<><Navbar /><Skills /></>} />
+            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
+            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
+            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
+            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
+            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
           </Routes>
         )}
       </div>

@@ -3,12 +3,14 @@ import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { useT } from '../data/i18n';
 
-type NavbarProps = {
+export type NavbarProps = {
   onSectionHover?: (section: string | null) => void;
   highlightedSection?: string | null;
+  darkMode?: boolean;
+  setDarkMode?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, darkMode, setDarkMode }) => {
   const location = useLocation();
   const t = useT();
   // Ustal aktywną sekcję na podstawie ścieżki
@@ -110,6 +112,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
           );
         })}
       </ul>
+      <button
+        className="theme-toggle"
+        onClick={() => setDarkMode && setDarkMode((d) => !d)}
+        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        style={{marginLeft: 24, fontSize: 22, background: 'none', border: 'none', cursor: 'pointer', color: '#b3e0ff'}}
+      >
+        {darkMode ? '🌙' : '☀️'}
+      </button>
     </nav>
   );
 };

@@ -88,5 +88,29 @@ export const skills: SkillItem[] = [
     logo: '/logos/react.svg',
     name: 'React',
     category: 'framework'
+  },
+  {
+    slug: 'sql',
+    color: '#1976d2',
+    description: 'sql',
+    logo: '/logos/sap.svg',
+    name: 'SQL',
+    category: 'db'
+  },
+  {
+    slug: 'vscode',
+    color: '#0078d4',
+    description: 'vscode',
+    logo: '/logos/vscode.svg',
+    name: 'Visual Studio Code',
+    category: 'devtools'
+  },
+  {
+    slug: 'docker',
+    color: '#2496ed',
+    description: 'docker',
+    logo: '/logos/docker.svg',
+    name: 'Docker',
+    category: 'devtools'
   }
 ];
