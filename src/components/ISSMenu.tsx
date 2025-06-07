@@ -1,16 +1,13 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 
 // Import typu z drei/three
 import { PerspectiveCamera as PerspectiveCameraType } from 'three';
 import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
-
-function ISSModel(props: Record<string, unknown>) {
-  const { scene } = useGLTF('/assets/la_station_spatiale_internationale_iss/scene.gltf');
-  return <primitive object={scene} {...props} />;
-}
+import ISSModel from './models/ISSModel';
+import SpacemanModel from './models/SpacemanModel';
 
 const AnimatedCamera = () => {
   const ref = useRef<PerspectiveCameraType>(null);
@@ -77,6 +74,7 @@ const ISSMenu: React.FC = () => {
           <ISSModel scale={2.5} />
           <MeteorModel position={[85, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
           <SatelliteModel position={[-30, -60, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
+          <SpacemanModel position={[40, 110, 80]} scale={METEOR_SCALE * 0.15} rotation={[0, Math.PI / 2 + Math.PI, 0]} />
           {/* Tutaj możesz dodać kolejne elementy 3D */}
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
         </Canvas>
