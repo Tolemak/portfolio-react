@@ -12,6 +12,11 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onSectionHover, 
   return (
     <nav className="navbar">
       <ul>
+        <li key="home">
+          <a href="/" aria-label="Home" style={{ display: 'flex', alignItems: 'center', fontSize: 22, marginRight: 12 }}>
+            <span role="img" aria-label="ISS" style={{ fontSize: 28, marginRight: 4 }}>🛰️</span>
+          </a>
+        </li>
         {navbar.map((item) => (
           <li
             key={item.to}
