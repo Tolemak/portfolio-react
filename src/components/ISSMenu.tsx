@@ -38,13 +38,15 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-// Dodaj typy do propsów
-interface ISSMenuProps {
-  darkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
 
-const ISSMenu: React.FC<ISSMenuProps> = ({ darkMode, setDarkMode }) => {
+  // Model hover handlers
+  const handleModelHover = (section: string | null) => setHighlightedSection(section);
+
+  // Navbar hover handlers
+  const handleNavbarHover = (section: string | null) => setHighlightedSection(section);
+
   return (
     <div
       style={{
@@ -60,7 +62,7 @@ const ISSMenu: React.FC<ISSMenuProps> = ({ darkMode, setDarkMode }) => {
         justifyContent: 'flex-start',
       }}
     >
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} />
       <div
         style={{
           width: '100vw',
@@ -78,15 +80,47 @@ const ISSMenu: React.FC<ISSMenuProps> = ({ darkMode, setDarkMode }) => {
           <AnimatedCamera />
           <ambientLight intensity={0.7} />
           <directionalLight position={[10, 10, 10]} intensity={1.2} />
-          <ISSModel scale={2.5} />
-          <MeteorModel position={[185, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
-          <SatelliteModel position={[-20, -80, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
-          <SpacemanModel position={[40, 110, 80]} scale={METEOR_SCALE * 0.15} rotation={[0, Math.PI / 2 + Math.PI, 0]} />
-          <SputnikModel position={[10, 100, 60]} scale={METEOR_SCALE} rotation={[0, Math.PI / 3, 0]} />
+          <ISSModel
+            scale={2.5}
+            highlighted={highlightedSection === 'about'}
+            onPointerOver={() => handleModelHover('about')}
+            onPointerOut={() => handleModelHover(null)}
+          />
+          <MeteorModel
+            position={[185, 40, 30]}
+            scale={METEOR_SCALE}
+            rotation={[0, 0, 0]}
+            highlighted={highlightedSection === 'skills'}
+            onPointerOver={() => handleModelHover('skills')}
+            onPointerOut={() => handleModelHover(null)}
+          />
+          <SatelliteModel
+            position={[-20, -80, 50]}
+            scale={METEOR_SCALE}
+            rotation={[0, Math.PI / 5, 0]}
+            highlighted={highlightedSection === 'projects'}
+            onPointerOver={() => handleModelHover('projects')}
+            onPointerOut={() => handleModelHover(null)}
+          />
+          <SpacemanModel
+            position={[40, 110, 80]}
+            scale={METEOR_SCALE * 0.15}
+            rotation={[0, Math.PI / 2 + Math.PI, 0]}
+            highlighted={highlightedSection === 'education'}
+            onPointerOver={() => handleModelHover('education')}
+            onPointerOut={() => handleModelHover(null)}
+          />
+          <SputnikModel
+            position={[10, 100, 60]}
+            scale={METEOR_SCALE}
+            rotation={[0, Math.PI / 3, 0]}
+            highlighted={highlightedSection === 'experience'}
+            onPointerOver={() => handleModelHover('experience')}
+            onPointerOut={() => handleModelHover(null)}
+          />
           <OrbitControls enablePan enableZoom enableRotate />
         </Canvas>
       </div>
-      {/* Tu można dodać interaktywne menu na overlay */}
     </div>
   );
 };

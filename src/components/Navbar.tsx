@@ -4,15 +4,27 @@ import { navbar } from '../data/navbar';
 type NavbarProps = {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
+  onSectionHover?: (section: string | null) => void;
+  highlightedSection?: string | null;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
+const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onSectionHover, highlightedSection }) => {
   return (
     <nav className="navbar">
       <ul>
         {navbar.map((item) => (
-          <li key={item.to}>
-            <a href={item.to}>{item.title}</a>
+          <li
+            key={item.to}
+            onMouseEnter={() => onSectionHover && onSectionHover(item.title.toLowerCase())}
+            onMouseLeave={() => onSectionHover && onSectionHover(null)}
+            className={highlightedSection === item.title.toLowerCase() ? 'highlighted' : ''}
+          >
+            <a
+              href={item.to}
+              style={highlightedSection === item.title.toLowerCase() ? { color: '#b3e0ff', fontWeight: 'bold' } : {}}
+            >
+              {item.title}
+            </a>
           </li>
         ))}
       </ul>
