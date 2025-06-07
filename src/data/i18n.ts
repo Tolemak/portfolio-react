@@ -4,12 +4,14 @@ export const translations = {
   pl: {
     about: {
       title: 'O mnie',
-      intro: 'Cześć! Jestem pasjonatem nowoczesnych technologii webowych, grafiki 3D i interaktywnych interfejsów. Lubię łączyć kreatywność z inżynierią, budując aplikacje, które nie tylko działają, ale i zachwycają wizualnie. To portfolio prezentuje moje umiejętności, projekty i ścieżkę zawodową. Zapraszam do kontaktu i współpracy!',
+      intro: 'Cześć! Nazywam się Kamil Gałkowski. Jestem pasjonatem nowoczesnych technologii webowych, backendu i automatyzacji. Lubię łączyć kreatywność z inżynierią, budując aplikacje, które nie tylko działają, ale i zachwycają wizualnie. To portfolio prezentuje moje umiejętności, projekty i ścieżkę zawodową. Zapraszam do kontaktu i współpracy!',
       cards: [
-        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'Tworzę nowoczesne, interaktywne interfejsy w React, TypeScript, Svelte, z naciskiem na UX, animacje i 3D.' },
-        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'Projektuję i wdrażam API oraz backendy w PHP (Symfony), Node.js, Python. Bezpieczeństwo, wydajność, integracje.' },
-        { icon: '/logos/docker.svg', title: 'DevOps & Cloud', desc: 'Automatyzacja, CI/CD, Docker, chmura. Dbam o jakość wdrożeń i stabilność środowisk.' },
-        { icon: '/logos/3d.svg', title: 'Grafika 3D & WebGL', desc: 'Modele 3D, animacje, Three.js, interaktywne sceny. Portfolio to także demo moich możliwości 3D.' }
+        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'Tworzę nowoczesne, responsywne interfejsy w React, TypeScript, z naciskiem na UX, dostępność i wydajność.' },
+        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'Projektuję i wdrażam API oraz backendy w PHP (Symfony), Node.js, Python. Bezpieczeństwo, wydajność, integracje, SQL.' },
+        { icon: '/logos/docker.svg', title: 'DevOps & Bazy danych', desc: 'Automatyzacja, CI/CD, Docker, zarządzanie bazami danych (SQL), wdrożenia i stabilność środowisk.' },
+        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
+        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
+        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
       ],
       schools: {
         'Gdańsk University of Technology': 'Politechnika Gdańska',
@@ -88,12 +90,14 @@ export const translations = {
   en: {
     about: {
       title: 'About Me',
-      intro: `Hi! I'm passionate about modern web technologies, 3D graphics, and interactive UIs. I love combining creativity with engineering, building apps that work and look great. This portfolio showcases my skills, projects, and professional journey. Feel free to contact me!`,
+      intro: `Hi! My name is Kamil Gałkowski. I'm passionate about modern web technologies, backend, and automation. I love combining creativity with engineering, building apps that work and look great. This portfolio showcases my skills, projects, and professional journey. Feel free to contact me!`,
       cards: [
-        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'I create modern, interactive UIs in React, TypeScript, Svelte, with a focus on UX, animation, and 3D.' },
-        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design and implement APIs and backends in PHP (Symfony), Node.js, Python. Security, performance, integrations.' },
-        { icon: '/logos/docker.svg', title: 'DevOps & Cloud', desc: 'Automation, CI/CD, Docker, cloud. I care about deployment quality and environment stability.' },
-        { icon: '/logos/3d.svg', title: '3D Graphics & WebGL', desc: '3D models, animation, Three.js, interactive scenes. This portfolio is also a demo of my 3D skills.' }
+        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'I build modern, responsive interfaces in React and TypeScript, with a focus on UX, accessibility, and performance.' },
+        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design and implement APIs and backends in PHP (Symfony), Node.js, Python. Security, performance, integrations, SQL.' },
+        { icon: '/logos/docker.svg', title: 'DevOps & Databases', desc: 'Automation, CI/CD, Docker, database management (SQL), deployments, and environment stability.' },
+        { icon: '/logos/github-mark-white.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
+        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
+        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
       ],
       schools: {
         'Gdańsk University of Technology': 'Gdańsk University of Technology',
