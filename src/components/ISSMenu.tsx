@@ -1,20 +1,15 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerspectiveCamera } from '@react-three/drei';
 
 // Import typu z drei/three
 import { PerspectiveCamera as PerspectiveCameraType } from 'three';
+import MeteorModel from './models/MeteorModel';
+import SatelliteModel from './models/SatelliteModel';
 
 function ISSModel(props: Record<string, unknown>) {
   const { scene } = useGLTF('/assets/la_station_spatiale_internationale_iss/scene.gltf');
   return <primitive object={scene} {...props} />;
-}
-
-function MeteorModel(props: Record<string, unknown>) {
-  const { scene } = useGLTF('/assets/meteor/scene.gltf');
-  // Klonujemy scene, aby każdy meteor był osobnym obiektem
-  const cloned = useMemo(() => scene.clone(true), [scene]);
-  return <primitive object={cloned} {...props} />;
 }
 
 const AnimatedCamera = () => {
@@ -46,27 +41,46 @@ const AnimatedCamera = () => {
 };
 
 const METEOR_SCALE = 2.5 * 4;
-const METEOR_POSITIONS = [
-  [85, 40, 30],
-  [-85, 40, 20],
-  [0, 85, 85],
-  [0, -85, -85],
-  [100, 0, 60],
-];
 
 const ISSMenu: React.FC = () => {
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'linear-gradient(135deg, #12002b 0%, #000 100%)', zIndex: 10 }}>
-      <Canvas shadows>
-        <AnimatedCamera />
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[10, 10, 10]} intensity={1.2} />
-        <ISSModel scale={2.5} />
-        {METEOR_POSITIONS.map((pos, i) => (
-          <MeteorModel key={i} scale={METEOR_SCALE} position={pos} rotation={[Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI]} />
-        ))}
-        <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
-      </Canvas>
+    <div
+      style={{
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 10,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // background: 'none', // brak tła
+      }}
+    >
+      <div
+        style={{
+          width: '99vw',
+          height: '99vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '2rem',
+          boxShadow: '0 0 32px #000a',
+          // Usunięto background, aby tło 3D było przezroczyste
+        }}
+      >
+        <Canvas shadows style={{ width: '100%', height: '100%', background: 'transparent' }} gl={{ alpha: true }}>
+          <AnimatedCamera />
+          <ambientLight intensity={0.7} />
+          <directionalLight position={[10, 10, 10]} intensity={1.2} />
+          <ISSModel scale={2.5} />
+          <MeteorModel position={[85, 40, 30]} scale={METEOR_SCALE} rotation={[0, 0, 0]} />
+          <SatelliteModel position={[-30, -60, 50]} scale={METEOR_SCALE} rotation={[0, Math.PI / 5, 0]} />
+          {/* Tutaj możesz dodać kolejne elementy 3D */}
+          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+        </Canvas>
+      </div>
       {/* Tu można dodać interaktywne menu na overlay */}
     </div>
   );
