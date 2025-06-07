@@ -1,8 +1,15 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
 import { Mesh, MeshStandardMaterial, Object3D } from 'three';
+import type { ThreeEvent } from '@react-three/fiber';
 
-export default function SatelliteModel(props: Record<string, unknown>) {
+interface ModelProps extends Record<string, unknown> {
+  highlighted?: boolean;
+  onPointerOver?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerOut?: (e: ThreeEvent<PointerEvent>) => void;
+}
+
+export default function SatelliteModel({ highlighted, onPointerOver, onPointerOut, ...props }: ModelProps) {
   const { scene } = useGLTF('/assets/satelite/scene.gltf');
   const [hovered, setHovered] = React.useState(false);
   // Klonujemy scene, aby satelita był niezależnym obiektem
@@ -52,15 +59,21 @@ export default function SatelliteModel(props: Record<string, unknown>) {
   }, [cloned]);
 
   React.useEffect(() => {
-    setColor(hovered ? '#b3e0ff' : '#888');
-  }, [hovered, setColor]);
+    setColor(highlighted || hovered ? '#b3e0ff' : '#888');
+  }, [hovered, highlighted, setColor]);
 
   return (
     <primitive
       object={cloned}
       {...props}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
+      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
+        setHovered(true);
+        if (onPointerOver) onPointerOver(e);
+      }}
+      onPointerOut={(e: ThreeEvent<PointerEvent>) => {
+        setHovered(false);
+        if (onPointerOut) onPointerOut(e);
+      }}
       // Wyłącz cienie na poziomie komponentu
       castShadow={false}
       receiveShadow={false}
