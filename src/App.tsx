@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import ISSMenu from './components/ISSMenu';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -8,6 +9,11 @@ import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import StarsCanvas from "./components/StarCanvas";
 import About from './components/About';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Education from './components/Education';
+import Skills from './components/Skills';
+import Navbar from './components/Navbar';
 
 function App() {
   // Dark mode state (auto-detect system preference)
@@ -60,11 +66,15 @@ function App() {
           setShowISSMenu(true);
         }} />
       ) : (
-        showISSMenu && <ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Routes>
+          <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
+          <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
+          <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
+          <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
+          <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
+          <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
+        </Routes>
       )}
-      {/* About section always available for /about route */}
-      {/* Routing logic for About (simple version) */}
-      {window.location.pathname === '/about' && <About />}
     </div>
   );
 }
