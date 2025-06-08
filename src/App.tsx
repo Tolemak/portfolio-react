@@ -1,20 +1,22 @@
-import { useState, useEffect } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
-import ISSMenu from './components/ISSMenu';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import particlesOptions from "./components/particles.json";
 import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
-import StarsCanvas from "./components/StarCanvas";
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Education from './components/Education';
-import Skills from './components/Skills';
-import Navbar from './components/Navbar';
 import { LangContext, type Lang } from './data/i18n';
+
+// Lazy load sekcji
+const About = lazy(() => import('./components/About'));
+const Experience = lazy(() => import('./components/Experience'));
+const Projects = lazy(() => import('./components/Projects'));
+const Education = lazy(() => import('./components/Education'));
+const Skills = lazy(() => import('./components/Skills'));
+const Navbar = lazy(() => import('./components/Navbar'));
+const ISSMenu = lazy(() => import('./components/ISSMenu'));
+const StarsCanvas = lazy(() => import('./components/StarCanvas'));
 
 function App() {
   // Dark mode state (auto-detect system preference)
@@ -110,6 +112,7 @@ function App() {
           */}
           {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
           {/* Splash logic */}
+          <Suspense fallback={<div className="loader">Ładowanie...</div>}>
           {showSplash ? (
             <StarsCanvas key="splash" onSplashEnd={() => {
               setShowSplash(false);
@@ -126,6 +129,7 @@ function App() {
               <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
             </Routes>
           )}
+          </Suspense>
         </div>
       </LangContext.Provider>
     </>
