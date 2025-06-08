@@ -29,7 +29,10 @@ function App() {
   const [showSplash, setShowSplash] = useState(() => {
     return !sessionStorage.getItem('splashShown');
   });
-  const [lang, setLang] = useState<Lang>('pl');
+  const [lang, setLang] = useState<Lang>(() => {
+    const stored = localStorage.getItem('lang');
+    return stored === 'en' ? 'en' : 'pl';
+  });
 
   useEffect(() => {
     if (!init) {
@@ -48,7 +51,8 @@ function App() {
   return (
     <LangContext.Provider value={lang}>
       <div className={`app-root${darkMode ? ' dark' : ''}`}>
-        {/* Language Switcher */}
+        {/* USUŃ stary przycisk języka */}
+        {/*
         <div style={{ position: 'fixed', top: 18, right: 18, zIndex: 2000 }}>
           <button
             onClick={() => setLang(l => l === 'pl' ? 'en' : 'pl')}
@@ -68,6 +72,7 @@ function App() {
             {lang === 'pl' ? 'EN' : 'PL'}
           </button>
         </div>
+        */}
         {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
         {/* Splash logic */}
         {showSplash ? (
@@ -78,12 +83,12 @@ function App() {
           }} />
         ) : (
           <Routes>
-            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
-            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
-            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
-            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
-            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
-            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
+            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />} />
+            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><About /></>} />
+            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Experience /></>} />
+            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Projects /></>} />
+            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Education /></>} />
+            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
           </Routes>
         )}
       </div>
