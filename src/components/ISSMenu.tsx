@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCamera as PerspectiveCameraType } from 'three';
+import { useNavigate } from 'react-router-dom';
 import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
 import ISSModel from './models/ISSModel';
@@ -41,6 +42,7 @@ const AnimatedCamera = () => {
 
 const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>>; lang: 'pl' | 'en'; setLang: React.Dispatch<React.SetStateAction<'pl' | 'en'>> }) => {
   const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
+  const navigate = useNavigate();
 
   // Model hover handlers
   const handleModelHover = (section: string | null) => setHighlightedSection(section);
@@ -92,6 +94,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
               highlighted={highlightedSection === 'about'}
               onPointerOver={() => handleModelHover('about')}
               onPointerOut={() => handleModelHover(null)}
+              onClick={() => navigate('/about')}
             />
             <MeteorModel
               position={[185, 40, 30]}
@@ -100,6 +103,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
               highlighted={highlightedSection === 'skills'}
               onPointerOver={() => handleModelHover('skills')}
               onPointerOut={() => handleModelHover(null)}
+              onClick={() => navigate('/skills')}
             />
             <SatelliteModel
               position={[-20, -80, 50]}
@@ -108,6 +112,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
               highlighted={highlightedSection === 'projects'}
               onPointerOver={() => handleModelHover('projects')}
               onPointerOut={() => handleModelHover(null)}
+              onClick={() => navigate('/projects')}
             />
             <SpacemanModel
               position={[40, 110, 80]}
@@ -116,6 +121,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
               highlighted={highlightedSection === 'education'}
               onPointerOver={() => handleModelHover('education')}
               onPointerOut={() => handleModelHover(null)}
+              onClick={() => navigate('/education')}
             />
             <SputnikModel
               position={[10, 100, 60]}
@@ -124,6 +130,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
               highlighted={highlightedSection === 'experience'}
               onPointerOver={() => handleModelHover('experience')}
               onPointerOut={() => handleModelHover(null)}
+              onClick={() => navigate('/experience')}
             />
             <OrbitControls enablePan enableZoom enableRotate />
           </Canvas>

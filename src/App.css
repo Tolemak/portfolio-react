@@ -116,10 +116,60 @@ section {
 }
 @media (max-width: 600px) {
   .navbar ul {
-    gap: 1rem;
+    gap: 0.5rem;
   }
   section {
-    padding: 1rem 0.25rem;
+    padding: 0.7rem 0 !important;
+    max-width: 100vw;
+    border-radius: 0.7em;
+    overflow-x: visible;
+    box-sizing: border-box;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  h2 {
+    font-size: 1.2em;
+    margin-top: 1.7em !important;
+  }
+  h3 {
+    font-size: 1em;
+  }
+  .card, .fancy-card, .experience-item, .education-item, .skills-list, .skills-category-list {
+    padding: 0.7em 0 !important;
+    font-size: 0.95em !important;
+    border-radius: 0.7em !important;
+    margin: 0.5em 0 0.5em 0 !important;
+    gap: 0.7em !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: visible !important;
+    box-sizing: border-box !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+  }
+  .skills-list, .skills-category-list {
+    grid-template-columns: 1fr !important;
+    gap: 1em !important;
+  }
+  .theme-toggle, .lang-toggle {
+    font-size: 1em !important;
+    width: 2.2em !important;
+    height: 2.2em !important;
+  }
+  .navbar {
+    min-height: 56px !important;
+    padding: 0.3rem 0.1rem !important;
+  }
+  html, body, #root, .app-root {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+  }
+  #hero, #projects, #skills, #experience, #education {
+    scroll-margin-top: 90px !important;
   }
 }
 
