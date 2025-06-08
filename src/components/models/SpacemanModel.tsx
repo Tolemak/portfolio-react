@@ -13,7 +13,7 @@ interface ModelProps extends Record<string, unknown> {
 }
 
 export default function SpacemanModel({ highlighted, onPointerOver, onPointerOut, ...props }: ModelProps) {
-  const { scene } = useGLTF('/assets/spaceman/scene.gltf');
+  const { scene } = useGLTF('/public/models/spaceman/scene.gltf');
   const [hovered, setHovered] = useState(false);
   const cloned = useMemo(() => scene.clone(true), [scene]);
 

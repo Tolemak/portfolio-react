@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sputnik 1
+* source:	https://sketchfab.com/3d-models/sputnik-1-885a1c9175df417ea84c6b94277ae208
+* author:	borkia (https://sketchfab.com/borkia)
+
+Model License:
+* license type:	CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
+* requirements:	Author must be credited. Modified versions must have the same license. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sputnik 1" (https://sketchfab.com/3d-models/sputnik-1-885a1c9175df417ea84c6b94277ae208) by borkia (https://sketchfab.com/borkia) licensed under CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
