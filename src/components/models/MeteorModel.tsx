@@ -14,7 +14,7 @@ interface ModelProps extends Record<string, unknown> {
 }
 
 export default function MeteorModel({ highlighted, onPointerOver, onPointerOut, ...props }: ModelProps) {
-  const { scene } = useGLTF('/public/models/meteor/scene.gltf');
+  const { scene } = useGLTF('/models/meteor/scene.gltf');
   const [hovered, setHovered] = useState(false);
 
   // Klonujemy scenę, aby każdy meteor był niezależny

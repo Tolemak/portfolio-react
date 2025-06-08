@@ -13,7 +13,7 @@ interface ModelProps extends Record<string, unknown> {
 }
 
 export default function SputnikModel({ highlighted, onPointerOver, onPointerOut, ...props }: ModelProps) {
-  const { scene } = useGLTF('/public/models/sputnik_1/scene.gltf');
+  const { scene } = useGLTF('/models/sputnik_1/scene.gltf');
   const [hovered, setHovered] = useState(false);
   const cloned = useMemo(() => scene.clone(true), [scene]);
 

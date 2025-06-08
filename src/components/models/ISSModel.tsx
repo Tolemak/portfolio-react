@@ -13,7 +13,7 @@ interface ISSModelProps extends Record<string, unknown> {
 }
 
 export default function ISSModel({ highlighted, onPointerOver, onPointerOut, ...props }: ISSModelProps) {
-  const { scene } = useGLTF('/public/models/la_station_spatiale_internationale_iss/scene.gltf');
+  const { scene } = useGLTF('/models/la_station_spatiale_internationale_iss/scene.gltf');
   const [hovered, setHovered] = useState(false);
   const cloned = useMemo(() => scene.clone(true), [scene]);
 
