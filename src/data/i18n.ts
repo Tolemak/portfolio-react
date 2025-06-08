@@ -64,6 +64,10 @@ export const translations = {
         'File Actions': {
           short: 'Operacje na plikach w przeglądarce. Zmień rozmiar, konwertuj, kompresuj i więcej.',
           desc: 'FileActions_BackendDemo to projekt demonstracyjny prezentujący aplikację full-stack z backendem w PHP/Symfony. Pokazuje dobre praktyki, czystą architekturę i integracje z nowoczesnymi narzędziami.'
+        },
+        'Stare Portfolio': {
+          short: 'Stare portfolio – zobacz poprzednią wersję strony.',
+          desc: 'Moje poprzednie portfolio, dostępne pod adresem old-portfolio.tolemak.pl. Projekt powstał w oparciu o inne technologie niż obecna wersja. Kod źródłowy znajduje się na moim GitHubie jako repozytorium "portfolio".'
         }
       }
     },
@@ -150,6 +154,10 @@ export const translations = {
         'File Actions': {
           short: 'Batch file operations in your browser. Resize, convert, compress, and more.',
           desc: 'FileActions_BackendDemo is a demo project showcasing a full-stack app with PHP/Symfony backend. It highlights best practices, clean architecture, and integration with modern tools.'
+        },
+        'Stare Portfolio': {
+          short: 'Old portfolio – see the previous version of the site.',
+          desc: 'My previous portfolio, available at old-portfolio.tolemak.pl. The project was based on different technologies than the current version. The source code is available on my GitHub as the "portfolio" repository.'
         }
       }
     },
