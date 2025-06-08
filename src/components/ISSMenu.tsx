@@ -38,7 +38,7 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>>; lang: 'pl' | 'en'; setLang: React.Dispatch<React.SetStateAction<'pl' | 'en'>> }) => {
   const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
 
   // Model hover handlers
@@ -60,9 +60,11 @@ const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: Re
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        paddingTop: '72px', // Added top padding equal to navbar height
+        boxSizing: 'border-box',
       }}
     >
-      <Navbar onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navbar onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />
       {window.location.pathname === '/' && (
         <div
           style={{
@@ -71,6 +73,9 @@ const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: Re
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            marginTop: '-72px', // Adjusted margin to offset the top padding
+            paddingTop: '72px',
+            boxSizing: 'border-box',
           }}
         >
           <Canvas
