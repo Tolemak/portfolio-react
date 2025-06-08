@@ -49,50 +49,53 @@ function App() {
   }, [darkMode]);
 
   return (
-    <LangContext.Provider value={lang}>
-      <div className={`app-root${darkMode ? ' dark' : ''}`}>
-        {/* USUŃ stary przycisk języka */}
-        {/*
-        <div style={{ position: 'fixed', top: 18, right: 18, zIndex: 2000 }}>
-          <button
-            onClick={() => setLang(l => l === 'pl' ? 'en' : 'pl')}
-            style={{
-              background: 'rgba(30,40,60,0.85)',
-              color: '#fff',
-              border: '1.5px solid #61dafb',
-              borderRadius: '1.2em',
-              padding: '0.4em 1.2em',
-              fontWeight: 600,
-              fontSize: '1em',
-              cursor: 'pointer',
-              marginRight: 8
-            }}
-            aria-label={lang === 'pl' ? 'Switch to English' : 'Przełącz na polski'}
-          >
-            {lang === 'pl' ? 'EN' : 'PL'}
-          </button>
+    <>
+      <a href="#hero" className="skip-link">Przejdź do treści</a>
+      <LangContext.Provider value={lang}>
+        <div className={`app-root${darkMode ? ' dark' : ''}`}>
+          {/* USUŃ stary przycisk języka */}
+          {/*
+          <div style={{ position: 'fixed', top: 18, right: 18, zIndex: 2000 }}>
+            <button
+              onClick={() => setLang(l => l === 'pl' ? 'en' : 'pl')}
+              style={{
+                background: 'rgba(30,40,60,0.85)',
+                color: '#fff',
+                border: '1.5px solid #61dafb',
+                borderRadius: '1.2em',
+                padding: '0.4em 1.2em',
+                fontWeight: 600,
+                fontSize: '1em',
+                cursor: 'pointer',
+                marginRight: 8
+              }}
+              aria-label={lang === 'pl' ? 'Switch to English' : 'Przełącz na polski'}
+            >
+              {lang === 'pl' ? 'EN' : 'PL'}
+            </button>
+          </div>
+          */}
+          {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
+          {/* Splash logic */}
+          {showSplash ? (
+            <StarsCanvas key="splash" onSplashEnd={() => {
+              setShowSplash(false);
+              sessionStorage.setItem('splashShown', '1');
+              setShowISSMenu(true);
+            }} />
+          ) : (
+            <Routes>
+              <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />} />
+              <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><About /></>} />
+              <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Experience /></>} />
+              <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Projects /></>} />
+              <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Education /></>} />
+              <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
+            </Routes>
+          )}
         </div>
-        */}
-        {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
-        {/* Splash logic */}
-        {showSplash ? (
-          <StarsCanvas key="splash" onSplashEnd={() => {
-            setShowSplash(false);
-            sessionStorage.setItem('splashShown', '1');
-            setShowISSMenu(true);
-          }} />
-        ) : (
-          <Routes>
-            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />} />
-            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><About /></>} />
-            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Experience /></>} />
-            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Projects /></>} />
-            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Education /></>} />
-            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
-          </Routes>
-        )}
-      </div>
-    </LangContext.Provider>
+      </LangContext.Provider>
+    </>
   );
 }
 
