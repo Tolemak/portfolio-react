@@ -95,11 +95,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
             filter: highlightedSection === null && location.pathname === '/' ? 'drop-shadow(0 0 8px #b3e0ff)' : 'none',
             fontSize: isMobile ? 10 : 18,
           }}>
-            <svg width={isMobile ? 16 : 28} height={isMobile ? 16 : 28} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="16" cy="16" rx="13" ry="13" fill="#b3e0ff" fillOpacity="0.18"/>
-              <rect x="7" y="14" width="18" height="4" rx="2" fill="#b3e0ff" />
-              <rect x="15" y="7" width="2" height="18" rx="1" fill="#b3e0ff" />
-              <rect x="10.5" y="10.5" width="11" height="11" rx="5.5" fill="#1976d2" stroke="#b3e0ff" strokeWidth="1.5" />
+            <svg width={isMobile ? 16 : 28} height={isMobile ? 16 : 28} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label={t.navbar.home + ' icon'} role="img" focusable="false">
+              <ellipse cx="16" cy="16" rx="13" ry="13" fill="#b3e0ff" fillOpacity="0.18" aria-hidden="true"/>
+              <rect x="7" y="14" width="18" height="4" rx="2" fill="#b3e0ff" aria-hidden="true"/>
+              <rect x="15" y="7" width="2" height="18" rx="1" fill="#b3e0ff" aria-hidden="true"/>
+              <rect x="10.5" y="10.5" width="11" height="11" rx="5.5" fill="#1976d2" stroke="#b3e0ff" strokeWidth="1.5" aria-hidden="true"/>
             </svg>
             {/* Animated underline for home if active */}
             {highlightedSection === null && location.pathname === '/' && (
