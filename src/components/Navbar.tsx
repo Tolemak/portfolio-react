@@ -65,16 +65,16 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
     >
       <ul style={{
         display: 'flex',
-        flexWrap: isMobile ? 'wrap' : 'nowrap',
+        flexWrap: 'wrap', // Changed: always wrap
         alignItems: 'center',
-        gap: isMobile ? 0 : 32,
+        columnGap: isMobile ? 0 : 32, // Explicit column gap
+        rowGap: isMobile ? 2 : 16,    // Explicit row gap (e.g., 16px for desktop)
         margin: 0,
         padding: 0,
         listStyle: 'none',
         position: 'relative',
-        width: '100%',
+        // width: '100%', // Removed
         justifyContent: 'center',
-        rowGap: isMobile ? 2 : undefined,
       }}>
         <li key="home" style={{
           marginRight: isMobile ? 0 : 8,
