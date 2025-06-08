@@ -13,8 +13,9 @@ const METEOR_SCALE = 2.5 * 3;
 
 const AnimatedCamera = () => {
   const ref = useRef<PerspectiveCameraType>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 600;
   const startZ = 10;
-  const endZ = 450;
+  const endZ = isMobile ? 850 : 450; // farther on mobile
   const duration = 3500;
   const startTime = useRef<number | null>(null);
   const finished = useRef(false);
@@ -84,8 +85,8 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
             gl={{ alpha: true }}
           >
             <AnimatedCamera />
-            <ambientLight intensity={0.7} />
-            <directionalLight position={[10, 10, 10]} intensity={1.2} />
+            <ambientLight intensity={1.6} />
+            <directionalLight position={[10, 10, 10]} intensity={2.5} />
             <ISSModel
               scale={2.5}
               highlighted={highlightedSection === 'about'}
