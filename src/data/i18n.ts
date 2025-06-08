@@ -22,10 +22,11 @@ export const translations = {
       title: 'Doświadczenie',
       stack: 'Stack:',
       usedIn: 'Używane w doświadczeniach:',
+      current: 'obecnie',
       tiles: {
-        'software-freelance-junior': {
-          desc: 'Rozwój i utrzymanie aplikacji webowej łączącej ERP i CRM. Tworzenie nowych funkcjonalności oraz integracje z REST API w odpowiedzi na potrzeby klienta.',
-          name: 'Web Developer (Freelancer)'
+        'favourite-computer-systems-developer': {
+          desc: 'Rozwój i utrzymanie aplikacji webowych dla klientów Favourite Computer Systems. Tworzenie nowych funkcjonalności oraz integracje z REST API w odpowiedzi na potrzeby klienta.',
+          name: 'Programista aplikacji'
         }
       }
     },
@@ -112,10 +113,11 @@ export const translations = {
       title: 'Experience',
       stack: 'Stack:',
       usedIn: 'Used in experience:',
+      current: 'present',
       tiles: {
-        'software-freelance-junior': {
-          desc: 'Development and maintenance of a web application combining ERP and CRM. Creating new functionalities and integrations with REST API in response to customer needs.',
-          name: 'Web Developer (Freelancer)'
+        'favourite-computer-systems-developer': {
+          desc: 'Development and maintenance of web applications for clients of Favourite Computer Systems. Creating new functionalities and integrations with REST API in response to customer needs.',
+          name: 'Software Developer'
         }
       }
     },

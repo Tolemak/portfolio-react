@@ -49,6 +49,15 @@ const Experience: React.FC = () => {
                 );
               })}
             </div>
+            {item.links && item.links.length > 0 && (
+              <div className="experience-links">
+                {item.links.map((link) => (
+                  <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer" className="experience-link">
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

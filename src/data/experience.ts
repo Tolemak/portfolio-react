@@ -17,18 +17,18 @@ export interface ExperienceItem {
 
 export const experience: ExperienceItem[] = [
   {
-    slug: 'software-freelance-junior',
-    company: 'Self-employed',
-    description: 'Development and maintenance of a web application combining ERP and CRM. Creating new functionalities and integrations with REST API in response to customer needs.',
+    slug: 'favourite-computer-systems-developer',
+    company: 'Favourite Computer Systems',
+    description: 'Development and maintenance of web applications for clients of Favourite Computer Systems. Creating new functionalities and integrations with REST API in response to customer needs.',
     contract: 'FullTime',
     type: 'Software Development',
-    location: 'Home',
-    period: { from: new Date(2020, 8, 1), to: new Date() },
-    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python'],
-    name: 'Web Developer',
-    color: 'green',
-    links: [],
-    logo: '',
-    shortDescription: 'Creating awesome applications for customers.'
+    location: 'Gdańsk', // Możesz zaktualizować, jeśli inna lokalizacja
+    period: { from: new Date(2020, 8, 1), to: new Date() }, // Zakładam, że data początkowa jest ta sama
+    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python', 'ts'], // Usunięto 'react'
+    name: 'Software Developer',
+    color: 'blue', // Możesz zmienić kolor
+    links: [{ to: 'https://www.favourite.pl/', label: 'Strona firmy' }],
+    logo: 'no-img.svg', // Placeholder, możesz zmienić na logo firmy
+    shortDescription: 'Developing and maintaining web applications at Favourite Computer Systems.'
   }
 ];
