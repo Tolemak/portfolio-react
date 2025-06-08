@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import ISSMenu from './components/ISSMenu';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -33,6 +33,7 @@ function App() {
     const stored = localStorage.getItem('lang');
     return stored === 'en' ? 'en' : 'pl';
   });
+  const location = useLocation();
 
   useEffect(() => {
     if (!init) {
@@ -47,6 +48,38 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
+
+  useEffect(() => {
+    // Dynamic page titles (PL/EN)
+    const titles: Record<string, { pl: string; en: string }> = {
+      '/': {
+        pl: 'Kamil Gałkowski – Portfolio',
+        en: 'Kamil Gałkowski – Portfolio',
+      },
+      '/about': {
+        pl: 'O mnie – Kamil Gałkowski',
+        en: 'About Me – Kamil Gałkowski',
+      },
+      '/experience': {
+        pl: 'Doświadczenie – Kamil Gałkowski',
+        en: 'Experience – Kamil Gałkowski',
+      },
+      '/projects': {
+        pl: 'Projekty – Kamil Gałkowski',
+        en: 'Projects – Kamil Gałkowski',
+      },
+      '/education': {
+        pl: 'Edukacja – Kamil Gałkowski',
+        en: 'Education – Kamil Gałkowski',
+      },
+      '/skills': {
+        pl: 'Umiejętności – Kamil Gałkowski',
+        en: 'Skills – Kamil Gałkowski',
+      },
+    };
+    const title = titles[location.pathname]?.[lang] || 'Kamil Gałkowski – Portfolio';
+    document.title = title;
+  }, [location.pathname, lang]);
 
   return (
     <>

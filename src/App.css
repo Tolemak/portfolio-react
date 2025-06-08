@@ -745,3 +745,45 @@ section {
 .read-the-docs {
   color: #888;
 }
+
+/* SkillTag (global styles) */
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 1.5px solid;
+  border-radius: 1em;
+  padding: 0.18em 0.6em 0.18em 0.35em;
+  margin: 0 0.25em 0.25em 0;
+  font-size: 0.97em;
+  background: #e3f2fd; /* jaśniejsze tło dla lepszego kontrastu */
+  color: #0d223a; /* ciemniejszy tekst */
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s, color 0.15s;
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,0.08);
+}
+.skill-tag-logo {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
+  margin-right: 0.3em;
+}
+.skill-tag:hover, .skill-tag:focus {
+  background: #1976d2;
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
+  outline: none;
+}
+@media (prefers-color-scheme: dark) {
+  .skill-tag {
+    background: #22304a !important;
+    color: #fff;
+  }
+  .skill-tag:hover, .skill-tag:focus {
+    background: #1976d2 !important;
+    color: #fff !important;
+  }
+}
