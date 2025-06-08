@@ -10,7 +10,7 @@ interface ModelProps extends Record<string, unknown> {
 }
 
 export default function SatelliteModel({ highlighted, onPointerOver, onPointerOut, ...props }: ModelProps) {
-  const { scene } = useGLTF('/public/models/satelite/scene.gltf');
+  const { scene } = useGLTF('/models/satelite/scene.gltf');
   const [hovered, setHovered] = React.useState(false);
   // Klonujemy scene, aby satelita był niezależnym obiektem
   const cloned = React.useMemo(() => scene.clone(true), [scene]);
