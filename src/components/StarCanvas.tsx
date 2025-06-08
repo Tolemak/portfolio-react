@@ -67,7 +67,7 @@ const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
   useEffect(() => {
     let frame: number;
     let start: number | null = null;
-    const duration = 3000;
+    const duration = 6000; // wydłużony czas trwania splash screena (ms)
     function animate(ts: number) {
       if (start === null) start = ts;
       const elapsed = ts - start;
