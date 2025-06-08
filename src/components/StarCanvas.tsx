@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
+import { Points, PointMaterial, Preload, useGLTF } from "@react-three/drei";
 // @ts-expect-error: maath has no types, but works fine for random.inSphere
 import * as random from "maath/random/dist/maath-random.esm";
 import type { Points as PointsImpl } from "@react-three/drei";
@@ -58,30 +58,94 @@ const BOMBA_QUOTES = [
   "Wszystko jest możliwe, jeśli masz wystarczająco dużo prochu!"
 ];
 
+// Preload all ISSMenu models
+const MODEL_PATHS = [
+  '/models/la_station_spatiale_internationale_iss/scene.gltf',
+  '/models/meteor/scene.gltf',
+  '/models/satelite/scene.gltf',
+  '/models/spaceman/scene.gltf',
+  '/models/sputnik_1/scene.gltf',
+];
+
+function usePreloadModels(paths: string[]) {
+  // Returns true if all models are loaded
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    let isMounted = true;
+    let loadedCount = 0;
+    paths.forEach((path) => {
+      useGLTF.preload(path);
+      fetch(path)
+        .then(() => {
+          loadedCount++;
+          if (loadedCount === paths.length && isMounted) setLoaded(true);
+        })
+        .catch(() => {
+          loadedCount++;
+          if (loadedCount === paths.length && isMounted) setLoaded(true);
+        });
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [paths]);
+  return loaded;
+}
+
 // Fade-out splash screen with callback
 const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
   const [progress, setProgress] = useState(0);
   const [quote] = useState(() => BOMBA_QUOTES[Math.floor(Math.random() * BOMBA_QUOTES.length)]);
   const [fadeOut, setFadeOut] = useState(false);
+  const modelsLoaded = usePreloadModels(MODEL_PATHS);
+  const minDuration = 5000; // 5s
+  const fakeMax = 90; // %
 
+  // Fake progress: 0-90% in 5s, then wait for models
   useEffect(() => {
     let frame: number;
     let start: number | null = null;
-    const duration = 6000; // wydłużony czas trwania splash screena (ms)
     function animate(ts: number) {
       if (start === null) start = ts;
       const elapsed = ts - start;
-      setProgress(Math.min(100, (elapsed / duration) * 100));
-      if (elapsed < duration) {
+      if (elapsed < minDuration) {
+        // Fake progress
+        const value = (elapsed / minDuration) * fakeMax;
+        setProgress(value);
         frame = requestAnimationFrame(animate);
       } else {
-        setProgress(100);
-        setTimeout(() => setFadeOut(true), 300);
+        setProgress(fakeMax);
       }
     }
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
   }, []);
+
+  // After fake progress, if models not loaded, progress to 100% slowly
+  useEffect(() => {
+    let frame: number;
+    if (progress >= fakeMax && !modelsLoaded) {
+      let value = fakeMax;
+      function animate() {
+        value += 0.5; // slow step
+        setProgress(Math.min(100, value));
+        if (value < 100 && !modelsLoaded) {
+          frame = requestAnimationFrame(animate);
+        }
+      }
+      frame = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [progress, modelsLoaded]);
+
+  // When both: min 5s passed (progress >= 90) AND modelsLoaded, finish to 100% and fade out
+  useEffect(() => {
+    if (progress >= fakeMax && modelsLoaded) {
+      setProgress(100);
+      const timer = setTimeout(() => setFadeOut(true), 400); // short pause for 100%
+      return () => clearTimeout(timer);
+    }
+  }, [progress, modelsLoaded]);
 
   useEffect(() => {
     if (fadeOut) {

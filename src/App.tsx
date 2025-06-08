@@ -22,7 +22,7 @@ function App() {
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const [init, setInit] = useState(false);
-  const [showISSMenu, setShowISSMenu] = useState(() => {
+  const [,setShowISSMenu] = useState(() => {
     // ISSMenu (czyli scena 3D) pokazuje się tylko jeśli splash już był
     return !!sessionStorage.getItem('splashShown');
   });
@@ -44,18 +44,6 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
-
-  useEffect(() => {
-    if (!showSplash) return;
-    // Po zakończeniu splash, ustaw flagę w sessionStorage
-    if (init && !showISSMenu) {
-      setTimeout(() => {
-        setShowSplash(false);
-        sessionStorage.setItem('splashShown', '1');
-        setShowISSMenu(true);
-      }, 2000); // lub czas trwania animacji ładowania
-    }
-  }, [init, showISSMenu, showSplash]);
 
   return (
     <LangContext.Provider value={lang}>
@@ -81,7 +69,7 @@ function App() {
           </button>
         </div>
         {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
-        {/* Splash + ISSMenu logic */}
+        {/* Splash logic */}
         {showSplash ? (
           <StarsCanvas key="splash" onSplashEnd={() => {
             setShowSplash(false);
