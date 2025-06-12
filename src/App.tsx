@@ -8,7 +8,6 @@ import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { LangContext, type Lang } from './data/i18n';
 
-// Lazy load sekcji
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
 const Projects = lazy(() => import('./components/Projects'));
@@ -19,13 +18,11 @@ const ISSMenu = lazy(() => import('./components/ISSMenu'));
 const StarsCanvas = lazy(() => import('./components/StarCanvas'));
 
 function App() {
-  // Dark mode state (auto-detect system preference)
   const [darkMode, setDarkMode] = useState(() =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const [init, setInit] = useState(false);
   const [,setShowISSMenu] = useState(() => {
-    // ISSMenu (czyli scena 3D) pokazuje się tylko jeśli splash już był
     return !!sessionStorage.getItem('splashShown');
   });
   const [showSplash, setShowSplash] = useState(() => {
@@ -52,7 +49,6 @@ function App() {
   }, [darkMode]);
 
   useEffect(() => {
-    // Dynamic page titles (PL/EN)
     const titles: Record<string, { pl: string; en: string }> = {
       '/': {
         pl: 'Kamil Gałkowski – Portfolio',
@@ -88,30 +84,7 @@ function App() {
       <a href="#hero" className="skip-link">Przejdź do treści</a>
       <LangContext.Provider value={lang}>
         <div className={`app-root${darkMode ? ' dark' : ''}`}>
-          {/* USUŃ stary przycisk języka */}
-          {/*
-          <div style={{ position: 'fixed', top: 18, right: 18, zIndex: 2000 }}>
-            <button
-              onClick={() => setLang(l => l === 'pl' ? 'en' : 'pl')}
-              style={{
-                background: 'rgba(30,40,60,0.85)',
-                color: '#fff',
-                border: '1.5px solid #61dafb',
-                borderRadius: '1.2em',
-                padding: '0.4em 1.2em',
-                fontWeight: 600,
-                fontSize: '1em',
-                cursor: 'pointer',
-                marginRight: 8
-              }}
-              aria-label={lang === 'pl' ? 'Switch to English' : 'Przełącz na polski'}
-            >
-              {lang === 'pl' ? 'EN' : 'PL'}
-            </button>
-          </div>
-          */}
           {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
-          {/* Splash logic */}
           <Suspense fallback={<div className="loader">Ładowanie...</div>}>
           {showSplash ? (
             <StarsCanvas key="splash" onSplashEnd={() => {
