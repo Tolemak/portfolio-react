@@ -1,4 +1,3 @@
-// Projects data migrated from Svelte version
 export interface ProjectItem {
   slug: string;
   color: string;
@@ -24,7 +23,7 @@ export const projects: ProjectItem[] = [
       { to: 'http://file-actions.tolemak.pl/', label: 'Live Demo' },
       { to: 'https://github.com/Tolemak/FileActions_BackendDemo', label: 'GitHub' }
     ],
-    logo: 'symfony.svg',
+    logo: '/logos/symfony.svg',
     name: 'File Actions',
     period: { from: new Date('2025-04-01') },
     skills: ['php','symfony','bootstrap','js', 'ts', 'html', 'css'],
@@ -41,7 +40,7 @@ export const projects: ProjectItem[] = [
       { to: 'https://old-portfolio.tolemak.pl', label: 'Live Demo' },
       { to: 'https://github.com/Tolemak/portfolio', label: 'GitHub' }
     ],
-    logo: 'react.svg',
+    logo: '/logos/react.svg',
     name: 'Stare Portfolio',
     period: { from: new Date('2022-01-01'), to: new Date('2024-01-01') },
     skills: ['js', 'css', 'html'],
