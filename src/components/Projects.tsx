@@ -20,9 +20,10 @@ const Projects: React.FC = () => {
         {projects.map((project) => (
           <div key={project.slug} className="project-card fancy-card" style={{ borderColor: project.color }}>
             <div className="project-header">
-              <img src={`/logos/${project.logo}`} alt={project.name} className="project-logo" loading="lazy" />
+              <img src={project.logo} alt={project.name} className="project-logo" loading="lazy" />
               <h3>{project.name}</h3>
             </div>
+            <p className="project-date">{new Date(project.period.from).toLocaleDateString('default', { month: '2-digit', year: 'numeric' })}</p>
             <p className="project-short">{(t.projects.tiles as Record<string, { short: string; desc: string }>)[project.name]?.short || project.shortDescription}</p>
             <div className="project-links">
               {project.links.map((link) => (

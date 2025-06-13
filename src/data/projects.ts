@@ -42,7 +42,7 @@ export const projects: ProjectItem[] = [
     ],
     logo: '/logos/react.svg',
     name: 'Stare Portfolio',
-    period: { from: new Date('2022-01-01'), to: new Date('2024-01-01') },
+    period: { from: new Date('2022-01-01') },
     skills: ['js', 'css', 'html'],
     type: 'Portfolio'
   }
