@@ -177,6 +177,14 @@ section {
   border-color: #1976d2;
   outline: none;
 }
+
+.project-card .project-date {
+  font-size: 0.85em;
+  color: var(--text-secondary, #555); /* Uses --text-secondary if defined, otherwise a fallback gray */
+  margin-bottom: 0.75em; /* Provides some space below the date */
+  margin-top: -0.5em; /* Adjust to pull it closer to the header if needed */
+  text-align: left; /* Or 'center' if you prefer */
+}
 .project-header {
   display: flex;
   align-items: center;
