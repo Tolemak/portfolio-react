@@ -17,6 +17,8 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
+      - name: Copy .htaccess to dist
+        run: cp .htaccess dist/
       - name: Push dist to gh-pages branch
         run: |
           git config --global user.name 'github-actions[bot]'
