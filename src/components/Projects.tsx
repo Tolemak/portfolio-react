@@ -10,6 +10,20 @@ const Projects: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
   const t = useT();
 
+  const sortedProjects = [...projects].sort((a, b) => {
+    const dateAFrom = new Date(a.period.from).getTime();
+    const dateBFrom = new Date(b.period.from).getTime();
+    const dateATo = a.period.to ? new Date(a.period.to).getTime() : Infinity; // Ongoing projects get a very large 'to' date
+    const dateBTo = b.period.to ? new Date(b.period.to).getTime() : Infinity; // Ongoing projects get a very large 'to' date
+
+    // Sort by 'to' date primarily (newest, so ongoing projects come first)
+    if (dateBTo !== dateATo) {
+      return dateBTo - dateATo;
+    }
+    // If 'to' dates are the same (e.g., both ongoing or same end date), sort by 'from' date (newest first)
+    return dateBFrom - dateAFrom;
+  });
+
   // Helper: znajdź skill po slug
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
 
@@ -17,7 +31,7 @@ const Projects: React.FC = () => {
     <section id="projects" className="projects-section">
       <h2>{t.projects.title}</h2>
       <div className="projects-list">
-        {projects.map((project) => (
+        {sortedProjects.map((project) => (
           <div key={project.slug} className="project-card fancy-card" style={{ borderColor: project.color }}>
             <div className="project-header">
               <img src={project.logo} alt={project.name} className="project-logo" loading="lazy" />
