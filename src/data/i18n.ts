@@ -69,6 +69,10 @@ export const translations = {
         'Stare Portfolio': {
           short: 'Stare portfolio – zobacz poprzednią wersję strony.',
           desc: 'Moje poprzednie portfolio, dostępne pod adresem old-portfolio.tolemak.pl. Projekt powstał w oparciu o inne technologie niż obecna wersja. Kod źródłowy znajduje się na moim GitHubie jako repozytorium "portfolio".'
+        },
+        'Mathema': {
+          short: 'Interaktywna aplikacja do nauki matematyki.',
+          desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów.'
         }
       }
     },
@@ -160,6 +164,10 @@ export const translations = {
         'Stare Portfolio': {
           short: 'Old portfolio – see the previous version of the site.',
           desc: 'My previous portfolio, available at old-portfolio.tolemak.pl. The project was based on different technologies than the current version. The source code is available on my GitHub as the "portfolio" repository.'
+        },
+        'Mathema': {
+          short: 'Interactive application for learning mathematics.',
+          desc: 'Mathema is an interactive web application designed to help users practice and improve their mathematical skills. The application presents users with a variety of mathematical problems from different categories and allows them to test their knowledge in interactive mode or browse problem sets. Users can also track their progress and view results on a global leaderboard.'
         }
       }
     },
