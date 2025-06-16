@@ -73,6 +73,10 @@ export const translations = {
         'Mathema': {
           short: 'Interaktywna aplikacja do nauki matematyki.',
           desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów.'
+        },
+        'Aktualne Portfolio': {
+          short: 'Interaktywne portfolio prezentujące moje projekty i umiejętności.',
+          desc: 'Moje obecne portfolio, które właśnie przeglądasz. Zbudowane przy użyciu nowoczesnych technologii webowych, aby zaprezentować moje umiejętności i projekty w interaktywny i responsywный sposób.'
         }
       }
     },
@@ -168,6 +172,10 @@ export const translations = {
         'Mathema': {
           short: 'Interactive application for learning mathematics.',
           desc: 'Mathema is an interactive web application designed to help users practice and improve their mathematical skills. The application presents users with a variety of mathematical problems from different categories and allows them to test their knowledge in interactive mode or browse problem sets. Users can also track their progress and view results on a global leaderboard.'
+        },
+        'Current Portfolio': {
+          short: 'Interactive portfolio showcasing my projects and skills.',
+          desc: 'My current portfolio, which you are currently viewing. Built with modern web technologies to present my skills and projects in an interactive and responsive way.'
         }
       }
     },
