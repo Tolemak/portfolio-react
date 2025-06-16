@@ -45,5 +45,21 @@ export const projects: ProjectItem[] = [
     period: { from: new Date('2022-01-01') },
     skills: ['js', 'css', 'html'],
     type: 'Portfolio'
+  },
+  {
+    slug: 'mathema',
+    color: '#3498db',
+    description:
+      'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów.',
+    shortDescription: 'Interaktywna aplikacja do nauki matematyki.',
+    links: [
+      { to: 'https://mathema.tolemak.pl/', label: 'Live Demo' },
+      { to: 'https://github.com/Tolemak/mathema', label: 'GitHub' }
+    ],
+    logo: '/logos/react.svg',
+    name: 'Mathema',
+    period: { from: new Date('2025-06-01') },
+    skills: ['react', 'vite', 'ts', 'react-router', 'css'],
+    type: 'Web Application'
   }
 ];
