@@ -61,5 +61,21 @@ export const projects: ProjectItem[] = [
     period: { from: new Date('2025-06-01') },
     skills: ['react', 'vite', 'ts', 'react-router', 'css'],
     type: 'Web Application'
+  },
+  {
+    slug: 'current-portfolio',
+    color: '#6A0DAD',
+    description:
+      'Moje obecne portfolio, które właśnie przeglądasz. Zbudowane przy użyciu nowoczesnych technologii webowych, aby zaprezentować moje umiejętności i projekty w interaktywny i responsywny sposób.',
+    shortDescription:
+      'Interaktywne portfolio prezentujące moje projekty i umiejętności.',
+    links: [
+      { to: 'https://github.com/Tolemak/portfolio-react', label: 'GitHub' }
+    ],
+    logo: '/logos/react.svg',
+    name: 'Aktualne Portfolio',
+    period: { from: new Date('2025-06-01') },
+    skills: ['react', 'vite', 'ts', 'css', 'eslint'],
+    type: 'Portfolio'
   }
 ];
