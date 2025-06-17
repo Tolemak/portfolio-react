@@ -7,6 +7,7 @@ import particlesOptions from "./components/particles.json";
 import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { LangContext, type Lang } from './data/i18n';
+import NotFound from './components/NotFound';
 
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
@@ -100,6 +101,7 @@ function App() {
               <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Projects /></>} />
               <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Education /></>} />
               <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
+              <Route path="*" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Suspense fallback={<div className="loader">Ładowanie...</div>}><NotFound /></Suspense></>} />
             </Routes>
           )}
           </Suspense>
