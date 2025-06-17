@@ -16,4 +16,7 @@ RedirectMatch 403 \.htaccess
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ /index.html [L]
+
+  # Strony błędów
+  ErrorDocument 403 /403.html
 </IfModule>
