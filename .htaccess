@@ -1,9 +1,26 @@
+# Blokuj dostęp do wszystkich plików poza dozwolonymi (index.html, favicon, assets, logos)
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
+
+  # Zezwól na index.html, favicon, assets, logos
+  RewriteCond %{REQUEST_URI} ^/(index\.html|favicon\.ico)$ [OR]
+  RewriteCond %{REQUEST_URI} ^/public/logos/ [OR]
+  RewriteCond %{REQUEST_URI} ^/assets/
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Blokuj dostęp do innych plików (np. .env, .git, itp.)
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [F]
+
+  # Obsługa SPA (wszystko inne do index.html)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteRule . /index.html [L]
+
+  # Strony błędów
+  ErrorDocument 403 /403.html
+  ErrorDocument 404 /404.html
 </IfModule>
