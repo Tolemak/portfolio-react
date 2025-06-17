@@ -12,16 +12,8 @@ RedirectMatch 403 \.htaccess
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Jeśli ścieżka nie istnieje jako plik/katalog, sprawdź czy to nie jest ścieżka do SPA
+  # Obsługa SPA (wszystko inne do index.html)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ /index.html [L]
-
-  # Strony błędów
-  ErrorDocument 403 /403.html
-  ErrorDocument 404 /404.html
 </IfModule>
-
-# Jeśli żądanie kończy się na .html i nie istnieje taki plik, pokaż 404
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)\.html$ /404.html [L]
