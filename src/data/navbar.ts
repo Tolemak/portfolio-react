@@ -1,4 +1,3 @@
-// Navbar data migrated from Svelte version
 export const navbar = [
   { title: 'About', to: '/about', icon: 'i-carbon-user-avatar' },
   { title: 'Experience', to: '/experience', icon: 'i-carbon-development' },

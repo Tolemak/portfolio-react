@@ -1,4 +1,3 @@
-// Experience data migrated from Svelte version
 export interface ExperienceItem {
   slug: string;
   company: string;
@@ -22,13 +21,13 @@ export const experience: ExperienceItem[] = [
     description: 'Development and maintenance of web applications for clients of Favourite Computer Systems. Creating new functionalities and integrations with REST API in response to customer needs.',
     contract: 'FullTime',
     type: 'Software Development',
-    location: 'Gdańsk', // Możesz zaktualizować, jeśli inna lokalizacja
-    period: { from: new Date(2020, 8, 1), to: new Date() }, // Zakładam, że data początkowa jest ta sama
-    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python', 'ts'], // Usunięto 'react'
+    location: 'Gdańsk',
+    period: { from: new Date(2020, 8, 1), to: new Date() },
+    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python', 'ts'],
     name: 'Software Developer',
-    color: 'blue', // Możesz zmienić kolor
+    color: 'blue',
     links: [{ to: 'https://www.favourite.pl/', label: 'Strona firmy' }],
-    logo: 'no-img.svg', // Placeholder, możesz zmienić na logo firmy
+    logo: 'no-img.svg',
     shortDescription: 'Developing and maintaining web applications at Favourite Computer Systems.'
   }
 ];

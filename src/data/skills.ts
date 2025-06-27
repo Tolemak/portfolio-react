@@ -10,7 +10,7 @@ export interface SkillItem {
 export const skills: SkillItem[] = [
   {
     slug: 'js',
-    color: '#FFFF00', // yellow
+    color: '#FFFF00',
     description: `JavaScript UX Specialist, Data Preloading Maestro, Interactive Frontend Developer, Efficient Data Loader`,
     logo: '/logos/js.png',
     name: 'Javascript',
@@ -18,7 +18,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'php',
-    color: '#0000FF', // blue
+    color: '#0000FF',
     description: `PHP REST API Architect, Data Preprocessing Prodigy, API Integration Expert, SQL Data Pipeline Maestro`,
     logo: '/logos/php.svg',
     name: 'PHP',
@@ -26,7 +26,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'python',
-    color: '#0000FF', // blue
+    color: '#0000FF',
     description: `Python Data Wizard, Automation Script Guru`,
     logo: '/logos/python.png',
     name: 'Python',
@@ -34,7 +34,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'html',
-    color: '#FFA500', // orange
+    color: '#FFA500',
     description: 'Tworzenie semantycznych, dostępnych struktur stron internetowych.',
     logo: '/logos/html.svg',
     name: 'HTML',
@@ -42,7 +42,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'css',
-    color: '#0000FF', // blue
+    color: '#0000FF',
     description: 'Zaawansowane stylowanie, responsywność, animacje CSS.',
     logo: '/logos/css.svg',
     name: 'CSS',
@@ -50,7 +50,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'symfony',
-    color: '#FFFFFF', // white
+    color: '#FFFFFF',
     description: 'Framework PHP do budowy skalowalnych aplikacji webowych.',
     logo: '/logos/symfony.svg',
     name: 'Symfony',
@@ -58,7 +58,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'bootstrap',
-    color: '#EE82EE', // violet
+    color: '#EE82EE',
     description: 'Framework CSS do szybkiego prototypowania i responsywnych layoutów.',
     logo: '/logos/bootstrap.svg',
     name: 'Bootstrap',
@@ -66,7 +66,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'twig',
-    color: '#008000', // green
+    color: '#008000',
     description: 'Szablony PHP, makra, formatowanie danych.',
     logo: '/logos/twig.svg',
     name: 'Twig',

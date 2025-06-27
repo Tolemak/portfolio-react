@@ -19,26 +19,21 @@ const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
 
   if (!skill) return null;
 
-  // Helper: znajdź doświadczenia, gdzie skill był użyty
   const getExperienceWithSkill = (slug: string) =>
     experience.filter((exp) => exp.skills.includes(slug));
 
-  // Helper: znajdź projekty, gdzie skill był użyty
   const getProjectsWithSkill = (slug: string) =>
     projects.filter((proj) => proj.skills.includes(slug));
 
-  // Helper: znajdź edukację, gdzie skill był użyty (np. w subjects)
   const getEducationWithSkill = (slug: string) =>
     education.filter((edu) =>
       (edu.subjects && edu.subjects.some((s) => s.toLowerCase().includes(skills.find(sk => sk.slug === slug)?.name.toLowerCase() || slug.toLowerCase()))));
 
-  // Helper do tłumaczenia opisu umiejętności
   const getSkillDesc = (slug: string, fallback: string | {pl:string;en:string}) => {
     if (typeof fallback === 'object' && fallback !== null) {
       return fallback[lang] || Object.values(fallback)[0];
     }
-    // @ts-expect-error: tiles może nie istnieć
-    return t.skills && t.skills["descs"] && t.skills["descs"][slug] ? t.skills["descs"][slug] : fallback;
+    return (t.skills?.descs as Record<string, string>)?.[slug] || fallback;
   };
 
   return (

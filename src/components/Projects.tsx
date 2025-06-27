@@ -13,18 +13,15 @@ const Projects: React.FC = () => {
   const sortedProjects = [...projects].sort((a, b) => {
     const dateAFrom = new Date(a.period.from).getTime();
     const dateBFrom = new Date(b.period.from).getTime();
-    const dateATo = a.period.to ? new Date(a.period.to).getTime() : Infinity; // Ongoing projects get a very large 'to' date
-    const dateBTo = b.period.to ? new Date(b.period.to).getTime() : Infinity; // Ongoing projects get a very large 'to' date
+    const dateATo = a.period.to ? new Date(a.period.to).getTime() : Infinity;
+    const dateBTo = b.period.to ? new Date(b.period.to).getTime() : Infinity;
 
-    // Sort by 'to' date primarily (newest, so ongoing projects come first)
     if (dateBTo !== dateATo) {
       return dateBTo - dateATo;
     }
-    // If 'to' dates are the same (e.g., both ongoing or same end date), sort by 'from' date (newest first)
     return dateBFrom - dateAFrom;
   });
 
-  // Helper: znajdź skill po slug
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
 
   return (
