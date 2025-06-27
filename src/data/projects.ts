@@ -41,7 +41,7 @@ export const projects: ProjectItem[] = [
       { to: 'https://github.com/Tolemak/portfolio', label: 'GitHub' }
     ],
     logo: '/logos/react.svg',
-    name: 'Stare Portfolio',
+    name: 'Old Portfolio',
     period: { from: new Date('2022-01-01') },
     skills: ['js', 'css', 'html'],
     type: 'Portfolio'
@@ -73,7 +73,7 @@ export const projects: ProjectItem[] = [
       { to: 'https://github.com/Tolemak/portfolio-react', label: 'GitHub' }
     ],
     logo: '/logos/react.svg',
-    name: 'Aktualne Portfolio',
+    name: 'Current Portfolio',
     period: { from: new Date('2025-06-01') },
     skills: ['react', 'vite', 'ts', 'css', 'eslint'],
     type: 'Portfolio'

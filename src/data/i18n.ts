@@ -61,12 +61,18 @@ export const translations = {
     projects: {
       title: 'Projekty',
       stack: 'Stack:',
+      names: {
+        'File Actions': 'File Actions',
+        'Old Portfolio': 'Stare Portfolio',
+        'Mathema': 'Mathema',
+        'Current Portfolio': 'Aktualne Portfolio'
+      },
       tiles: {
         'File Actions': {
           short: 'Operacje na plikach w przeglądarce. Zmień rozmiar, konwertuj, kompresuj i więcej.',
           desc: 'FileActions_BackendDemo to projekt demonstracyjny prezentujący aplikację full-stack z backendem w PHP/Symfony. Pokazuje dobre praktyki, czystą architekturę i integracje z nowoczesnymi narzędziami.'
         },
-        'Stare Portfolio': {
+        'Old Portfolio': {
           short: 'Stare portfolio – zobacz poprzednią wersję strony.',
           desc: 'Moje poprzednie portfolio, dostępne pod adresem old-portfolio.tolemak.pl. Projekt powstał w oparciu o inne technologie niż obecna wersja. Kod źródłowy znajduje się na moim GitHubie jako repozytorium "portfolio".'
         },
@@ -74,9 +80,9 @@ export const translations = {
           short: 'Interaktywna aplikacja do nauki matematyki.',
           desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów.'
         },
-        'Aktualne Portfolio': {
+        'Current Portfolio': {
           short: 'Interaktywne portfolio prezentujące moje projekty i umiejętności.',
-          desc: 'Moje obecne portfolio, które właśnie przeglądasz. Zbudowane przy użyciu nowoczesnych technologii webowych, aby zaprezentować moje umiejętności i projekty w interaktywny i responsywный sposób.'
+          desc: 'Moje obecne portfolio, które właśnie przeglądasz. Zbudowane przy użyciu nowoczesnych technologii webowych, aby zaprezentować moje umiejętności i projekty w interaktywny i responsywny sposób.'
         }
       }
     },
@@ -160,12 +166,18 @@ export const translations = {
     projects: {
       title: 'Projects',
       stack: 'Stack:',
+      names: {
+        'File Actions': 'File Actions',
+        'Old Portfolio': 'Old Portfolio',
+        'Mathema': 'Mathema',
+        'Current Portfolio': 'Current Portfolio'
+      },
       tiles: {
         'File Actions': {
           short: 'Batch file operations in your browser. Resize, convert, compress, and more.',
           desc: 'FileActions_BackendDemo is a demo project showcasing a full-stack app with PHP/Symfony backend. It highlights best practices, clean architecture, and integration with modern tools.'
         },
-        'Stare Portfolio': {
+        'Old Portfolio': {
           short: 'Old portfolio – see the previous version of the site.',
           desc: 'My previous portfolio, available at old-portfolio.tolemak.pl. The project was based on different technologies than the current version. The source code is available on my GitHub as the "portfolio" repository.'
         },
