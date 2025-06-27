@@ -3,7 +3,6 @@ import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { useT } from '../data/i18n';
 
-// Custom hook for window width
 function useWindowWidth() {
   const [width, setWidth] = React.useState(window.innerWidth);
   React.useEffect(() => {
@@ -29,16 +28,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
   const width = useWindowWidth();
   React.useEffect(() => {
     localStorage.setItem('lang', lang);
-    // Optionally reload or trigger context update if needed
-    // window.location.reload();
   }, [lang]);
-  // Ustal aktywną sekcję na podstawie ścieżki
   const activeSection = React.useMemo(() => {
     if (location.pathname === '/') return null;
     const found = navbar.find(item => location.pathname.startsWith(item.to));
     return found ? found.title.toLowerCase() : null;
   }, [location.pathname]);
-  // Responsive styles
   const isMobile = width < 600;
   return (
     <nav
@@ -65,15 +60,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
     >
       <ul style={{
         display: 'flex',
-        flexWrap: 'wrap', // Changed: always wrap
+        flexWrap: 'wrap',
         alignItems: 'center',
-        columnGap: isMobile ? 0 : 32, // Explicit column gap
-        rowGap: isMobile ? 2 : 16,    // Explicit row gap (e.g., 16px for desktop)
+        columnGap: isMobile ? 0 : 18,
+        rowGap: isMobile ? 2 : 16,
         margin: 0,
         padding: 0,
         listStyle: 'none',
         position: 'relative',
-        // width: '100%', // Removed
         justifyContent: 'center',
       }}>
         <li key="home" style={{
@@ -101,7 +95,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
               <rect x="15" y="7" width="2" height="18" rx="1" fill="#b3e0ff" aria-hidden="true"/>
               <rect x="10.5" y="10.5" width="11" height="11" rx="5.5" fill="#1976d2" stroke="#b3e0ff" strokeWidth="1.5" aria-hidden="true"/>
             </svg>
-            {/* Animated underline for home if active */}
             {highlightedSection === null && location.pathname === '/' && (
               <span style={{
                 position: 'absolute',
@@ -121,6 +114,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
         </li>
         {navbar.map((item) => {
           const isActive = (highlightedSection === item.title.toLowerCase()) || (activeSection === item.title.toLowerCase());
+          const translatedText = t.navbar[item.title.toLowerCase() as keyof typeof t.navbar] || item.title;
+          const isLongText = translatedText.length > 9;
+          const isVeryLongText = translatedText.length > 12;
           return (
             <li
               key={item.to}
@@ -131,12 +127,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
                 borderRadius: isMobile ? 10 : 18,
                 background: isActive ? 'rgba(179,224,255,0.22)' : 'rgba(30,30,60,0.7)',
                 boxShadow: isActive ? '0 0 16px 4px #b3e0ff88, 0 2px 8px #0004' : '0 1px 4px #0002',
-                padding: isMobile ? '0.15rem 0.4rem' : '0.5rem 1.3rem',
+                padding: isMobile ? '0.15rem 0.4rem' : (isVeryLongText ? '0.5rem 0.5rem' : isLongText ? '0.5rem 0.7rem' : '0.5rem 1.3rem'),
                 margin: 0,
                 fontWeight: isActive ? 700 : 400,
                 color: isActive ? '#b3e0ff' : '#fff',
                 fontFamily: 'Orbitron, monospace',
-                fontSize: isMobile ? 10 : 18,
+                fontSize: isMobile ? 10 : (isVeryLongText ? 14 : isLongText ? 15 : 18),
                 letterSpacing: '0.04em',
                 cursor: 'pointer',
                 transition: 'all 0.18s',
@@ -146,23 +142,35 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
                 gap: isMobile ? 2 : 8,
                 position: 'relative',
                 filter: isActive ? 'drop-shadow(0 0 8px #b3e0ff)' : 'none',
-                minWidth: isMobile ? '33.33%' : undefined,
-                maxWidth: isMobile ? '33.33%' : undefined,
+                minWidth: isMobile ? '33.33%' : 160,
+                maxWidth: isMobile ? '33.33%' : 160,
+                width: isMobile ? undefined : 160,
                 flex: isMobile ? '1 1 33.33%' : undefined,
                 textAlign: 'center',
                 boxSizing: 'border-box',
+                justifyContent: 'center',
               }}
             >
               <Link to={item.to} style={{
-                color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: isMobile ? 2 : 8, fontSize: isMobile ? 10 : 18, overflow: isMobile ? 'hidden' : undefined, whiteSpace: isMobile ? 'nowrap' : undefined, textOverflow: isMobile ? 'ellipsis' : undefined
+                color: 'inherit', 
+                textDecoration: 'none', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                gap: isMobile ? 2 : 8, 
+                fontSize: isMobile ? 10 : (isVeryLongText ? 14 : isLongText ? 15 : 18), 
+                overflow: 'hidden', 
+                whiteSpace: 'nowrap', 
+                textOverflow: 'ellipsis',
+                width: '100%',
+                textAlign: 'center'
               }}>
-                {t.navbar[item.title.toLowerCase() as keyof typeof t.navbar] || item.title}
+                {translatedText}
               </Link>
             </li>
           );
         })}
       </ul>
-      {/* Second row for theme and language button on mobile */}
       {isMobile && (
         <div style={{
           display: 'flex',
@@ -214,7 +222,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
           </button>
         </div>
       )}
-      {/* On desktop, keep both buttons inline on the right */}
       {!isMobile && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginLeft: 24 }}>
           <button

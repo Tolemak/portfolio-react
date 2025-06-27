@@ -21,7 +21,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   if (!isOpen) return null;
 
-  // Obsługa kliknięcia poza modalem (backdrop)
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) onClose();
   };
