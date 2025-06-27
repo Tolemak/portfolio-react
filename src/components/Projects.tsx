@@ -35,7 +35,7 @@ const Projects: React.FC = () => {
           <div key={project.slug} className="project-card fancy-card" style={{ borderColor: project.color }}>
             <div className="project-header">
               <img src={project.logo} alt={project.name} className="project-logo" loading="lazy" />
-              <h3>{project.name}</h3>
+              <h3>{(t.projects.names as Record<string, string>)[project.name] || project.name}</h3>
             </div>
             <p className="project-date">{new Date(project.period.from).toLocaleDateString('default', { month: '2-digit', year: 'numeric' })}</p>
             <p className="project-short">{(t.projects.tiles as Record<string, { short: string; desc: string }>)[project.name]?.short || project.shortDescription}</p>
