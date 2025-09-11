@@ -1,7 +1,7 @@
 import React from 'react';
 import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
-import { useT } from '../data/i18n';
+import { useT, useLang } from '../data/i18n';
 
 function useWindowWidth() {
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -18,13 +18,12 @@ export type NavbarProps = {
   highlightedSection?: string | null;
   darkMode?: boolean;
   setDarkMode?: React.Dispatch<React.SetStateAction<boolean>>;
-  lang: 'pl' | 'en';
-  setLang: React.Dispatch<React.SetStateAction<'pl' | 'en'>>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, darkMode, setDarkMode, lang, setLang }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, darkMode, setDarkMode }) => {
   const location = useLocation();
   const t = useT();
+  const { lang, setLang } = useLang();
   const width = useWindowWidth();
   React.useEffect(() => {
     localStorage.setItem('lang', lang);

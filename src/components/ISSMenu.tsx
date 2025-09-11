@@ -9,6 +9,7 @@ import ISSModel from './models/ISSModel';
 import SpacemanModel from './models/SpacemanModel';
 import SputnikModel from './models/SputnikModel';
 import Navbar from './Navbar';
+import { useLang } from '../data/i18n';
 
 const METEOR_SCALE = 2.5 * 3;
 
@@ -40,9 +41,10 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>>; lang: 'pl' | 'en'; setLang: React.Dispatch<React.SetStateAction<'pl' | 'en'>> }) => {
+const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>>; }) => {
   const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
   const navigate = useNavigate();
+  useLang();
 
   // Model hover handlers
   const handleModelHover = (section: string | null) => setHighlightedSection(section);
@@ -67,7 +69,7 @@ const ISSMenu = ({ darkMode, setDarkMode, lang, setLang }: { darkMode: boolean; 
         boxSizing: 'border-box',
       }}
     >
-      <Navbar onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />
+      <Navbar onSectionHover={handleNavbarHover} highlightedSection={highlightedSection} darkMode={darkMode} setDarkMode={setDarkMode} />
       {window.location.pathname === '/' && (
         <div
           style={{

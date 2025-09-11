@@ -6,7 +6,7 @@ import { loadFull } from "tsparticles";
 import particlesOptions from "./components/particles.json";
 import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
-import { LangContext, type Lang } from './data/i18n';
+import { LangContext, type Lang, useT } from './data/i18n';
 import NotFound from './components/NotFound';
 
 const About = lazy(() => import('./components/About'));
@@ -18,7 +18,10 @@ const Navbar = lazy(() => import('./components/Navbar'));
 const ISSMenu = lazy(() => import('./components/ISSMenu'));
 const StarsCanvas = lazy(() => import('./components/StarCanvas'));
 
-function App() {
+const AppContent = () => {
+  const t = useT();
+  const location = useLocation();
+  const { lang } = useT();
   const [darkMode, setDarkMode] = useState(() =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
@@ -29,11 +32,6 @@ function App() {
   const [showSplash, setShowSplash] = useState(() => {
     return !sessionStorage.getItem('splashShown');
   });
-  const [lang, setLang] = useState<Lang>(() => {
-    const stored = localStorage.getItem('lang');
-    return stored === 'en' ? 'en' : 'pl';
-  });
-  const location = useLocation();
 
   useEffect(() => {
     if (!init) {
@@ -82,32 +80,43 @@ function App() {
 
   return (
     <>
-      <a href="#hero" className="skip-link">Przejdź do treści</a>
-      <LangContext.Provider value={lang}>
-        <div className={`app-root${darkMode ? ' dark' : ''}`}>
-          {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
-          <Suspense fallback={<div className="loader">Ładowanie...</div>}>
-          {showSplash ? (
-            <StarsCanvas key="splash" onSplashEnd={() => {
-              setShowSplash(false);
-              sessionStorage.setItem('splashShown', '1');
-              setShowISSMenu(true);
-            }} />
-          ) : (
-            <Routes>
-              <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} />} />
-              <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><About /></>} />
-              <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Experience /></>} />
-              <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Projects /></>} />
-              <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Education /></>} />
-              <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Skills /></>} />
-              <Route path="*" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} lang={lang} setLang={setLang} /><Suspense fallback={<div className="loader">Ładowanie...</div>}><NotFound /></Suspense></>} />
-            </Routes>
-          )}
-          </Suspense>
-        </div>
-      </LangContext.Provider>
+      <a href="#hero" className="skip-link">{t.app.skipLink}</a>
+      <div className={`app-root${darkMode ? ' dark' : ''}`}>
+        {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
+        <Suspense fallback={<div className="loader">{t.app.loading}</div>}>
+        {showSplash ? (
+          <StarsCanvas key="splash" onSplashEnd={() => {
+            setShowSplash(false);
+            sessionStorage.setItem('splashShown', '1');
+            setShowISSMenu(true);
+          }} />
+        ) : (
+          <Routes>
+            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
+            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
+            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
+            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
+            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
+            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
+            <Route path="*" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Suspense fallback={<div className="loader">{t.app.loading}</div>}><NotFound /></Suspense></>} />
+          </Routes>
+        )}
+        </Suspense>
+      </div>
     </>
+  );
+};
+
+function App() {
+  const [lang, setLang] = useState<Lang>(() => {
+    const stored = localStorage.getItem('lang');
+    return stored === 'en' ? 'en' : 'pl';
+  });
+
+  return (
+    <LangContext.Provider value={{ lang, setLang }}>
+      <AppContent />
+    </LangContext.Provider>
   );
 }
 
