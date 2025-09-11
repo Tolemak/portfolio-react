@@ -1,4 +1,6 @@
-# React Portfolio (Vite + TypeScript)
+# Portfolio React (Vite + TypeScript) - PL/EN
+
+[English version](README.en.md)
 
 Nowoczesne portfolio programisty zbudowane w React + Vite + TypeScript.
 

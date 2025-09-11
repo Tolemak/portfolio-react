@@ -25,8 +25,8 @@ export const translations = {
       current: 'obecnie',
       tiles: {
         'favourite-computer-systems-developer': {
-          desc: 'Rozwój i utrzymanie aplikacji webowych dla klientów Favourite Computer Systems. Tworzenie nowych funkcjonalności oraz integracje z REST API w odpowiedzi na potrzeby klienta.',
-          name: 'Programista aplikacji'
+          desc: 'Rozwój i utrzymanie aplikacji webowych dla klientów Favourite Computer Systems. Tworzenie nowych funkcjonalności i integracji z zewnętrznymi API w odpowiedzi na potrzeby klienta.',
+          name: 'Programista Aplikacji Webowych'
         }
       }
     },
@@ -43,19 +43,19 @@ export const translations = {
         'other': 'Inne'
       },
       descs: {
-        js: 'JavaScript – nowoczesny frontend, interaktywność, animacje, dynamiczne UI.',
-        php: 'PHP – backend, API, integracje, przetwarzanie danych.',
-        python: 'Python – automatyzacja, przetwarzanie danych, skrypty.',
-        html: 'HTML – semantyczne struktury stron, dostępność.',
-        css: 'CSS – stylowanie, responsywność, animacje.',
-        symfony: 'Symfony – framework PHP do dużych aplikacji webowych.',
-        bootstrap: 'Bootstrap – szybkie prototypowanie, responsywne layouty.',
-        twig: 'Twig – szablony, makra, formatowanie danych.',
-        ts: 'TypeScript – typowany JavaScript, bezpieczeństwo, skalowalność.',
-        react: 'React – nowoczesne SPA, komponenty, hooki.',
-        sql: 'SQL – relacyjne bazy danych, zapytania, optymalizacja.',
-        vscode: 'Visual Studio Code – główne narzędzie pracy, pluginy, personalizacja.',
-        docker: 'Docker – konteneryzacja, DevOps, CI/CD.'
+        js: 'Nowoczesny frontend, interaktywność, animacje, dynamiczne UI.',
+        php: 'Backend, API, integracje, przetwarzanie danych.',
+        python: 'Automatyzacja, przetwarzanie danych, skrypty.',
+        html: 'Semantyczne struktury stron, dostępność, SEO.',
+        css: 'Stylowanie, responsywność, animacje, nowoczesne layouty.',
+        symfony: 'Framework PHP do dużych, skalowalnych aplikacji webowych.',
+        bootstrap: 'Szybkie prototypowanie, responsywne komponenty UI.',
+        twig: 'System szablonów dla PHP, oddzielenie logiki od widoku.',
+        ts: 'Typowany JavaScript, większe bezpieczeństwo i skalowalność kodu.',
+        react: 'Nowoczesne SPA, komponenty, hooki, zarządzanie stanem.',
+        sql: 'Relacyjne bazy danych, zapytania, optymalizacja wydajności.',
+        vscode: 'Główne środowisko pracy, personalizacja, debugowanie.',
+        docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.'
       }
     },
     projects: {
@@ -90,8 +90,8 @@ export const translations = {
       title: 'Edukacja',
       subjects: 'Przedmioty:',
       degree: {
-        'Bachelor degree of biomedical engineering': 'Inżynieria biomedyczna (inżynier)',
-        'Master degree of IT project management': 'Zarządzanie projektami IT (magister)',
+        'Bachelor degree of biomedical engineering': 'Tytuł inżyniera, Inżynieria Biomedyczna',
+        'Master degree of IT project management': 'Tytuł magistra, Zarządzanie Projektami IT',
       }
     },
     navbar: {
@@ -104,6 +104,10 @@ export const translations = {
     },
     modal: {
       close: 'Zamknij'
+    },
+    app: {
+      skipLink: 'Przejdź do treści',
+      loading: 'Ładowanie...'
     }
   },
   en: {
@@ -114,7 +118,7 @@ export const translations = {
         { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'I build modern, responsive interfaces in React and TypeScript, with a focus on UX, accessibility, and performance.' },
         { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design and implement APIs and backends in PHP (Symfony), Node.js, Python. Security, performance, integrations, SQL.' },
         { icon: '/logos/docker.svg', title: 'DevOps & Databases', desc: 'Automation, CI/CD, Docker, database management (SQL), deployments, and environment stability.' },
-        { icon: '/logos/github-mark-white.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
+        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
         { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
         { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
       ],
@@ -209,14 +213,30 @@ export const translations = {
     },
     modal: {
       close: 'Close'
+    },
+    app: {
+      skipLink: 'Skip to content',
+      loading: 'Loading...'
     }
   }
 };
 
 import React from 'react';
-export const LangContext = React.createContext<Lang>('pl');
+import type { Dispatch, SetStateAction } from 'react';
+
+export type LangContextType = {
+  lang: Lang;
+  setLang: Dispatch<SetStateAction<Lang>>;
+}
+
+export const LangContext = React.createContext<LangContextType>({
+  lang: 'pl',
+  setLang: () => {},
+});
+
 export const useLang = () => React.useContext(LangContext);
+
 export const useT = () => {
-  const lang = useLang();
-  return translations[lang];
+  const { lang } = useLang();
+  return { ...translations[lang], lang };
 };
