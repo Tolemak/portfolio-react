@@ -21,7 +21,7 @@ const StarsCanvas = lazy(() => import('./components/StarCanvas'));
 const AppContent = () => {
   const t = useT();
   const location = useLocation();
-  const { lang } = useT();
+  const { lang } = t;
   const [darkMode, setDarkMode] = useState(() =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   );
