@@ -151,15 +151,15 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection, dar
               }}
             >
               <Link to={item.to} style={{
-                color: 'inherit', 
-                textDecoration: 'none', 
-                display: 'flex', 
-                alignItems: 'center', 
+                color: 'inherit',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
-                gap: isMobile ? 2 : 8, 
-                fontSize: isMobile ? 10 : (isVeryLongText ? 14 : isLongText ? 15 : 18), 
-                overflow: 'hidden', 
-                whiteSpace: 'nowrap', 
+                gap: isMobile ? 2 : 8,
+                fontSize: isMobile ? 10 : (isVeryLongText ? 14 : isLongText ? 15 : 18),
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
                 width: '100%',
                 textAlign: 'center'

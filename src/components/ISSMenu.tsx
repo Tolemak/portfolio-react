@@ -41,7 +41,7 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
-const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>>; }) => {
+const ISSMenu = ({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
   const navigate = useNavigate();
   useLang();
