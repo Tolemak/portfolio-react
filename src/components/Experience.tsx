@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { experience } from '../data/experience';
 import { skills } from '../data/skills';
 import type { SkillItem } from '../data/skills';
@@ -10,16 +10,10 @@ const Experience: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
   const t = useT();
 
-  // Helper: znajdź skill po slug
+  const tiles = t.experience.tiles as Record<string, { desc: string; name: string }>;
   const getSkillBySlug = (slug: string) => skills.find((s) => s.slug === slug);
-
-  // Helper do tłumaczenia opisu doświadczenia
-  const getExperienceDesc = (item: typeof experience[number]) => {
-    // Spróbuj pobrać tłumaczenie z t.experience["tiles"][item.slug]?.desc
-    // Jeśli nie istnieje, zwróć item.description
-    // @ts-expect-error: tiles może nie istnieć
-    return t.experience && t.experience["tiles"] && t.experience["tiles"][item.slug]?.desc ? t.experience["tiles"][item.slug].desc : item.description;
-  };
+  const getExperienceDesc = (item: typeof experience[number]) =>
+    tiles[item.slug]?.desc ?? item.description;
 
   return (
     <section id="experience" className="experience-section">
@@ -28,12 +22,13 @@ const Experience: React.FC = () => {
         {experience.map((item) => (
           <div key={item.slug} className="experience-item fancy-card" style={{ borderColor: item.color }}>
             <div className="experience-header">
-              <strong>{((t.experience.tiles as Record<string, {desc:string;name:string}>)[item.slug]?.name || item.name)}</strong> <span>({item.company})</span>
+              <strong>{tiles[item.slug]?.name ?? item.name}</strong>
+              {' '}<span>({item.company})</span>
             </div>
             <div className="experience-period-location">
               <span>{item.location}</span>
               <span>
-                {item.period.from.getFullYear()} - {item.period.to ? item.period.to.getFullYear() : 'obecnie'}
+                {item.period.from.getFullYear()} – {item.period.to ? item.period.to.getFullYear() : t.experience.current}
               </span>
             </div>
             <div className="experience-description">
@@ -44,15 +39,19 @@ const Experience: React.FC = () => {
               {item.skills.map((slug) => {
                 const skill = getSkillBySlug(slug);
                 if (!skill) return null;
-                return (
-                  <SkillTag key={slug} skill={skill} onClick={setModalSkill} />
-                );
+                return <SkillTag key={slug} skill={skill} onClick={setModalSkill} />;
               })}
             </div>
-            {item.links && item.links.length > 0 && (
+            {item.links.length > 0 && (
               <div className="experience-links">
                 {item.links.map((link) => (
-                  <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer" className="experience-link">
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="experience-link"
+                  >
                     {link.label}
                   </a>
                 ))}

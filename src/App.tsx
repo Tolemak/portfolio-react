@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
@@ -8,6 +8,8 @@ import particlesOptionsDark from "./components/particles.dark.json";
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { LangContext, type Lang, useT } from './data/i18n';
 import NotFound from './components/NotFound';
+import { useTheme } from './contexts/ThemeContext';
+import { useDocumentTitle } from './hooks/useDocumentTitle';
 
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
@@ -20,11 +22,9 @@ const StarsCanvas = lazy(() => import('./components/StarCanvas'));
 
 const AppContent = () => {
   const t = useT();
-  const location = useLocation();
-  const { lang } = t;
-  const [darkMode, setDarkMode] = useState(() =>
-    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
+  const { darkMode } = useTheme();
+  useDocumentTitle();
+
   const [init, setInit] = useState(false);
   const [,setShowISSMenu] = useState(() => {
     return !!sessionStorage.getItem('splashShown');
@@ -43,45 +43,10 @@ const AppContent = () => {
     }
   }, [init]);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-  }, [darkMode]);
-
-  useEffect(() => {
-    const titles: Record<string, { pl: string; en: string }> = {
-      '/': {
-        pl: 'Kamil Gałkowski – Portfolio',
-        en: 'Kamil Gałkowski – Portfolio',
-      },
-      '/about': {
-        pl: 'O mnie – Kamil Gałkowski',
-        en: 'About Me – Kamil Gałkowski',
-      },
-      '/experience': {
-        pl: 'Doświadczenie – Kamil Gałkowski',
-        en: 'Experience – Kamil Gałkowski',
-      },
-      '/projects': {
-        pl: 'Projekty – Kamil Gałkowski',
-        en: 'Projects – Kamil Gałkowski',
-      },
-      '/education': {
-        pl: 'Edukacja – Kamil Gałkowski',
-        en: 'Education – Kamil Gałkowski',
-      },
-      '/skills': {
-        pl: 'Umiejętności – Kamil Gałkowski',
-        en: 'Skills – Kamil Gałkowski',
-      },
-    };
-    const title = titles[location.pathname]?.[lang] || 'Kamil Gałkowski – Portfolio';
-    document.title = title;
-  }, [location.pathname, lang]);
-
   return (
     <>
       <a href="#hero" className="skip-link">{t.app.skipLink}</a>
-      <div className={`app-root${darkMode ? ' dark' : ''}`}>
+      <div className="app-root">
         {init && <Particles options={(darkMode ? particlesOptions : particlesOptionsDark) as unknown as RecursivePartial<IOptions>} />}
         <Suspense fallback={<div className="loader">{t.app.loading}</div>}>
         {showSplash ? (
@@ -92,13 +57,13 @@ const AppContent = () => {
           }} />
         ) : (
           <Routes>
-            <Route path="/" element={<ISSMenu darkMode={darkMode} setDarkMode={setDarkMode} />} />
-            <Route path="/about" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><About /></>} />
-            <Route path="/experience" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Experience /></>} />
-            <Route path="/projects" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Projects /></>} />
-            <Route path="/education" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Education /></>} />
-            <Route path="/skills" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Skills /></>} />
-            <Route path="*" element={<><Navbar darkMode={darkMode} setDarkMode={setDarkMode} /><Suspense fallback={<div className="loader">{t.app.loading}</div>}><NotFound /></Suspense></>} />
+            <Route path="/" element={<ISSMenu />} />
+            <Route path="/about" element={<><Navbar /><main><About /></main></>} />
+            <Route path="/experience" element={<><Navbar /><main><Experience /></main></>} />
+            <Route path="/projects" element={<><Navbar /><main><Projects /></main></>} />
+            <Route path="/education" element={<><Navbar /><main><Education /></main></>} />
+            <Route path="/skills" element={<><Navbar /><main><Skills /></main></>} />
+            <Route path="*" element={<><Navbar /><main><Suspense fallback={<div className="loader">{t.app.loading}</div>}><NotFound /></Suspense></main></>} />
           </Routes>
         )}
         </Suspense>

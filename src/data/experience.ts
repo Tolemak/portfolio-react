@@ -22,7 +22,7 @@ export const experience: ExperienceItem[] = [
     contract: 'FullTime',
     type: 'Software Development',
     location: 'Gdańsk',
-    period: { from: new Date(2020, 8, 1), to: new Date() },
+    period: { from: new Date(2020, 8, 1), to: new Date(2025, 9, 30) },
     skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python', 'ts'],
     name: 'Software Developer',
     color: 'blue',

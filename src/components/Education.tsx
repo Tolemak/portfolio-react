@@ -24,7 +24,7 @@ const Education: React.FC = () => {
       <h2>{t.education.title}</h2>
       <div className="education-list">
         {education.map((item) => (
-          <div key={item.slug} className="education-item fancy-card" style={{ borderColor: '#61dafb' }}>
+          <div key={item.slug} className="education-item fancy-card" style={{ borderColor: 'var(--accent)' }}>
             <div className="education-header">
               <img src={schoolLogos[item.organization] || '/logos/no-img.svg'} alt={item.organization} className="education-logo" />
               <div>

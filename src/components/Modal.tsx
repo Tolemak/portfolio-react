@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 import { useT } from '../data/i18n';
 
@@ -16,7 +17,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    // Zablokuj scrollowanie gdy modal jest otwarty
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -25,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     if (e.target === e.currentTarget) onClose();
   };
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" onClick={handleBackdropClick}>
       <div
         className="modal-content glass"
@@ -37,7 +43,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button className="modal-close" onClick={onClose} aria-label={t.modal.close}>&times;</button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
