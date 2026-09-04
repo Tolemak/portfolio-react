@@ -111,5 +111,29 @@ export const skills: SkillItem[] = [
     logo: '/logos/docker.svg',
     name: 'Docker',
     category: 'devtools'
+  },
+  {
+    slug: 'vite',
+    color: '#646cff',
+    description: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
+    logo: '/logos/vite.png',
+    name: 'Vite',
+    category: 'devtools'
+  },
+  {
+    slug: 'react-router',
+    color: '#61dafb',
+    description: 'Routing i nawigacja w aplikacjach React.',
+    logo: '/logos/react.svg',
+    name: 'React Router',
+    category: 'library'
+  },
+  {
+    slug: 'eslint',
+    color: '#4b32c3',
+    description: 'Statyczna analiza kodu, wymuszanie spójnego stylu i wychwytywanie błędów.',
+    logo: '/logos/no-img.svg',
+    name: 'ESLint',
+    category: 'devtools'
   }
 ];

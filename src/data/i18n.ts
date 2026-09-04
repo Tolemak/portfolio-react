@@ -27,11 +27,16 @@ export const translations = {
         'favourite-computer-systems-developer': {
           desc: 'Rozwój i utrzymanie aplikacji webowych dla klientów Favourite Computer Systems. Tworzenie nowych funkcjonalności i integracji z zewnętrznymi API w odpowiedzi na potrzeby klienta.',
           name: 'Programista Aplikacji Webowych'
+        },
+        'wskz-backend-developer': {
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+          name: 'Programista Backend'
         }
       }
     },
     skills: {
       title: 'Umiejętności',
+      all: 'Wszystkie',
       usedIn: 'Używane w doświadczeniach:',
       categories: {
         'pro-lang': 'Języki programowania',
@@ -55,7 +60,10 @@ export const translations = {
         react: 'Nowoczesne SPA, komponenty, hooki, zarządzanie stanem.',
         sql: 'Relacyjne bazy danych, zapytania, optymalizacja wydajności.',
         vscode: 'Główne środowisko pracy, personalizacja, debugowanie.',
-        docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.'
+        docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.',
+        vite: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
+        'react-router': 'Routing i nawigacja w aplikacjach React.',
+        eslint: 'Statyczna analiza kodu, spójny styl, wychwytywanie błędów.'
       }
     },
     projects: {
@@ -108,6 +116,11 @@ export const translations = {
     app: {
       skipLink: 'Przejdź do treści',
       loading: 'Ładowanie...'
+    },
+    notFound: {
+      title: '404',
+      message: 'Nie znaleziono strony lub zasobu.',
+      cta: 'Powrót na stronę główną'
     }
   },
   en: {
@@ -136,11 +149,16 @@ export const translations = {
         'favourite-computer-systems-developer': {
           desc: 'Development and maintenance of web applications for clients of Favourite Computer Systems. Creating new functionalities and integrations with REST API in response to customer needs.',
           name: 'Software Developer'
+        },
+        'wskz-backend-developer': {
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+          name: 'Backend Developer'
         }
       }
     },
     skills: {
       title: 'Skills',
+      all: 'All',
       usedIn: 'Used in experience:',
       categories: {
         'pro-lang': 'Programming Languages',
@@ -164,7 +182,10 @@ export const translations = {
         react: 'React – modern SPA, components, hooks.',
         sql: 'SQL – relational databases, queries, optimization.',
         vscode: 'Visual Studio Code – main dev tool, plugins, customization.',
-        docker: 'Docker – containerization, DevOps, CI/CD.'
+        docker: 'Docker – containerization, DevOps, CI/CD.',
+        vite: 'Vite – fast build tool and dev server for modern frontend apps.',
+        'react-router': 'React Router – routing and navigation in React apps.',
+        eslint: 'ESLint – static analysis, consistent code style, catching bugs early.'
       }
     },
     projects: {
@@ -217,6 +238,11 @@ export const translations = {
     app: {
       skipLink: 'Skip to content',
       loading: 'Loading...'
+    },
+    notFound: {
+      title: '404',
+      message: 'Page or resource not found.',
+      cta: 'Back to homepage'
     }
   }
 };

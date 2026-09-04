@@ -7,5 +7,11 @@ export default defineConfig({
   server: {
     host: '0.0.0.0', // pozwala na dostęp z sieci lokalnej
     port: 5173
+  },
+  build: {
+    // The three.js/GLTF chunk (~930kB) and the shared vendor chunk (motion + react-three-fiber
+    // + tsparticles, used on nearly every route) are expected to sit above Vite's 500kB default;
+    // both are already lazy-loaded per-route rather than blocking the initial paint.
+    chunkSizeWarningLimit: 1000
   }
 })

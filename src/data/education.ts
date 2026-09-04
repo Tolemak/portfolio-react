@@ -1,4 +1,3 @@
-// Education data migrated from Svelte version
 export interface EducationItem {
   degree: string;
   description: string;
@@ -17,7 +16,7 @@ export const education: EducationItem[] = [
     degree: 'Bachelor degree of biomedical engineering',
     description: '',
     location: 'Poland, Gdańsk',
-    logo: '', // You can map to logo asset if needed
+    logo: '',
     name: '',
     organization: 'Gdańsk University of Technology',
     period: { from: new Date(2017, 10, 1), to: new Date(2021, 2, 1) },

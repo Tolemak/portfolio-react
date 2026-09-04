@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { useT, useLang } from '../data/i18n';
 import { experience } from '../data/experience';
@@ -16,8 +16,13 @@ interface SkillModalProps {
 const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
   const t = useT();
   const { lang } = useLang();
+  const [displaySkill, setDisplaySkill] = useState<SkillItem | null>(skill);
 
-  if (!skill) return null;
+  useEffect(() => {
+    if (skill) setDisplaySkill(skill);
+  }, [skill]);
+
+  if (!displaySkill) return null;
 
   const getExperienceWithSkill = (slug: string) =>
     experience.filter((exp) => exp.skills.includes(slug));
@@ -44,31 +49,31 @@ const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="modal-skill-details">
         <div className="modal-skill-header">
-          <img src={skill.logo} alt={skill.name} className="modal-skill-logo" />
+          <img src={displaySkill.logo} alt={displaySkill.name} className="modal-skill-logo" />
           <div>
-            <h3>{skill.name}</h3>
+            <h3>{displaySkill.name}</h3>
             <span className="modal-skill-category">
-              {t.skills.categories[skill.category as keyof typeof t.skills.categories] || skill.category}
+              {t.skills.categories[displaySkill.category as keyof typeof t.skills.categories] || displaySkill.category}
             </span>
           </div>
         </div>
-        <p>{getSkillDesc(skill.slug, skill.description)}</p>
+        <p>{getSkillDesc(displaySkill.slug, displaySkill.description)}</p>
         <div className="modal-skill-used-in">
           <strong>{t.skills.usedIn}</strong>
           <ul>
-            {getExperienceWithSkill(skill.slug).map((exp) => (
+            {getExperienceWithSkill(displaySkill.slug).map((exp) => (
               <li key={exp.slug}>
                 <span style={{ color: exp.color }}>{exp.name}</span>{' '}
                 <span>({exp.company})</span>
               </li>
             ))}
-            {getProjectsWithSkill(skill.slug).map((proj) => (
+            {getProjectsWithSkill(displaySkill.slug).map((proj) => (
               <li key={proj.slug}>
                 <span style={{ color: proj.color }}>{proj.name}</span>{' '}
                 <span>(Project)</span>
               </li>
             ))}
-            {getEducationWithSkill(skill.slug).map((edu) => (
+            {getEducationWithSkill(displaySkill.slug).map((edu) => (
               <li key={edu.slug}>
                 <span style={{ color: 'var(--accent)' }}>
                   {(t.education.degree as Record<string, string>)[edu.degree] || edu.degree}
