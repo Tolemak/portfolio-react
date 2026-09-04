@@ -1,8 +1,10 @@
 ﻿import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { useT, useLang } from '../data/i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { radialViewTransition } from '../utils/viewTransition';
 
 export type NavbarProps = {
   onSectionHover?: (section: string | null) => void;
@@ -36,10 +38,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
     return key === activeSection || key === highlightedSection;
   };
 
+  const handleThemeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { clientX, clientY } = e;
+    radialViewTransition(clientX, clientY, toggleTheme);
+  };
+
   return (
     <>
       <nav className="navbar-container">
-        {/* Logo / Home */}
         <Link to="/" className="navbar-logo" aria-label={t.navbar.home}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="10" fill="var(--accent-light)" />
@@ -49,7 +55,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
           Portfolio
         </Link>
 
-        {/* Desktop nav links */}
         <ul className="navbar-list">
           {navbar.map((item) => {
             const active = isItemActive(item);
@@ -61,17 +66,23 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
                 onMouseEnter={() => onSectionHover && onSectionHover(item.title.toLowerCase())}
                 onMouseLeave={() => onSectionHover && onSectionHover(null)}
               >
+                {active && (
+                  <motion.span
+                    layoutId="navbar-pill"
+                    className="navbar-pill"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
                 <Link to={item.to}>{translatedText}</Link>
               </li>
             );
           })}
         </ul>
 
-        {/* Actions: theme + lang + hamburger */}
         <div className="navbar-actions">
           <button
             className="navbar-btn"
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
             aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             title={darkMode ? 'Light mode' : 'Dark mode'}
           >
@@ -97,7 +108,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <div className={`navbar-mobile-menu${mobileOpen ? ' open' : ''}`} aria-hidden={!mobileOpen}>
         <ul>
           {navbar.map((item) => {

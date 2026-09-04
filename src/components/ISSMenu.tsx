@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useEffect, useRef, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCamera as PerspectiveCameraType } from 'three';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
 import ISSModel from './models/ISSModel';
@@ -10,8 +11,25 @@ import SpacemanModel from './models/SpacemanModel';
 import SputnikModel from './models/SputnikModel';
 import Navbar from './Navbar';
 import { LangContext } from '../data/i18n';
+import { useTheme } from '../contexts/ThemeContext';
+import { getSectionPath } from '../data/issMenuSections';
 
 const METEOR_SCALE = 2.5 * 3;
+const WARP_DURATION_MS = 380;
+
+const OBJECT_POSITIONS = {
+  iss: [0, 0, 0],
+  meteor: [185, 40, 30],
+  satellite: [-20, -80, 50],
+  spaceman: [40, 110, 80],
+  sputnik: [10, 100, 60],
+} as const satisfies Record<string, [number, number, number]>;
+
+function maxHitboxRadius(pos: readonly [number, number, number]): number {
+  const others = Object.values(OBJECT_POSITIONS).filter((p) => p !== pos);
+  const nearest = Math.min(...others.map(([x, y, z]) => Math.hypot(pos[0] - x, pos[1] - y, pos[2] - z)));
+  return (nearest / 2) * 0.9;
+}
 
 const AnimatedCamera = () => {
   const ref = useRef<PerspectiveCameraType>(null);
@@ -40,18 +58,43 @@ const AnimatedCamera = () => {
   return <PerspectiveCamera ref={ref} makeDefault position={[0, 0, startZ]} fov={40} />;
 };
 
+const SceneExposure = ({ exposure }: { exposure: number }) => {
+  const gl = useThree((state) => state.gl);
+  useEffect(() => {
+    gl.toneMappingExposure = exposure;
+  }, [gl, exposure]);
+  return null;
+};
+
 const ISSMenu = () => {
   const [highlightedSection, setHighlightedSection] = React.useState<string | null>(null);
+  const [warpTo, setWarpTo] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { lang } = React.useContext(LangContext);
+  const { darkMode } = useTheme();
 
   const hint = lang === 'en'
     ? 'Drag to rotate. Click objects to explore!'
     : 'Obracaj kamera myszka. Klikaj obiekty!';
 
+  const handleSelect = (path: string) => {
+    if (warpTo) return;
+    setWarpTo(path);
+  };
+
+  useEffect(() => {
+    if (!warpTo) return;
+    const timer = setTimeout(() => navigate(warpTo), WARP_DURATION_MS);
+    return () => clearTimeout(timer);
+  }, [warpTo, navigate]);
+
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
       style={{
         position: 'fixed',
         left: 0,
@@ -87,52 +130,71 @@ const ISSMenu = () => {
             style={{ width: '100%', height: '100%', background: 'transparent' }}
           >
             <AnimatedCamera />
-            <ambientLight intensity={1.2} />
-            <directionalLight position={[10, 10, 10]} intensity={2} />
+            <SceneExposure exposure={darkMode ? 1.5 : 1.25} />
+            <hemisphereLight
+              args={[darkMode ? '#4a5a8a' : '#ffffff', darkMode ? '#05070d' : '#c7d2e0', darkMode ? 1.4 : 1.1]}
+            />
+            <ambientLight intensity={darkMode ? 1.4 : 1} />
+            <directionalLight
+              position={[10, 10, 10]}
+              intensity={darkMode ? 4 : 3.2}
+              color={darkMode ? '#dce8ff' : '#fff3e0'}
+            />
+            <directionalLight
+              position={[-12, -6, -8]}
+              intensity={darkMode ? 1.4 : 1}
+              color={darkMode ? '#818cf8' : '#6366f1'}
+            />
             <ISSModel
+              position={OBJECT_POSITIONS.iss}
+              maxHitboxRadius={maxHitboxRadius(OBJECT_POSITIONS.iss)}
               scale={2.5}
               highlighted={highlightedSection === 'about'}
               onPointerOver={() => setHighlightedSection('about')}
               onPointerOut={() => setHighlightedSection(null)}
-              onClick={() => navigate('/about')}
+              onClick={() => handleSelect(getSectionPath('about'))}
             />
             <MeteorModel
-              position={[185, 40, 30]}
+              position={OBJECT_POSITIONS.meteor}
+              maxHitboxRadius={maxHitboxRadius(OBJECT_POSITIONS.meteor)}
               scale={METEOR_SCALE}
               rotation={[0, 0, 0]}
               highlighted={highlightedSection === 'skills'}
               onPointerOver={() => setHighlightedSection('skills')}
               onPointerOut={() => setHighlightedSection(null)}
-              onClick={() => navigate('/skills')}
+              onClick={() => handleSelect(getSectionPath('skills'))}
             />
             <SatelliteModel
-              position={[-20, -80, 50]}
+              position={OBJECT_POSITIONS.satellite}
+              maxHitboxRadius={maxHitboxRadius(OBJECT_POSITIONS.satellite)}
               scale={METEOR_SCALE}
               rotation={[0, Math.PI / 5, 0]}
               highlighted={highlightedSection === 'projects'}
               onPointerOver={() => setHighlightedSection('projects')}
               onPointerOut={() => setHighlightedSection(null)}
-              onClick={() => navigate('/projects')}
+              onClick={() => handleSelect(getSectionPath('projects'))}
             />
             <SpacemanModel
-              position={[40, 110, 80]}
+              position={OBJECT_POSITIONS.spaceman}
+              maxHitboxRadius={maxHitboxRadius(OBJECT_POSITIONS.spaceman)}
               scale={METEOR_SCALE * 0.15}
               rotation={[0, Math.PI / 2 + Math.PI, 0]}
               highlighted={highlightedSection === 'education'}
               onPointerOver={() => setHighlightedSection('education')}
               onPointerOut={() => setHighlightedSection(null)}
-              onClick={() => navigate('/education')}
+              onClick={() => handleSelect(getSectionPath('education'))}
             />
             <SputnikModel
-              position={[10, 100, 60]}
+              position={OBJECT_POSITIONS.sputnik}
+              maxHitboxRadius={maxHitboxRadius(OBJECT_POSITIONS.sputnik)}
               scale={METEOR_SCALE}
               rotation={[0, Math.PI / 3, 0]}
               highlighted={highlightedSection === 'experience'}
               onPointerOver={() => setHighlightedSection('experience')}
               onPointerOut={() => setHighlightedSection(null)}
-              onClick={() => navigate('/experience')}
+              onClick={() => handleSelect(getSectionPath('experience'))}
             />
-            <OrbitControls enablePan enableZoom enableRotate />
+            <OrbitControls enablePan enableZoom enableRotate enableDamping dampingFactor={0.08} enabled={!warpTo} />
           </Canvas>
           <div
             style={{
@@ -157,9 +219,20 @@ const ISSMenu = () => {
           >
             🖱️ {hint}
           </div>
+          <AnimatePresence>
+            {warpTo && (
+              <motion.div
+                className="iss-warp-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: WARP_DURATION_MS / 1000 }}
+              />
+            )}
+          </AnimatePresence>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

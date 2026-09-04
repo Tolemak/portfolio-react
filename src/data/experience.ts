@@ -5,13 +5,14 @@ export interface ExperienceItem {
   contract: string;
   type: string;
   location: string;
-  period: { from: Date; to: Date };
+  period: { from: Date; to?: Date };
   skills: string[];
   name: string;
   color: string;
   links: { to: string; label: string }[];
   logo: string;
   shortDescription: string;
+  confidential?: boolean;
 }
 
 export const experience: ExperienceItem[] = [
@@ -29,5 +30,21 @@ export const experience: ExperienceItem[] = [
     links: [{ to: 'https://www.favourite.pl/', label: 'Strona firmy' }],
     logo: 'no-img.svg',
     shortDescription: 'Developing and maintaining web applications at Favourite Computer Systems.'
+  },
+  {
+    slug: 'wskz-backend-developer',
+    company: 'WSKZ',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    contract: 'FullTime',
+    type: 'Software Development',
+    location: 'Polska',
+    period: { from: new Date(2025, 9, 1) },
+    skills: [],
+    name: 'Backend Developer',
+    color: '#64748b',
+    links: [{ to: 'https://wskz.pl', label: 'Strona firmy' }],
+    logo: 'no-img.svg',
+    shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    confidential: true
   }
 ];

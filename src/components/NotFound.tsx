@@ -1,30 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useT } from '../data/i18n';
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
+  const t = useT();
+
   return (
-    <div className="notfound-container" style={{textAlign: 'center', padding: '80px 20px', position: 'relative', zIndex: 2}}>
-      <h1 style={{fontSize: '4rem', color: '#e67e22'}}>404</h1>
-      <p style={{fontSize: '1.3rem', color: '#bbb'}}>Nie znaleziono strony lub zasobu.</p>
-      <button
-        style={{
-          color: '#fff',
-          background: '#3498db',
-          border: 'none',
-          borderRadius: '6px',
-          padding: '12px 28px',
-          fontWeight: 'bold',
-          fontSize: '1.1rem',
-          cursor: 'pointer',
-          marginTop: '24px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-        }}
-        onClick={() => navigate('/')}
-      >
-        Powrót na stronę główną
+    <section className="notfound-section" aria-label={t.notFound.title}>
+      <h1 className="notfound-code">{t.notFound.title}</h1>
+      <p className="notfound-message">{t.notFound.message}</p>
+      <button className="notfound-cta" onClick={() => navigate('/')}>
+        {t.notFound.cta}
       </button>
-    </div>
+    </section>
   );
 };
 
