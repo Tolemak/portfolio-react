@@ -121,6 +121,11 @@ export const translations = {
       title: '404',
       message: 'Nie znaleziono strony lub zasobu.',
       cta: 'Powrót na stronę główną'
+    },
+    errorBoundary: {
+      title: 'Coś poszło nie tak',
+      message: 'Nie udało się załadować tej treści. Spróbuj odświeżyć stronę.',
+      cta: 'Odśwież stronę'
     }
   },
   en: {
@@ -243,6 +248,11 @@ export const translations = {
       title: '404',
       message: 'Page or resource not found.',
       cta: 'Back to homepage'
+    },
+    errorBoundary: {
+      title: 'Something went wrong',
+      message: 'This content failed to load. Try refreshing the page.',
+      cta: 'Refresh page'
     }
   }
 };
