@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig } from 'motion/react';
 import './App.css';
@@ -10,17 +10,19 @@ import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { LangContext, type Lang, useT } from './data/i18n';
 import NotFound from './components/NotFound';
 import PageTransition from './components/PageTransition';
+import ErrorBoundary from './components/ErrorBoundary';
+import { lazyWithRetry } from './utils/lazyWithRetry';
 import { useTheme } from './contexts/ThemeContext';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 
-const About = lazy(() => import('./components/About'));
-const Experience = lazy(() => import('./components/Experience'));
-const Projects = lazy(() => import('./components/Projects'));
-const Education = lazy(() => import('./components/Education'));
-const Skills = lazy(() => import('./components/Skills'));
-const Navbar = lazy(() => import('./components/Navbar'));
-const ISSMenu = lazy(() => import('./components/ISSMenu'));
-const StarsCanvas = lazy(() => import('./components/StarCanvas'));
+const About = lazyWithRetry(() => import('./components/About'), 'about');
+const Experience = lazyWithRetry(() => import('./components/Experience'), 'experience');
+const Projects = lazyWithRetry(() => import('./components/Projects'), 'projects');
+const Education = lazyWithRetry(() => import('./components/Education'), 'education');
+const Skills = lazyWithRetry(() => import('./components/Skills'), 'skills');
+const Navbar = lazyWithRetry(() => import('./components/Navbar'), 'navbar');
+const ISSMenu = lazyWithRetry(() => import('./components/ISSMenu'), 'issmenu');
+const StarsCanvas = lazyWithRetry(() => import('./components/StarCanvas'), 'starcanvas');
 
 const AppContent = () => {
   const t = useT();
@@ -46,6 +48,7 @@ const AppContent = () => {
       <a href="#main-content" className="skip-link">{t.app.skipLink}</a>
       <div className="app-root" id="main-content">
         {init && <Particles options={(darkMode ? particlesOptionsWhite : particlesOptionsPurple) as unknown as RecursivePartial<IOptions>} />}
+        <ErrorBoundary>
         <Suspense fallback={<div className="loader">{t.app.loading}</div>}>
         {showSplash ? (
           <StarsCanvas key="splash" onSplashEnd={() => {
@@ -66,6 +69,7 @@ const AppContent = () => {
           </AnimatePresence>
         )}
         </Suspense>
+        </ErrorBoundary>
       </div>
     </>
   );
