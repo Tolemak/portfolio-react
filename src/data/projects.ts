@@ -73,7 +73,7 @@ export const projects: ProjectItem[] = [
     ],
     logo: '/logos/mongodb.svg',
     name: 'Lecture Backend',
-    period: { from: new Date('2026-09-08') },
+    period: { from: new Date('2025-06-01') },
     skills: ['php', 'symfony', 'mongodb', 'docker'],
     type: 'Web Application'
   },
