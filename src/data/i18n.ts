@@ -69,6 +69,10 @@ export const translations = {
     projects: {
       title: 'Projekty',
       stack: 'Stack:',
+      types: {
+        'Web Application': 'Aplikacja webowa',
+        'Portfolio': 'Portfolio'
+      },
       names: {
         'File Actions': 'File Actions',
         'Old Portfolio': 'Stare Portfolio',
@@ -196,6 +200,10 @@ export const translations = {
     projects: {
       title: 'Projects',
       stack: 'Stack:',
+      types: {
+        'Web Application': 'Web Application',
+        'Portfolio': 'Portfolio'
+      },
       names: {
         'File Actions': 'File Actions',
         'Old Portfolio': 'Old Portfolio',
