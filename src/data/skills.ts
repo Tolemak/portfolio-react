@@ -135,5 +135,21 @@ export const skills: SkillItem[] = [
     logo: '/logos/no-img.svg',
     name: 'ESLint',
     category: 'devtools'
+  },
+  {
+    slug: 'mongodb',
+    color: '#47A248',
+    description: 'Dokumentowa baza NoSQL, elastyczne schematy, skalowalność.',
+    logo: '/logos/mongodb.svg',
+    name: 'MongoDB',
+    category: 'db'
+  },
+  {
+    slug: 'node',
+    color: '#83CD29',
+    description: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.',
+    logo: '/logos/node.png',
+    name: 'Node.js',
+    category: 'framework'
   }
 ];
