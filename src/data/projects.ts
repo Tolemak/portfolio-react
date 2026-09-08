@@ -18,7 +18,7 @@ export const projects: ProjectItem[] = [
     description:
       'FileActions_BackendDemo is a demonstration project showcasing a full-stack application with a primary focus on backend development using PHP and the Symfony framework. It highlights best practices, clean architecture, and integration with modern tools and technologies.',
     shortDescription:
-      'Batch file operations in your browser. Resive, convert, compress, and maybe more.',
+      'Batch file operations in your browser. Resize, convert, compress, and maybe more.',
     links: [
       { to: 'http://file-actions.tolemak.pl/', label: 'Live Demo' },
       { to: 'https://github.com/Tolemak/FileActions_BackendDemo', label: 'GitHub' }
@@ -59,7 +59,22 @@ export const projects: ProjectItem[] = [
     logo: '/logos/react.svg',
     name: 'Mathema',
     period: { from: new Date('2025-06-01') },
-    skills: ['react', 'vite', 'ts', 'react-router', 'css'],
+    skills: ['react', 'vite', 'ts', 'react-router', 'css', 'node'],
+    type: 'Web Application'
+  },
+  {
+    slug: 'lecture-backend',
+    color: '#e91e63',
+    description:
+      'REST API do zarządzania wykładami i zapisami studentów, zbudowane w Symfony z bazą MongoDB. Architektura warstwowa z wyraźnym rozdzieleniem logiki domenowej, persystencji i warstwy API, pokryta testami i udokumentowana specyfikacją OpenAPI.',
+    shortDescription: 'REST API do zarządzania wykładami — Symfony, MongoDB, architektura warstwowa.',
+    links: [
+      { to: 'https://github.com/Tolemak/LectureBackend_BackendDemo', label: 'GitHub' }
+    ],
+    logo: '/logos/mongodb.svg',
+    name: 'Lecture Backend',
+    period: { from: new Date('2026-09-08') },
+    skills: ['php', 'symfony', 'mongodb', 'docker'],
     type: 'Web Application'
   },
   {

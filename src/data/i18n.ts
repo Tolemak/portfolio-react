@@ -63,7 +63,9 @@ export const translations = {
         docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.',
         vite: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
         'react-router': 'Routing i nawigacja w aplikacjach React.',
-        eslint: 'Statyczna analiza kodu, spójny styl, wychwytywanie błędów.'
+        eslint: 'Statyczna analiza kodu, spójny styl, wychwytywanie błędów.',
+        mongodb: 'Dokumentowa baza NoSQL, elastyczne schematy, skalowalność.',
+        node: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.'
       }
     },
     projects: {
@@ -77,6 +79,7 @@ export const translations = {
         'File Actions': 'File Actions',
         'Old Portfolio': 'Stare Portfolio',
         'Mathema': 'Mathema',
+        'Lecture Backend': 'Lecture Backend',
         'Current Portfolio': 'Aktualne Portfolio'
       },
       tiles: {
@@ -90,7 +93,11 @@ export const translations = {
         },
         'Mathema': {
           short: 'Interaktywna aplikacja do nauki matematyki.',
-          desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów.'
+          desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów, zasilanej prawdziwym backendem (Node.js/Express + SQLite).'
+        },
+        'Lecture Backend': {
+          short: 'REST API do zarządzania wykładami — Symfony, MongoDB, architektura warstwowa.',
+          desc: 'REST API do zarządzania wykładami i zapisami studentów, zbudowane w Symfony z bazą MongoDB. Architektura warstwowa z wyraźnym rozdzieleniem logiki domenowej, persystencji i warstwy API, pokryta testami i udokumentowana specyfikacją OpenAPI.'
         },
         'Current Portfolio': {
           short: 'Interaktywne portfolio prezentujące moje projekty i umiejętności.',
@@ -194,7 +201,9 @@ export const translations = {
         docker: 'Docker – containerization, DevOps, CI/CD.',
         vite: 'Vite – fast build tool and dev server for modern frontend apps.',
         'react-router': 'React Router – routing and navigation in React apps.',
-        eslint: 'ESLint – static analysis, consistent code style, catching bugs early.'
+        eslint: 'ESLint – static analysis, consistent code style, catching bugs early.',
+        mongodb: 'MongoDB – document-oriented NoSQL database, flexible schemas, scalability.',
+        node: 'Node.js – JavaScript/TypeScript backend, REST APIs, real-time servers.'
       }
     },
     projects: {
@@ -208,6 +217,7 @@ export const translations = {
         'File Actions': 'File Actions',
         'Old Portfolio': 'Old Portfolio',
         'Mathema': 'Mathema',
+        'Lecture Backend': 'Lecture Backend',
         'Current Portfolio': 'Current Portfolio'
       },
       tiles: {
@@ -221,7 +231,11 @@ export const translations = {
         },
         'Mathema': {
           short: 'Interactive application for learning mathematics.',
-          desc: 'Mathema is an interactive web application designed to help users practice and improve their mathematical skills. The application presents users with a variety of mathematical problems from different categories and allows them to test their knowledge in interactive mode or browse problem sets. Users can also track their progress and view results on a global leaderboard.'
+          desc: 'Mathema is an interactive web application designed to help users practice and improve their mathematical skills. The application presents users with a variety of mathematical problems from different categories and allows them to test their knowledge in interactive mode or browse problem sets. Users can also track their progress and view results on a global leaderboard, backed by a real API (Node.js/Express + SQLite).'
+        },
+        'Lecture Backend': {
+          short: 'REST API for lecture management — Symfony, MongoDB, layered architecture.',
+          desc: 'A REST API for managing lectures and student enrollment, built with Symfony and MongoDB. Layered architecture with a clear separation of domain logic, persistence, and the API layer, covered by tests and documented with an OpenAPI spec.'
         },
         'Current Portfolio': {
           short: 'Interactive portfolio showcasing my projects and skills.',
