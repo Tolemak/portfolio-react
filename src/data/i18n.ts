@@ -65,7 +65,8 @@ export const translations = {
         'react-router': 'Routing i nawigacja w aplikacjach React.',
         eslint: 'Statyczna analiza kodu, spójny styl, wychwytywanie błędów.',
         mongodb: 'Dokumentowa baza NoSQL, elastyczne schematy, skalowalność.',
-        node: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.'
+        node: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.',
+        redis: 'Cache, rate limiting, struktury danych jako główny magazyn — nie tylko cache.'
       }
     },
     projects: {
@@ -80,9 +81,14 @@ export const translations = {
         'Old Portfolio': 'Stare Portfolio',
         'Mathema': 'Mathema',
         'Lecture Backend': 'Lecture Backend',
+        'CryptoPulse': 'CryptoPulse',
         'Current Portfolio': 'Aktualne Portfolio'
       },
       tiles: {
+        'CryptoPulse': {
+          short: 'Agregator cen krypto z kilku giełd, alerty webhookowe, Redis jako główny magazyn danych.',
+          desc: 'Symfony API agregujące ceny kryptowalut z Binance, Kraken i Coinbase, cache\'owane w Redisie, z alertami progowymi dostarczanymi webhookiem. Redis jako główny magazyn (nie tylko cache) — struktury danych dla alertów, rate limiting per giełda i per klient. Osobny frontend w React pokazuje ceny na żywo.'
+        },
         'File Actions': {
           short: 'Operacje na plikach w przeglądarce. Zmień rozmiar, konwertuj, kompresuj i więcej.',
           desc: 'FileActions_BackendDemo to projekt demonstracyjny prezentujący aplikację full-stack z backendem w PHP/Symfony. Pokazuje dobre praktyki, czystą architekturę i integracje z nowoczesnymi narzędziami.'
@@ -223,7 +229,8 @@ export const translations = {
         'react-router': 'React Router – routing and navigation in React apps.',
         eslint: 'ESLint – static analysis, consistent code style, catching bugs early.',
         mongodb: 'MongoDB – document-oriented NoSQL database, flexible schemas, scalability.',
-        node: 'Node.js – JavaScript/TypeScript backend, REST APIs, real-time servers.'
+        node: 'Node.js – JavaScript/TypeScript backend, REST APIs, real-time servers.',
+        redis: 'Caching, rate limiting, data structures as the primary store — not just a cache.'
       }
     },
     projects: {
@@ -238,9 +245,14 @@ export const translations = {
         'Old Portfolio': 'Old Portfolio',
         'Mathema': 'Mathema',
         'Lecture Backend': 'Lecture Backend',
+        'CryptoPulse': 'CryptoPulse',
         'Current Portfolio': 'Current Portfolio'
       },
       tiles: {
+        'CryptoPulse': {
+          short: 'Multi-exchange crypto price aggregator with webhook alerts, Redis as the primary data store.',
+          desc: 'A Symfony API aggregating crypto prices from Binance, Kraken, and Coinbase, cached in Redis, with threshold alerts delivered via webhook. Redis as the primary store (not just a cache) — data structures for alerts, rate limiting per exchange and per client. A separate React frontend shows live prices.'
+        },
         'File Actions': {
           short: 'Batch file operations in your browser. Resize, convert, compress, and more.',
           desc: 'FileActions_BackendDemo is a demo project showcasing a full-stack app with PHP/Symfony backend. It highlights best practices, clean architecture, and integration with modern tools.'

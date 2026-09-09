@@ -151,5 +151,13 @@ export const skills: SkillItem[] = [
     logo: '/logos/node.png',
     name: 'Node.js',
     category: 'framework'
+  },
+  {
+    slug: 'redis',
+    color: '#DC382D',
+    description: 'Cache, rate limiting, struktury danych jako główny magazyn — nie tylko cache.',
+    logo: '/logos/redis.svg',
+    name: 'Redis',
+    category: 'db'
   }
 ];
