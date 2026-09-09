@@ -84,7 +84,7 @@ export const skills: SkillItem[] = [
     slug: 'sql',
     color: '#1976d2',
     description: 'Relational databases, queries, performance optimization.',
-    logo: '/logos/sap.svg',
+    logo: '/logos/sql.svg',
     name: 'SQL',
     category: 'db'
   },
