@@ -93,9 +93,6 @@ const Skills: React.FC = () => {
                       </div>
                       <div className="skill-info">
                         <strong>{skill.name}</strong>
-                        <span className="skill-category">
-                          {t.skills.categories[skill.category as keyof typeof t.skills.categories] || skill.category}
-                        </span>
                         <p className="skill-desc">{getSkillDesc(skill.slug, skill.description)}</p>
                       </div>
                     </div>
