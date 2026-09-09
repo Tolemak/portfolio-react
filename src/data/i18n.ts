@@ -4,11 +4,11 @@ export const translations = {
   pl: {
     about: {
       title: 'O mnie',
-      intro: 'Cześć! Nazywam się Kamil Gałkowski. Jestem pasjonatem nowoczesnych technologii webowych, backendu i automatyzacji. Lubię łączyć kreatywność z inżynierią, budując aplikacje, które nie tylko działają, ale i zachwycają wizualnie. To portfolio prezentuje moje umiejętności, projekty i ścieżkę zawodową. Zapraszam do kontaktu i współpracy!',
+      intro: 'Nazywam się Kamil Gałkowski i jestem backend developerem. Od 2020 roku komercyjnie projektuję i utrzymuję aplikacje webowe w PHP i Symfony — API, integracje z systemami zewnętrznymi, warstwa danych i wydajność. Testy traktuję jako część procesu, a nie dodatek; wdrożenia i CI/CD prowadzę samodzielnie, na własnej infrastrukturze. Frontend w React i TypeScript jest uzupełnieniem tego warsztatu — dzięki niemu dowożę funkcjonalność end-to-end.',
       cards: [
-        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'Tworzę nowoczesne, responsywne interfejsy w React, TypeScript, z naciskiem na UX, dostępność i wydajność.' },
-        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'Projektuję i wdrażam API oraz backendy w PHP (Symfony), Node.js, Python. Bezpieczeństwo, wydajność, integracje, SQL.' },
-        { icon: '/logos/docker.svg', title: 'DevOps & Bazy danych', desc: 'Automatyzacja, CI/CD, Docker, zarządzanie bazami danych (SQL), wdrożenia i stabilność środowisk.' },
+        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'Projektuję API i logikę domenową w PHP/Symfony oraz Node.js. Architektura warstwowa, testy jako element procesu, integracje z systemami zewnętrznymi, modelowanie i optymalizacja warstwy danych.' },
+        { icon: '/logos/docker.svg', title: 'Infrastruktura & CI/CD', desc: 'Docker, pipeline’y w GitHub Actions, wdrożenia na własny VPS — reverse proxy, SSL, zadania cykliczne. Utrzymuję produkcyjnie to, co wypuszczam.' },
+        { icon: '/logos/react.svg', title: 'Frontend', desc: 'React i TypeScript tam, gdzie backend potrzebuje interfejsu — SPA, dwujęzyczność, dostępność i wydajność.' },
         { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
         { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
         { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
@@ -54,19 +54,20 @@ export const translations = {
         html: 'Semantyczne struktury stron, dostępność, SEO.',
         css: 'Stylowanie, responsywność, animacje, nowoczesne layouty.',
         symfony: 'Framework PHP do dużych, skalowalnych aplikacji webowych.',
-        bootstrap: 'Szybkie prototypowanie, responsywne komponenty UI.',
         twig: 'System szablonów dla PHP, oddzielenie logiki od widoku.',
         ts: 'Typowany JavaScript, większe bezpieczeństwo i skalowalność kodu.',
         react: 'Nowoczesne SPA, komponenty, hooki, zarządzanie stanem.',
         sql: 'Relacyjne bazy danych, zapytania, optymalizacja wydajności.',
-        vscode: 'Główne środowisko pracy, personalizacja, debugowanie.',
         docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.',
         vite: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
-        'react-router': 'Routing i nawigacja w aplikacjach React.',
-        eslint: 'Statyczna analiza kodu, spójny styl, wychwytywanie błędów.',
         mongodb: 'Dokumentowa baza NoSQL, elastyczne schematy, skalowalność.',
         node: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.',
-        redis: 'Cache, rate limiting, struktury danych jako główny magazyn — nie tylko cache.'
+        redis: 'Cache, rate limiting, struktury danych jako główny magazyn — nie tylko cache.',
+        doctrine: 'ORM dla PHP — mapowanie encji, relacje, migracje, optymalizacja zapytań.',
+        phpunit: 'Testy jednostkowe i funkcjonalne backendu, testy API, utrzymywanie pokrycia.',
+        'github-actions': 'Pipeline\'y CI/CD — testy, build i automatyczne wdrożenia na własny serwer.',
+        linux: 'Administracja serwerem VPS — Apache, reverse proxy, SSL, zadania cykliczne.',
+        openapi: 'Projektowanie REST API i dokumentowanie ich specyfikacją OpenAPI.'
       }
     },
     projects: {
@@ -90,8 +91,8 @@ export const translations = {
           desc: 'Symfony API agregujące ceny kryptowalut z Binance, Kraken i Coinbase, cache\'owane w Redisie, z alertami progowymi dostarczanymi webhookiem. Redis jako główny magazyn (nie tylko cache) — struktury danych dla alertów, rate limiting per giełda i per klient. Osobny frontend w React pokazuje ceny na żywo.'
         },
         'File Actions': {
-          short: 'Operacje na plikach w przeglądarce. Zmień rozmiar, konwertuj, kompresuj i więcej.',
-          desc: 'FileActions_BackendDemo to projekt demonstracyjny prezentujący aplikację full-stack z backendem w PHP/Symfony. Pokazuje dobre praktyki, czystą architekturę i integracje z nowoczesnymi narzędziami.'
+          short: 'Wsadowe przetwarzanie plików w przeglądarce — zmiana rozmiaru, konwersja, kompresja.',
+          desc: 'Backend w Symfony do wsadowego przetwarzania plików: zmiana rozmiaru, konwersja formatów, kompresja i filtry graficzne. Przetwarzanie oparte na Imagick, aplikacja zdockeryzowana, pokryta testami PHPUnit i wdrażana automatycznie na własny serwer.'
         },
         'Old Portfolio': {
           short: 'Stare portfolio – zobacz poprzednią wersję strony.',
@@ -99,15 +100,15 @@ export const translations = {
         },
         'Mathema': {
           short: 'Interaktywna aplikacja do nauki matematyki.',
-          desc: 'Mathema to interaktywna aplikacja internetowa stworzona, aby pomóc użytkownikom ćwiczyć i doskonalić umiejętności matematyczne. Aplikacja prezentuje użytkownikom różnorodne zadania matematyczne z różnych kategorii i pozwala im sprawdzać swoją wiedzę w trybie interaktywnym lub przeglądać zestawy zadań. Użytkownicy mogą również śledzić swoje postępy i przeglądać wyniki w globalnej tabeli liderów, zasilanej prawdziwym backendem (Node.js/Express + SQLite).'
+          desc: 'Aplikacja do ćwiczenia matematyki: zestawy zadań w kilku kategoriach, tryb interaktywny i śledzenie postępów. Wyniki trafiają do wspólnej tablicy liderów zasilanej backendem Node.js/Express z bazą SQLite, z ograniczaniem liczby zapytań po stronie API.'
         },
         'Lecture Backend': {
           short: 'REST API do zarządzania wykładami — Symfony, MongoDB, architektura warstwowa.',
           desc: 'REST API do zarządzania wykładami i zapisami studentów, zbudowane w Symfony z bazą MongoDB. Architektura warstwowa z wyraźnym rozdzieleniem logiki domenowej, persystencji i warstwy API, pokryta testami i udokumentowana specyfikacją OpenAPI.'
         },
         'Current Portfolio': {
-          short: 'Interaktywne portfolio prezentujące moje projekty i umiejętności.',
-          desc: 'Moje obecne portfolio, które właśnie przeglądasz. Zbudowane przy użyciu nowoczesnych technologii webowych, aby zaprezentować moje umiejętności i projekty w interaktywny i responsywny sposób.'
+          short: 'Portfolio, które właśnie przeglądasz — React, TypeScript, dwa tryby przeglądania.',
+          desc: 'Portfolio, które właśnie przeglądasz. React z TypeScriptem, dwa tryby przeglądania (przelot 3D po stacji kosmicznej oraz szybki tryb klasyczny), pełna dwujęzyczność PL/EN, testy jednostkowe i automatyczne wdrożenie na własny VPS przez GitHub Actions.'
         }
       }
     },
@@ -137,15 +138,15 @@ export const translations = {
       jumpTo: 'Przejdź do sekcji',
       teasers: {
         about: 'Poznaj mnie — kim jestem i czym się zajmuję.',
-        skills: 'Zobacz technologie, w których czuję się pewnie.',
+        skills: 'Technologie, z którymi pracuję na co dzień.',
         projects: 'Przegląd zrealizowanych projektów.',
         education: 'Moja ścieżka edukacyjna.',
-        experience: 'Doświadczenie zawodowe i dotychczasowa praca.'
+        experience: 'Ścieżka zawodowa i zakres odpowiedzialności.'
       }
     },
     classic: {
       heroTitle: 'Kamil Gałkowski',
-      heroSubtitle: 'Portfolio programisty — szybki przegląd projektów, umiejętności i doświadczenia.'
+      heroSubtitle: 'Backend developer — PHP/Symfony, API, Docker i wdrożenia na własnej infrastrukturze.'
     },
     modal: {
       close: 'Zamknij'
@@ -168,11 +169,11 @@ export const translations = {
   en: {
     about: {
       title: 'About Me',
-      intro: `Hi! My name is Kamil Gałkowski. I'm passionate about modern web technologies, backend, and automation. I love combining creativity with engineering, building apps that work and look great. This portfolio showcases my skills, projects, and professional journey. Feel free to contact me!`,
+      intro: `My name is Kamil Gałkowski and I'm a backend developer. Since 2020 I have been designing and maintaining web applications in PHP and Symfony commercially — APIs, integrations with external systems, the data layer, and performance. I treat tests as part of the process rather than an afterthought, and I run deployments and CI/CD myself, on my own infrastructure. React and TypeScript on the frontend complement that toolkit — they let me deliver features end to end.`,
       cards: [
-        { icon: '/logos/react.svg', title: 'Frontend & UI', desc: 'I build modern, responsive interfaces in React and TypeScript, with a focus on UX, accessibility, and performance.' },
-        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design and implement APIs and backends in PHP (Symfony), Node.js, Python. Security, performance, integrations, SQL.' },
-        { icon: '/logos/docker.svg', title: 'DevOps & Databases', desc: 'Automation, CI/CD, Docker, database management (SQL), deployments, and environment stability.' },
+        { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design APIs and domain logic in PHP/Symfony and Node.js. Layered architecture, tests as part of the process, integrations with external systems, data modelling and query optimisation.' },
+        { icon: '/logos/docker.svg', title: 'Infrastructure & CI/CD', desc: 'Docker, GitHub Actions pipelines, deployments to my own VPS — reverse proxy, SSL, scheduled jobs. I keep in production everything I ship.' },
+        { icon: '/logos/react.svg', title: 'Frontend', desc: 'React and TypeScript where the backend needs an interface — SPAs, bilingual UI, accessibility, and performance.' },
         { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
         { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
         { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
@@ -218,19 +219,20 @@ export const translations = {
         html: 'HTML – semantic page structures, accessibility.',
         css: 'CSS – styling, responsiveness, animation.',
         symfony: 'Symfony – PHP framework for large web apps.',
-        bootstrap: 'Bootstrap – rapid prototyping, responsive layouts.',
         twig: 'Twig – templates, macros, data formatting.',
         ts: 'TypeScript – typed JavaScript, safety, scalability.',
         react: 'React – modern SPA, components, hooks.',
         sql: 'SQL – relational databases, queries, optimization.',
-        vscode: 'Visual Studio Code – main dev tool, plugins, customization.',
         docker: 'Docker – containerization, DevOps, CI/CD.',
         vite: 'Vite – fast build tool and dev server for modern frontend apps.',
-        'react-router': 'React Router – routing and navigation in React apps.',
-        eslint: 'ESLint – static analysis, consistent code style, catching bugs early.',
         mongodb: 'MongoDB – document-oriented NoSQL database, flexible schemas, scalability.',
         node: 'Node.js – JavaScript/TypeScript backend, REST APIs, real-time servers.',
-        redis: 'Caching, rate limiting, data structures as the primary store — not just a cache.'
+        redis: 'Caching, rate limiting, data structures as the primary store — not just a cache.',
+        doctrine: 'PHP ORM — entity mapping, relations, migrations, query optimization.',
+        phpunit: 'Unit and functional backend tests, API tests, keeping coverage up.',
+        'github-actions': 'CI/CD pipelines — tests, builds, and automated deployments to my own server.',
+        linux: 'VPS administration — Apache, reverse proxy, SSL, scheduled jobs.',
+        openapi: 'Designing REST APIs and documenting them with an OpenAPI specification.'
       }
     },
     projects: {
@@ -254,8 +256,8 @@ export const translations = {
           desc: 'A Symfony API aggregating crypto prices from Binance, Kraken, and Coinbase, cached in Redis, with threshold alerts delivered via webhook. Redis as the primary store (not just a cache) — data structures for alerts, rate limiting per exchange and per client. A separate React frontend shows live prices.'
         },
         'File Actions': {
-          short: 'Batch file operations in your browser. Resize, convert, compress, and more.',
-          desc: 'FileActions_BackendDemo is a demo project showcasing a full-stack app with PHP/Symfony backend. It highlights best practices, clean architecture, and integration with modern tools.'
+          short: 'Batch file processing in the browser — resize, convert, compress.',
+          desc: 'A Symfony backend for batch file processing: resizing, format conversion, compression, and image filters. Processing is built on Imagick; the app is Dockerized, covered by PHPUnit tests, and deployed automatically to my own server.'
         },
         'Old Portfolio': {
           short: 'Old portfolio – see the previous version of the site.',
@@ -263,15 +265,15 @@ export const translations = {
         },
         'Mathema': {
           short: 'Interactive application for learning mathematics.',
-          desc: 'Mathema is an interactive web application designed to help users practice and improve their mathematical skills. The application presents users with a variety of mathematical problems from different categories and allows them to test their knowledge in interactive mode or browse problem sets. Users can also track their progress and view results on a global leaderboard, backed by a real API (Node.js/Express + SQLite).'
+          desc: 'A math-practice app: problem sets across several categories, an interactive mode, and progress tracking. Scores feed a shared leaderboard backed by a Node.js/Express API with SQLite, with request throttling on the API side.'
         },
         'Lecture Backend': {
           short: 'REST API for lecture management — Symfony, MongoDB, layered architecture.',
           desc: 'A REST API for managing lectures and student enrollment, built with Symfony and MongoDB. Layered architecture with a clear separation of domain logic, persistence, and the API layer, covered by tests and documented with an OpenAPI spec.'
         },
         'Current Portfolio': {
-          short: 'Interactive portfolio showcasing my projects and skills.',
-          desc: 'My current portfolio, which you are currently viewing. Built with modern web technologies to present my skills and projects in an interactive and responsive way.'
+          short: 'The portfolio you are looking at — React, TypeScript, two browsing modes.',
+          desc: 'The portfolio you are looking at. React with TypeScript, two browsing modes (a 3D flight through a space station and a fast classic mode), full PL/EN bilingual support, unit tests, and automated deployment to my own VPS via GitHub Actions.'
         }
       }
     },
@@ -301,15 +303,15 @@ export const translations = {
       jumpTo: 'Jump to section',
       teasers: {
         about: 'Get to know me — who I am and what I do.',
-        skills: 'See the technologies I work with confidently.',
+        skills: 'The technologies I work with day to day.',
         projects: 'A look at the projects I have built.',
         education: 'My educational background.',
-        experience: 'Professional experience and past work.'
+        experience: 'Career path and scope of responsibility.'
       }
     },
     classic: {
       heroTitle: 'Kamil Gałkowski',
-      heroSubtitle: 'Developer portfolio — a quick look at projects, skills, and experience.'
+      heroSubtitle: 'Backend developer — PHP/Symfony, APIs, Docker, and deployments on my own infrastructure.'
     },
     modal: {
       close: 'Close'
