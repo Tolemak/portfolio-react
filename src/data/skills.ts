@@ -10,24 +10,24 @@ export interface SkillItem {
 export const skills: SkillItem[] = [
   {
     slug: 'js',
-    color: '#FFFF00',
-    description: `JavaScript UX Specialist, Data Preloading Maestro, Interactive Frontend Developer, Efficient Data Loader`,
+    color: '#C9A227',
+    description: 'Modern frontend, interactivity, animation, dynamic UI.',
     logo: '/logos/js.png',
     name: 'Javascript',
     category: 'pro-lang'
   },
   {
     slug: 'php',
-    color: '#0000FF',
-    description: `PHP REST API Architect, Data Preprocessing Prodigy, API Integration Expert, SQL Data Pipeline Maestro`,
+    color: '#777BB4',
+    description: 'Backend, APIs, integrations, data processing.',
     logo: '/logos/php.svg',
     name: 'PHP',
     category: 'pro-lang'
   },
   {
     slug: 'python',
-    color: '#0000FF',
-    description: `Python Data Wizard, Automation Script Guru`,
+    color: '#4B8BBE',
+    description: 'Automation, data processing, scripting.',
     logo: '/logos/python.png',
     name: 'Python',
     category: 'pro-lang'
@@ -42,7 +42,7 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'css',
-    color: '#0000FF',
+    color: '#2E9BD6',
     description: 'Zaawansowane stylowanie, responsywność, animacje CSS.',
     logo: '/logos/css.svg',
     name: 'CSS',
@@ -50,23 +50,15 @@ export const skills: SkillItem[] = [
   },
   {
     slug: 'symfony',
-    color: '#FFFFFF',
+    color: '#94A3B8',
     description: 'Framework PHP do budowy skalowalnych aplikacji webowych.',
     logo: '/logos/symfony.svg',
     name: 'Symfony',
     category: 'framework'
   },
   {
-    slug: 'bootstrap',
-    color: '#EE82EE',
-    description: 'Framework CSS do szybkiego prototypowania i responsywnych layoutów.',
-    logo: '/logos/bootstrap.svg',
-    name: 'Bootstrap',
-    category: 'framework'
-  },
-  {
     slug: 'twig',
-    color: '#008000',
+    color: '#5FA832',
     description: 'Szablony PHP, makra, formatowanie danych.',
     logo: '/logos/twig.svg',
     name: 'Twig',
@@ -91,23 +83,15 @@ export const skills: SkillItem[] = [
   {
     slug: 'sql',
     color: '#1976d2',
-    description: 'sql',
+    description: 'Relational databases, queries, performance optimization.',
     logo: '/logos/sap.svg',
     name: 'SQL',
     category: 'db'
   },
   {
-    slug: 'vscode',
-    color: '#0078d4',
-    description: 'vscode',
-    logo: '/logos/vscode.svg',
-    name: 'Visual Studio Code',
-    category: 'devtools'
-  },
-  {
     slug: 'docker',
     color: '#2496ed',
-    description: 'docker',
+    description: 'Containerization, CI/CD, environment isolation.',
     logo: '/logos/docker.svg',
     name: 'Docker',
     category: 'devtools'
@@ -118,22 +102,6 @@ export const skills: SkillItem[] = [
     description: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
     logo: '/logos/vite.png',
     name: 'Vite',
-    category: 'devtools'
-  },
-  {
-    slug: 'react-router',
-    color: '#61dafb',
-    description: 'Routing i nawigacja w aplikacjach React.',
-    logo: '/logos/react.svg',
-    name: 'React Router',
-    category: 'library'
-  },
-  {
-    slug: 'eslint',
-    color: '#4b32c3',
-    description: 'Statyczna analiza kodu, wymuszanie spójnego stylu i wychwytywanie błędów.',
-    logo: '/logos/no-img.svg',
-    name: 'ESLint',
     category: 'devtools'
   },
   {
@@ -159,5 +127,45 @@ export const skills: SkillItem[] = [
     logo: '/logos/redis.svg',
     name: 'Redis',
     category: 'db'
+  },
+  {
+    slug: 'doctrine',
+    color: '#FC6A31',
+    description: 'PHP ORM — entity mapping, relations, migrations, query optimization.',
+    logo: '/logos/doctrine.svg',
+    name: 'Doctrine',
+    category: 'library'
+  },
+  {
+    slug: 'phpunit',
+    color: '#3C9CD7',
+    description: 'Unit and functional backend tests, API tests, keeping coverage up.',
+    logo: '/logos/phpunit.svg',
+    name: 'PHPUnit',
+    category: 'devtools'
+  },
+  {
+    slug: 'github-actions',
+    color: '#2088FF',
+    description: 'CI/CD pipelines — tests, builds, and automated deployments.',
+    logo: '/logos/github-actions.svg',
+    name: 'GitHub Actions',
+    category: 'devtools'
+  },
+  {
+    slug: 'linux',
+    color: '#C9971A',
+    description: 'VPS administration — Apache, reverse proxy, SSL, scheduled jobs.',
+    logo: '/logos/linux.svg',
+    name: 'Linux',
+    category: 'devtools'
+  },
+  {
+    slug: 'openapi',
+    color: '#6BA539',
+    description: 'Designing REST APIs and documenting them with an OpenAPI specification.',
+    logo: '/logos/openapi.svg',
+    name: 'REST / OpenAPI',
+    category: 'other'
   }
 ];
