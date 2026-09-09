@@ -9,9 +9,9 @@ export const translations = {
         { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'Projektuję API i logikę domenową w PHP/Symfony oraz Node.js. Architektura warstwowa, testy jako element procesu, integracje z systemami zewnętrznymi, modelowanie i optymalizacja warstwy danych.' },
         { icon: '/logos/docker.svg', title: 'Infrastruktura & CI/CD', desc: 'Docker, pipeline’y w GitHub Actions, wdrożenia na własny VPS — reverse proxy, SSL, zadania cykliczne. Utrzymuję produkcyjnie to, co wypuszczam.' },
         { icon: '/logos/react.svg', title: 'Frontend', desc: 'React i TypeScript tam, gdzie backend potrzebuje interfejsu — SPA, dwujęzyczność, dostępność i wydajność.' },
-        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
-        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
-        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
+        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: 'github.com/Tolemak', link: 'https://github.com/Tolemak' },
+        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: 'linkedin.com/in/kamil-gałkowski-544a781aa', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
+        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: 'kamil.galkowski@outlook.com', link: 'mailto:kamil.galkowski@outlook.com' }
       ],
       schools: {
         'Gdańsk University of Technology': 'Politechnika Gdańska',
@@ -174,9 +174,9 @@ export const translations = {
         { icon: '/logos/symfony.svg', title: 'Backend & API', desc: 'I design APIs and domain logic in PHP/Symfony and Node.js. Layered architecture, tests as part of the process, integrations with external systems, data modelling and query optimisation.' },
         { icon: '/logos/docker.svg', title: 'Infrastructure & CI/CD', desc: 'Docker, GitHub Actions pipelines, deployments to my own VPS — reverse proxy, SSL, scheduled jobs. I keep in production everything I ship.' },
         { icon: '/logos/react.svg', title: 'Frontend', desc: 'React and TypeScript where the backend needs an interface — SPAs, bilingual UI, accessibility, and performance.' },
-        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: '<a href="https://github.com/Tolemak" target="_blank" rel="noopener noreferrer" class="about-link">github.com/Tolemak</a>', link: 'https://github.com/Tolemak' },
-        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: '<a href="https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/" target="_blank" rel="noopener noreferrer" class="about-link">linkedin.com/in/kamil-gałkowski-544a781aa</a>', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
-        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: '<a href="mailto:tolemak.pancreas694@slmail.me" class="about-link">tolemak.pancreas694@slmail.me</a>', link: 'mailto:tolemak.pancreas694@slmail.me' }
+        { icon: '/logos/github-mark.svg', title: 'GitHub', desc: 'github.com/Tolemak', link: 'https://github.com/Tolemak' },
+        { icon: '/logos/linkedin-svgrepo-com.svg', title: 'LinkedIn', desc: 'linkedin.com/in/kamil-gałkowski-544a781aa', link: 'https://www.linkedin.com/in/kamil-ga%C5%82kowski-544a781aa/' },
+        { icon: '/logos/email-svgrepo-com.svg', title: 'Email', desc: 'kamil.galkowski@outlook.com', link: 'mailto:kamil.galkowski@outlook.com' }
       ],
       schools: {
         'Gdańsk University of Technology': 'Gdańsk University of Technology',
