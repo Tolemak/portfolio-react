@@ -4,13 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.tsx';
 import { ThemeProvider } from './contexts/ThemeContext.tsx';
+import { ModeProvider } from './contexts/ModeContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ModeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ModeProvider>
     </ThemeProvider>
   </StrictMode>,
 );

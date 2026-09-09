@@ -83,7 +83,7 @@ Runs a local production server for the built app from the `dist/` directory. Thi
 - Top navigation with highlighting
 - Responsive design
 - Dark and light theme
-- Interactive 3D on the main page
+- WOW mode: a 3D flight through a space station as the home page, with a non-3D Classic mode as an alternative
 - Bilingualism (PL/EN) and a language switcher
 - Tiled, modern cards with glassmorphism
 - Consistent modals and skill tags

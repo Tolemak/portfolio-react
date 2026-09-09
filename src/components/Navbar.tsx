@@ -4,6 +4,7 @@ import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { useT, useLang } from '../data/i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { useMode } from '../contexts/ModeContext';
 import { radialViewTransition } from '../utils/viewTransition';
 
 export type NavbarProps = {
@@ -15,8 +16,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
   const location = useLocation();
   const t = useT();
   const { darkMode, toggleTheme } = useTheme();
+  const { mode, toggleMode } = useMode();
   const { lang, setLang } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isClassicHome = mode === 'classic' && location.pathname === '/';
 
   React.useEffect(() => {
     localStorage.setItem('lang', lang);
@@ -41,6 +44,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
   const handleThemeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { clientX, clientY } = e;
     radialViewTransition(clientX, clientY, toggleTheme);
+  };
+
+  const handleModeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { clientX, clientY } = e;
+    radialViewTransition(clientX, clientY, toggleMode);
   };
 
   return (
@@ -73,13 +81,25 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
-                <Link to={item.to}>{translatedText}</Link>
+                {isClassicHome ? (
+                  <a href={`#${item.title.toLowerCase()}`}>{translatedText}</a>
+                ) : (
+                  <Link to={item.to}>{translatedText}</Link>
+                )}
               </li>
             );
           })}
         </ul>
 
         <div className="navbar-actions">
+          <button
+            className="navbar-btn"
+            onClick={handleModeToggle}
+            aria-label={mode === 'wow' ? t.navbar.switchToClassic : t.navbar.switchToWow}
+            title={mode === 'wow' ? t.navbar.switchToClassic : t.navbar.switchToWow}
+          >
+            {mode === 'wow' ? '🚀' : '📄'}
+          </button>
           <button
             className="navbar-btn"
             onClick={handleThemeToggle}
@@ -115,9 +135,15 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
             const translatedText = t.navbar[item.title.toLowerCase() as keyof typeof t.navbar] || item.title;
             return (
               <li key={item.to} className={active ? 'active' : ''}>
-                <Link to={item.to} onClick={() => setMobileOpen(false)}>
-                  {translatedText}
-                </Link>
+                {isClassicHome ? (
+                  <a href={`#${item.title.toLowerCase()}`} onClick={() => setMobileOpen(false)}>
+                    {translatedText}
+                  </a>
+                ) : (
+                  <Link to={item.to} onClick={() => setMobileOpen(false)}>
+                    {translatedText}
+                  </Link>
+                )}
               </li>
             );
           })}

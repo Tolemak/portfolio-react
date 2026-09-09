@@ -1,5 +1,6 @@
 import type { ThreeEvent } from '@react-three/fiber';
 import SpaceModel from './SpaceModel';
+import { SPACEMAN_MODEL_PATH } from '../../data/spaceObjects';
 
 interface SpacemanModelProps extends Record<string, unknown> {
   highlighted?: boolean;
@@ -8,5 +9,5 @@ interface SpacemanModelProps extends Record<string, unknown> {
 }
 
 export default function SpacemanModel(props: SpacemanModelProps) {
-  return <SpaceModel path="/models/spaceman/scene.gltf" {...props} />;
+  return <SpaceModel path={SPACEMAN_MODEL_PATH} {...props} />;
 }

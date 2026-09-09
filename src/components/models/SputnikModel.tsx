@@ -1,5 +1,6 @@
 import type { ThreeEvent } from '@react-three/fiber';
 import SpaceModel from './SpaceModel';
+import { SPUTNIK_MODEL_PATH } from '../../data/spaceObjects';
 
 interface SputnikModelProps extends Record<string, unknown> {
   highlighted?: boolean;
@@ -8,5 +9,5 @@ interface SputnikModelProps extends Record<string, unknown> {
 }
 
 export default function SputnikModel(props: SputnikModelProps) {
-  return <SpaceModel path="/models/sputnik_1/scene.gltf" {...props} />;
+  return <SpaceModel path={SPUTNIK_MODEL_PATH} {...props} />;
 }
