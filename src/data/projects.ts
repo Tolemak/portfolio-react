@@ -78,6 +78,22 @@ export const projects: ProjectItem[] = [
     type: 'Web Application'
   },
   {
+    slug: 'crypto-pulse',
+    color: '#DC382D',
+    description:
+      'Symfony API agregujące ceny kryptowalut z Binance, Kraken i Coinbase, cache\'owane w Redisie, z alertami progowymi dostarczanymi webhookiem. Redis jako główny magazyn (nie tylko cache) — struktury danych dla alertów, rate limiting per giełda i per klient. Osobny frontend w React pokazuje ceny na żywo.',
+    shortDescription: 'Agregator cen krypto z kilku giełd, alerty webhookowe, Redis jako główny magazyn danych.',
+    links: [
+      { to: 'https://crypto-pulse.tolemak.pl/', label: 'Live Demo' },
+      { to: 'https://github.com/Tolemak/CryptoPulse_BackendDemo', label: 'GitHub' }
+    ],
+    logo: '/logos/redis.svg',
+    name: 'CryptoPulse',
+    period: { from: new Date('2026-09-09') },
+    skills: ['php', 'symfony', 'redis', 'docker', 'react', 'ts', 'vite'],
+    type: 'Web Application'
+  },
+  {
     slug: 'current-portfolio',
     color: '#6A0DAD',
     description:
