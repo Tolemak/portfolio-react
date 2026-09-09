@@ -1,5 +1,6 @@
 import type { ThreeEvent } from '@react-three/fiber';
 import SpaceModel from './SpaceModel';
+import { SATELLITE_MODEL_PATH } from '../../data/spaceObjects';
 
 interface SatelliteModelProps extends Record<string, unknown> {
   highlighted?: boolean;
@@ -8,5 +9,5 @@ interface SatelliteModelProps extends Record<string, unknown> {
 }
 
 export default function SatelliteModel(props: SatelliteModelProps) {
-  return <SpaceModel path="/models/satelite/scene.gltf" castShadow={false} receiveShadow={false} {...props} />;
+  return <SpaceModel path={SATELLITE_MODEL_PATH} castShadow={false} receiveShadow={false} {...props} />;
 }

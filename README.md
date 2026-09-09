@@ -85,7 +85,7 @@ Uruchamia lokalny serwer produkcyjny dla zbudowanej aplikacji z katalogu `dist/`
 - Nawigacja górna z podświetleniem
 - Responsywny design
 - Ciemny i jasny motyw
-- Interaktywne 3D na stronie głównej
+- Tryb WOW: lot 3D przez stację kosmiczną jako strona główna, z trybem Classic (bez 3D) jako alternatywą
 - Bilingwalność (PL/EN) i przełącznik języka
 - Kafelkowe, nowoczesne karty z glassmorphism
 - Spójne modale i tagi umiejętności

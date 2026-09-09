@@ -119,7 +119,27 @@ export const translations = {
       experience: 'Doświadczenie',
       projects: 'Projekty',
       education: 'Edukacja',
-      skills: 'Umiejętności'
+      skills: 'Umiejętności',
+      switchToWow: 'Włącz tryb WOW',
+      switchToClassic: 'Włącz tryb Classic'
+    },
+    wow: {
+      hint: 'Przewiń, by lecieć przez stację. Strzałki i kropki też działają.',
+      enter: 'Wejdź',
+      prev: 'Poprzedni przystanek',
+      next: 'Następny przystanek',
+      jumpTo: 'Przejdź do sekcji',
+      teasers: {
+        about: 'Poznaj mnie — kim jestem i czym się zajmuję.',
+        skills: 'Zobacz technologie, w których czuję się pewnie.',
+        projects: 'Przegląd zrealizowanych projektów.',
+        education: 'Moja ścieżka edukacyjna.',
+        experience: 'Doświadczenie zawodowe i dotychczasowa praca.'
+      }
+    },
+    classic: {
+      heroTitle: 'Kamil Gałkowski',
+      heroSubtitle: 'Portfolio programisty — szybki przegląd projektów, umiejętności i doświadczenia.'
     },
     modal: {
       close: 'Zamknij'
@@ -257,7 +277,27 @@ export const translations = {
       experience: 'Experience',
       projects: 'Projects',
       education: 'Education',
-      skills: 'Skills'
+      skills: 'Skills',
+      switchToWow: 'Switch to WOW mode',
+      switchToClassic: 'Switch to Classic mode'
+    },
+    wow: {
+      hint: 'Scroll to fly through the station. Arrow keys and dots work too.',
+      enter: 'Enter',
+      prev: 'Previous stop',
+      next: 'Next stop',
+      jumpTo: 'Jump to section',
+      teasers: {
+        about: 'Get to know me — who I am and what I do.',
+        skills: 'See the technologies I work with confidently.',
+        projects: 'A look at the projects I have built.',
+        education: 'My educational background.',
+        experience: 'Professional experience and past work.'
+      }
+    },
+    classic: {
+      heroTitle: 'Kamil Gałkowski',
+      heroSubtitle: 'Developer portfolio — a quick look at projects, skills, and experience.'
     },
     modal: {
       close: 'Close'

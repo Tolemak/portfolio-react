@@ -13,6 +13,7 @@ import PageTransition from './components/PageTransition';
 import ErrorBoundary from './components/ErrorBoundary';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 import { useTheme } from './contexts/ThemeContext';
+import { useMode } from './contexts/ModeContext';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 
 const About = lazyWithRetry(() => import('./components/About'), 'about');
@@ -21,17 +22,19 @@ const Projects = lazyWithRetry(() => import('./components/Projects'), 'projects'
 const Education = lazyWithRetry(() => import('./components/Education'), 'education');
 const Skills = lazyWithRetry(() => import('./components/Skills'), 'skills');
 const Navbar = lazyWithRetry(() => import('./components/Navbar'), 'navbar');
-const ISSMenu = lazyWithRetry(() => import('./components/ISSMenu'), 'issmenu');
+const WowHome = lazyWithRetry(() => import('./components/WowHome'), 'wowhome');
+const ClassicHome = lazyWithRetry(() => import('./components/ClassicHome'), 'classichome');
 const StarsCanvas = lazyWithRetry(() => import('./components/StarCanvas'), 'starcanvas');
 
 const AppContent = () => {
   const t = useT();
   const { darkMode } = useTheme();
+  const { mode } = useMode();
   const location = useLocation();
   useDocumentTitle();
 
   const [init, setInit] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(mode === 'wow');
 
   useEffect(() => {
     if (!init) {
@@ -58,7 +61,7 @@ const AppContent = () => {
         ) : (
           <AnimatePresence mode="wait" initial={false}>
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<ISSMenu />} />
+              <Route path="/" element={mode === 'wow' ? <WowHome /> : <ClassicHome />} />
               <Route path="/about" element={<><Navbar /><PageTransition><About /></PageTransition></>} />
               <Route path="/experience" element={<><Navbar /><PageTransition><Experience /></PageTransition></>} />
               <Route path="/projects" element={<><Navbar /><PageTransition><Projects /></PageTransition></>} />

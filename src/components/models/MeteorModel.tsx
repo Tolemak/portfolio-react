@@ -1,5 +1,6 @@
 import type { ThreeEvent } from '@react-three/fiber';
 import SpaceModel from './SpaceModel';
+import { METEOR_MODEL_PATH } from '../../data/spaceObjects';
 
 interface MeteorModelProps extends Record<string, unknown> {
   highlighted?: boolean;
@@ -8,5 +9,5 @@ interface MeteorModelProps extends Record<string, unknown> {
 }
 
 export default function MeteorModel(props: MeteorModelProps) {
-  return <SpaceModel path="/models/meteor/scene.gltf" {...props} />;
+  return <SpaceModel path={METEOR_MODEL_PATH} {...props} />;
 }

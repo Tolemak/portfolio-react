@@ -4,10 +4,14 @@ import { Points, PointMaterial, Preload, useGLTF } from "@react-three/drei";
 // @ts-expect-error no types
 import * as random from "maath/random/dist/maath-random.esm";
 import type { Points as PointsImpl } from "@react-three/drei";
+import { SPACE_OBJECTS } from "../data/spaceObjects";
+import { useMode } from "../contexts/ModeContext";
 
-const StarBackground = (props: Record<string, unknown>) => {
+export const StarBackground = (props: Record<string, unknown>) => {
   const ref = useRef<React.ElementRef<typeof PointsImpl>>(null);
-  const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.5 }));
+  // Length must be a multiple of 3 (x,y,z per point) or the last point is
+  // partially written, producing a NaN vertex.
+  const [sphere] = useState(() => random.inSphere(new Float32Array(5001), { radius: 1.5 }));
 
   useFrame((_state, delta) => {
     if (ref.current) {
@@ -58,13 +62,7 @@ const BOMBA_QUOTES = [
   "Wszystko jest możliwe, jeśli masz wystarczająco dużo prochu!"
 ];
 
-const MODEL_PATHS = [
-  '/models/la_station_spatiale_internationale_iss/scene.gltf',
-  '/models/meteor/scene.gltf',
-  '/models/satelite/scene.gltf',
-  '/models/spaceman/scene.gltf',
-  '/models/sputnik_1/scene.gltf',
-];
+const MODEL_PATHS = SPACE_OBJECTS.map((o) => o.modelPath);
 
 interface GltfJson {
   buffers?: { uri?: string }[];
@@ -85,6 +83,10 @@ async function fetchGltfWithDependencies(path: string): Promise<void> {
 function usePreloadModels(paths: string[]) {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
+    if (paths.length === 0) {
+      setLoaded(true);
+      return;
+    }
     let isMounted = true;
     let loadedCount = 0;
     paths.forEach((path) => {
@@ -207,7 +209,8 @@ const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
 };
 
 const StarsCanvas = ({ onSplashEnd }: { onSplashEnd?: () => void }) => {
-  const [showSplash, setShowSplash] = useState(true);
+  const { mode } = useMode();
+  const [showSplash, setShowSplash] = useState(mode === 'wow');
 
   useEffect(() => {
     if (!showSplash && onSplashEnd) onSplashEnd();
