@@ -24,7 +24,7 @@ export const experience: ExperienceItem[] = [
     type: 'Software Development',
     location: 'Gdańsk',
     period: { from: new Date(2020, 8, 1), to: new Date(2025, 9, 30) },
-    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'bootstrap', 'twig', 'python', 'ts'],
+    skills: ['html', 'css', 'js', 'php', 'sql', 'symfony', 'twig', 'python', 'ts'],
     name: 'Software Developer',
     color: 'blue',
     links: [{ to: 'https://www.favourite.pl/', label: 'Strona firmy' }],

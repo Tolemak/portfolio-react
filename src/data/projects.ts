@@ -26,7 +26,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/symfony.svg',
     name: 'File Actions',
     period: { from: new Date('2025-04-01') },
-    skills: ['php','symfony','bootstrap','js', 'ts', 'html', 'css'],
+    skills: ['php','symfony','js', 'ts', 'html', 'css'],
     type: 'Web Application'
   },
   {
@@ -59,7 +59,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/react.svg',
     name: 'Mathema',
     period: { from: new Date('2025-06-01') },
-    skills: ['react', 'vite', 'ts', 'react-router', 'css', 'node'],
+    skills: ['react', 'vite', 'ts', 'css', 'node'],
     type: 'Web Application'
   },
   {
@@ -106,7 +106,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/vite.png',
     name: 'Current Portfolio',
     period: { from: new Date('2025-06-01') },
-    skills: ['react', 'vite', 'ts', 'css', 'eslint'],
+    skills: ['react', 'vite', 'ts', 'css'],
     type: 'Portfolio'
   }
 ];
