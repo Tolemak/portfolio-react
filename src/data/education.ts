@@ -21,7 +21,7 @@ export const education: EducationItem[] = [
     organization: 'Gdańsk University of Technology',
     period: { from: new Date(2017, 10, 1), to: new Date(2021, 2, 1) },
     shortDescription: '',
-    slug: 'dummy-education-item',
+    slug: 'pg-biomedical-engineering',
     subjects: ['Apps Development', 'Algebra', 'Biomedicine']
   },
   {
@@ -33,7 +33,7 @@ export const education: EducationItem[] = [
     organization: 'The Gdańsk School of Banking',
     period: { from: new Date(2021, 3, 1), to: new Date(2022, 9, 1) },
     shortDescription: '',
-    slug: 'dummy-education-item-2',
-    subjects: ['IT Managment', 'CRM', 'ITIL']
+    slug: 'wsb-it-project-management',
+    subjects: ['IT Management', 'CRM', 'ITIL']
   }
 ];
