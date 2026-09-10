@@ -24,6 +24,9 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   handleReload = () => {
+    Object.keys(sessionStorage)
+      .filter((key) => key.startsWith('chunk-retry:'))
+      .forEach((key) => sessionStorage.removeItem(key));
     window.location.reload();
   };
 
