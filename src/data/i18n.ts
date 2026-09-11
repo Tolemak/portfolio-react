@@ -153,7 +153,33 @@ export const translations = {
     },
     app: {
       skipLink: 'Przejdź do treści',
-      loading: 'Ładowanie...'
+      loading: 'Ładowanie...',
+      splashQuotes: [
+        'To nie są ćwiczenia, to jest wojna!',
+        'Panie admirale, mamy kontakt z wrogiem!',
+        'Zgłaszam gotowość do startu, panie kapitanie!',
+        'Wszyscy na pokład, lecimy na bombę!',
+        'Niech moc będzie z nami, a reszta niech się schowa!',
+        'Czas na galaktyczną rozwałkę!',
+        'Paliwo? Po co nam paliwo, mamy fantazję!',
+        'W kosmosie nikt nie usłyszy twojego krzyku... chyba że jesteś Bombą!',
+        'Zawsze chciałem być astronautą, a zostałem kapitanem!',
+        'Houston, mamy imprezę!',
+        'Nie ma rzeczy niemożliwych, są tylko mało wybuchowe!',
+        'Kto nie ryzykuje, ten nie leci na bombę!',
+        'Cisza przed burzą, czyli czas na drzemkę.',
+        'W galaktyce nie ma przypadków, są tylko niecelne strzały!',
+        'Zapasowe majtki to podstawa każdej misji!',
+        'Nie pytaj co galaktyka może zrobić dla ciebie, tylko co ty możesz wysadzić dla galaktyki!',
+        'Wolę wybuchy od nudy!',
+        'Gdyby nie grawitacja, już dawno bym odleciał!',
+        'W kosmosie nie ma świateł na skrzyżowaniach, więc gaz do dechy!',
+        'Nie ma awarii, są tylko nieplanowane eksplozje!',
+        'Moja rakieta, moje zasady!',
+        'Kto rano wstaje, ten szybciej leci na bombę!',
+        'Nie ufam komputerom, wolę dynamit!',
+        'Wszystko jest możliwe, jeśli masz wystarczająco dużo prochu!'
+      ]
     },
     notFound: {
       title: '404',
@@ -318,7 +344,33 @@ export const translations = {
     },
     app: {
       skipLink: 'Skip to content',
-      loading: 'Loading...'
+      loading: 'Loading...',
+      splashQuotes: [
+        "This isn't a drill, this is war!",
+        'Admiral, we have contact with the enemy!',
+        'Requesting launch clearance, Captain!',
+        "All hands on deck, we're flying to the bomb!",
+        'May the force be with us, and the rest can hide!',
+        'Time for a galactic blowout!',
+        "Fuel? Who needs fuel, we've got imagination!",
+        "In space no one can hear you scream... unless you're the Bomb!",
+        'I always wanted to be an astronaut, and I became a captain!',
+        'Houston, we have a party!',
+        'Nothing is impossible, some things are just less explosive!',
+        'No risk, no bomb run!',
+        'Calm before the storm, i.e. nap time.',
+        'In the galaxy there are no accidents, only missed shots!',
+        'Spare underwear is essential for every mission!',
+        'Ask not what the galaxy can do for you, ask what you can blow up for the galaxy!',
+        'I prefer explosions to boredom!',
+        "If it weren't for gravity, I'd have flown off long ago!",
+        'No traffic lights in space, so pedal to the metal!',
+        'There are no malfunctions, only unplanned explosions!',
+        'My rocket, my rules!',
+        'The early bird gets to the bomb faster!',
+        "I don't trust computers, I trust dynamite!",
+        'Anything is possible if you have enough gunpowder!'
+      ]
     },
     notFound: {
       title: '404',
