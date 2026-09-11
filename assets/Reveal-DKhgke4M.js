@@ -1,0 +1,1 @@
+import{j as e,t as n}from"./index-Bf5eSz8r.js";const r=({children:i,delay:t=0,className:o,style:a})=>e.jsx(n.div,{className:o,style:a,initial:{opacity:0,y:24},whileInView:{opacity:1,y:0},viewport:{once:!0,margin:"0px 0px -80px 0px"},transition:{duration:.5,delay:t,ease:[.16,1,.3,1]},children:i});export{r as R};
