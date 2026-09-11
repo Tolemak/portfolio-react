@@ -1,29 +1,9 @@
-import React, { createContext, useContext, useState, type ReactNode } from 'react';
-import { recommendMode, collectModeDetectionSignals, type HomeMode } from '../utils/detectRecommendedMode';
+import React, { useState, type ReactNode } from 'react';
+import type { HomeMode } from '../utils/detectRecommendedMode';
+import { ModeContext } from './modeContextValue';
+import { MODE_KEY, MODE_SOURCE_KEY, resolveInitialMode } from './resolveInitialMode';
 
 export type { HomeMode };
-
-type ModeContextType = {
-  mode: HomeMode;
-  isManual: boolean;
-  setMode: (mode: HomeMode) => void;
-  toggleMode: () => void;
-};
-
-const MODE_KEY = 'homeMode';
-const MODE_SOURCE_KEY = 'homeModeSource';
-
-function resolveInitialMode(): { mode: HomeMode; isManual: boolean } {
-  if (typeof window === 'undefined') return { mode: 'wow', isManual: false };
-  const source = localStorage.getItem(MODE_SOURCE_KEY);
-  const stored = localStorage.getItem(MODE_KEY);
-  if (source === 'manual' && (stored === 'wow' || stored === 'classic')) {
-    return { mode: stored, isManual: true };
-  }
-  return { mode: recommendMode(collectModeDetectionSignals()), isManual: false };
-}
-
-const ModeContext = createContext<ModeContextType | undefined>(undefined);
 
 export const ModeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [{ mode, isManual }, setState] = useState(resolveInitialMode);
@@ -43,12 +23,4 @@ export const ModeProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       {children}
     </ModeContext.Provider>
   );
-};
-
-export const useMode = () => {
-  const context = useContext(ModeContext);
-  if (!context) {
-    throw new Error('useMode must be used within a ModeProvider');
-  }
-  return context;
 };

@@ -5,7 +5,7 @@ import { Points, PointMaterial, Preload, useGLTF } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 import type { Points as PointsImpl } from "@react-three/drei";
 import { SPACE_OBJECTS } from "../data/spaceObjects";
-import { useMode } from "../contexts/ModeContext";
+import { useMode } from "../contexts/useMode";
 
 export const StarBackground = (props: Record<string, unknown>) => {
   const ref = useRef<React.ElementRef<typeof PointsImpl>>(null);

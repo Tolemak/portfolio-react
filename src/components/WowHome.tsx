@@ -12,7 +12,7 @@ import SputnikModel from './models/SputnikModel';
 import { StarBackground } from './StarCanvas';
 import Navbar from './Navbar';
 import { useT } from '../data/i18n';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/useTheme';
 import { spaceObjectsInFlightOrder, getSectionPath, maxHitboxRadius, type SectionKey } from '../data/spaceObjects';
 
 const WARP_DURATION_MS = 380;

@@ -12,8 +12,8 @@ import NotFound from './components/NotFound';
 import PageTransition from './components/PageTransition';
 import ErrorBoundary from './components/ErrorBoundary';
 import { lazyWithRetry } from './utils/lazyWithRetry';
-import { useTheme } from './contexts/ThemeContext';
-import { useMode } from './contexts/ModeContext';
+import { useTheme } from './contexts/useTheme';
+import { useMode } from './contexts/useMode';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 
 const About = lazyWithRetry(() => import('./components/About'), 'about');

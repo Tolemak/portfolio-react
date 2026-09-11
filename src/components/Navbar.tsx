@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 import { navbar } from '../data/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { useT, useLang } from '../data/i18n';
-import { useTheme } from '../contexts/ThemeContext';
-import { useMode } from '../contexts/ModeContext';
+import { useTheme } from '../contexts/useTheme';
+import { useMode } from '../contexts/useMode';
 import { radialViewTransition } from '../utils/viewTransition';
 
 export type NavbarProps = {
