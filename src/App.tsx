@@ -34,7 +34,9 @@ const AppContent = () => {
   useDocumentTitle();
 
   const [init, setInit] = useState(false);
-  const [showSplash, setShowSplash] = useState(mode === 'wow');
+  const [showSplash, setShowSplash] = useState(
+    () => mode === 'wow' && sessionStorage.getItem('splashShown') !== '1',
+  );
 
   useEffect(() => {
     if (!init) {

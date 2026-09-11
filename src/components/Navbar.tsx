@@ -128,7 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
         </div>
       </nav>
 
-      <div className={`navbar-mobile-menu${mobileOpen ? ' open' : ''}`} aria-hidden={!mobileOpen}>
+      <div className={`navbar-mobile-menu${mobileOpen ? ' open' : ''}`} inert={!mobileOpen}>
         <ul>
           {navbar.map((item) => {
             const active = isItemActive(item);

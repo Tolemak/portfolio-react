@@ -6,6 +6,7 @@ import * as random from "maath/random/dist/maath-random.esm";
 import type { Points as PointsImpl } from "@react-three/drei";
 import { SPACE_OBJECTS } from "../data/spaceObjects";
 import { useMode } from "../contexts/useMode";
+import { useT } from "../data/i18n";
 
 export const StarBackground = (props: Record<string, unknown>) => {
   const ref = useRef<React.ElementRef<typeof PointsImpl>>(null);
@@ -34,33 +35,6 @@ export const StarBackground = (props: Record<string, unknown>) => {
     </group>
   );
 };
-
-const BOMBA_QUOTES = [
-  "To nie są ćwiczenia, to jest wojna!",
-  "Panie admirale, mamy kontakt z wrogiem!",
-  "Zgłaszam gotowość do startu, panie kapitanie!",
-  "Wszyscy na pokład, lecimy na bombę!",
-  "Niech moc będzie z nami, a reszta niech się schowa!",
-  "Czas na galaktyczną rozwałkę!",
-  "Paliwo? Po co nam paliwo, mamy fantazję!",
-  "W kosmosie nikt nie usłyszy twojego krzyku... chyba że jesteś Bombą!",
-  "Zawsze chciałem być astronautą, a zostałem kapitanem!",
-  "Houston, mamy imprezę!",
-  "Nie ma rzeczy niemożliwych, są tylko mało wybuchowe!",
-  "Kto nie ryzykuje, ten nie leci na bombę!",
-  "Cisza przed burzą, czyli czas na drzemkę.",
-  "W galaktyce nie ma przypadków, są tylko niecelne strzały!",
-  "Zapasowe majtki to podstawa każdej misji!",
-  "Nie pytaj co galaktyka może zrobić dla ciebie, tylko co ty możesz wysadzić dla galaktyki!",
-  "Wolę wybuchy od nudy!",
-  "Gdyby nie grawitacja, już dawno bym odleciał!",
-  "W kosmosie nie ma świateł na skrzyżowaniach, więc gaz do dechy!",
-  "Nie ma awarii, są tylko nieplanowane eksplozje!",
-  "Moja rakieta, moje zasady!",
-  "Kto rano wstaje, ten szybciej leci na bombę!",
-  "Nie ufam komputerom, wolę dynamit!",
-  "Wszystko jest możliwe, jeśli masz wystarczająco dużo prochu!"
-];
 
 const MODEL_PATHS = SPACE_OBJECTS.map((o) => o.modelPath);
 
@@ -106,8 +80,12 @@ function usePreloadModels(paths: string[]) {
 }
 
 const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
+  const t = useT();
   const [progress, setProgress] = useState(0);
-  const [quote] = useState(() => BOMBA_QUOTES[Math.floor(Math.random() * BOMBA_QUOTES.length)]);
+  const [quote] = useState(() => {
+    const quotes = t.app.splashQuotes;
+    return quotes[Math.floor(Math.random() * quotes.length)];
+  });
   const [fadeOut, setFadeOut] = useState(false);
   const modelsLoaded = usePreloadModels(MODEL_PATHS);
   const minDuration = 5000;
