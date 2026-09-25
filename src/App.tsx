@@ -15,6 +15,7 @@ import { lazyWithRetry } from './utils/lazyWithRetry';
 import { useTheme } from './contexts/useTheme';
 import { useMode } from './contexts/useMode';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
+import { safeLocalStorage, safeSessionStorage } from './utils/safeStorage';
 
 const About = lazyWithRetry(() => import('./components/About'), 'about');
 const Experience = lazyWithRetry(() => import('./components/Experience'), 'experience');
@@ -35,7 +36,7 @@ const AppContent = () => {
 
   const [init, setInit] = useState(false);
   const [showSplash, setShowSplash] = useState(
-    () => mode === 'wow' && sessionStorage.getItem('splashShown') !== '1',
+    () => mode === 'wow' && safeSessionStorage.get('splashShown') !== '1',
   );
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const AppContent = () => {
         {showSplash ? (
           <StarsCanvas key="splash" onSplashEnd={() => {
             setShowSplash(false);
-            sessionStorage.setItem('splashShown', '1');
+            safeSessionStorage.set('splashShown', '1');
           }} />
         ) : (
           <AnimatePresence mode="wait" initial={false}>
@@ -82,7 +83,7 @@ const AppContent = () => {
 
 function App() {
   const [lang, setLang] = useState<Lang>(() => {
-    const stored = localStorage.getItem('lang');
+    const stored = safeLocalStorage.get('lang');
     return stored === 'en' ? 'en' : 'pl';
   });
 

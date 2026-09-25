@@ -1,5 +1,6 @@
 import React from 'react';
 import { LangContext, translations } from '../data/i18n';
+import { safeSessionStorage } from '../utils/safeStorage';
 
 type Props = {
   children: React.ReactNode;
@@ -24,9 +25,9 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   handleReload = () => {
-    Object.keys(sessionStorage)
+    safeSessionStorage.keys()
       .filter((key) => key.startsWith('chunk-retry:'))
-      .forEach((key) => sessionStorage.removeItem(key));
+      .forEach((key) => safeSessionStorage.remove(key));
     window.location.reload();
   };
 

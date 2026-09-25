@@ -6,6 +6,7 @@ import { useT, useLang } from '../data/i18n';
 import { useTheme } from '../contexts/useTheme';
 import { useMode } from '../contexts/useMode';
 import { radialViewTransition } from '../utils/viewTransition';
+import { safeLocalStorage } from '../utils/safeStorage';
 
 export type NavbarProps = {
   onSectionHover?: (section: string | null) => void;
@@ -22,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSectionHover, highlightedSection }) =
   const isClassicHome = mode === 'classic' && location.pathname === '/';
 
   React.useEffect(() => {
-    localStorage.setItem('lang', lang);
+    safeLocalStorage.set('lang', lang);
   }, [lang]);
 
   React.useEffect(() => {

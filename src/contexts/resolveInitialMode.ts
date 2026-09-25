@@ -1,4 +1,5 @@
 import { recommendMode, collectModeDetectionSignals, type HomeMode } from '../utils/detectRecommendedMode';
+import { safeLocalStorage } from '../utils/safeStorage';
 
 export const MODE_KEY = 'homeMode';
 export const MODE_SOURCE_KEY = 'homeModeSource';
@@ -10,8 +11,8 @@ export const MODE_SOURCE_KEY = 'homeModeSource';
 export function resolveInitialMode(): { mode: HomeMode; isManual: boolean } {
   if (typeof window === 'undefined') return { mode: 'wow', isManual: false };
 
-  const source = localStorage.getItem(MODE_SOURCE_KEY);
-  const stored = localStorage.getItem(MODE_KEY);
+  const source = safeLocalStorage.get(MODE_SOURCE_KEY);
+  const stored = safeLocalStorage.get(MODE_KEY);
   if (source === 'manual' && (stored === 'wow' || stored === 'classic')) {
     return { mode: stored, isManual: true };
   }

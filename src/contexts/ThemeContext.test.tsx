@@ -16,7 +16,14 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
+
+function blockLocalStorage() {
+  vi.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+    throw new DOMException('The operation is insecure.', 'SecurityError');
+  });
+}
 
 describe('ThemeProvider', () => {
   it('starts from the OS preference when nothing was chosen before', () => {
@@ -53,6 +60,17 @@ describe('ThemeProvider', () => {
     expect(localStorage.getItem('theme')).toBe('dark');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
   });
+
+  it('still toggles when storage is blocked', () => {
+    blockLocalStorage();
+    vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({ matches: true }));
+
+    const { result } = renderHook(() => useTheme(), { wrapper });
+    act(() => result.current.toggleTheme());
+
+    expect(result.current.darkMode).toBe(false);
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+  });
 });
 
 describe('useTheme', () => {
@@ -84,6 +102,12 @@ describe('resolveInitialMode', () => {
   it('ignores a manual flag pointing at an unknown mode', () => {
     localStorage.setItem('homeMode', 'nonsense');
     localStorage.setItem('homeModeSource', 'manual');
+
+    expect(resolveInitialMode().isManual).toBe(false);
+  });
+
+  it('falls back to the recommendation when storage is blocked', () => {
+    blockLocalStorage();
 
     expect(resolveInitialMode().isManual).toBe(false);
   });

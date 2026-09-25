@@ -14,7 +14,10 @@ beforeEach(() => {
   });
 });
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 
 function renderLazy(factory: () => Promise<{ default: () => React.ReactElement }>, key: string) {
   const Lazy = lazyWithRetry(factory, key);
@@ -48,6 +51,19 @@ describe('lazyWithRetry', () => {
 
     // Rendering a rejected lazy component surfaces the error to the boundary;
     // asserting on the factory keeps the failure out of React's error path.
+    await expect(
+      (failing as unknown as { _payload: { _result: () => Promise<unknown> } })._payload._result(),
+    ).rejects.toThrow('stale chunk');
+
+    expect(reload).not.toHaveBeenCalled();
+  });
+
+  it('does not reload when the retry flag cannot be stored', async () => {
+    vi.spyOn(window, 'sessionStorage', 'get').mockImplementation(() => {
+      throw new DOMException('The operation is insecure.', 'SecurityError');
+    });
+    const failing = lazyWithRetry(() => Promise.reject(new Error('stale chunk')), 'page');
+
     await expect(
       (failing as unknown as { _payload: { _result: () => Promise<unknown> } })._payload._result(),
     ).rejects.toThrow('stale chunk');
