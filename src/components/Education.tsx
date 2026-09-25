@@ -8,7 +8,7 @@ import { useT } from '../data/i18n';
 import Reveal from './Reveal';
 
 const schoolLogos: Record<string, string> = {
-  'Gdańsk University of Technology': '/logos/Logo_Gdańsk_University_of_Technology.svg.png',
+  'Gdańsk University of Technology': '/logos/gdansk-university-of-technology.png',
   'The Gdańsk School of Banking': '/logos/no-img.svg',
 };
 
