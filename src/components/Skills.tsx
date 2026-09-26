@@ -4,7 +4,7 @@ import { skills } from '../data/skills';
 import SkillModal from './SkillModal';
 import Reveal from './Reveal';
 import type { SkillItem } from '../data/skills';
-import { useT, useLang } from '../data/i18n';
+import { useT } from '../data/i18n';
 
 const categoryVariants = {
   initial: { opacity: 0, height: 0 },
@@ -16,15 +16,6 @@ const Skills: React.FC = () => {
   const [modalSkill, setModalSkill] = useState<SkillItem | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const t = useT();
-  const { lang } = useLang();
-
-  const getSkillDesc = (slug: string, fallback: string | { pl: string; en: string }) => {
-    if (typeof fallback === 'object' && fallback !== null) {
-      return fallback[lang] || Object.values(fallback)[0];
-    }
-    const descs = t.skills?.descs as Record<string, string> | undefined;
-    return descs?.[slug] || fallback;
-  };
 
   const grouped = Object.entries(
     skills.reduce<Record<string, SkillItem[]>>((acc, skill) => {
@@ -93,7 +84,6 @@ const Skills: React.FC = () => {
                       </div>
                       <div className="skill-info">
                         <strong>{skill.name}</strong>
-                        <p className="skill-desc">{getSkillDesc(skill.slug, skill.description)}</p>
                       </div>
                     </div>
                   </Reveal>

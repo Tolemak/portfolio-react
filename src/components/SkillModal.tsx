@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Modal from './Modal';
-import { useT, useLang } from '../data/i18n';
+import { useT } from '../data/i18n';
 import { experience } from '../data/experience';
 import { projects } from '../data/projects';
 import { education } from '../data/education';
-import { skills } from '../data/skills';
 import type { SkillItem } from '../data/skills';
 
 interface SkillModalProps {
@@ -15,7 +14,6 @@ interface SkillModalProps {
 
 const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
   const t = useT();
-  const { lang } = useLang();
   const [displaySkill, setDisplaySkill] = useState<SkillItem | null>(skill);
 
   useEffect(() => {
@@ -24,26 +22,19 @@ const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
 
   if (!displaySkill) return null;
 
-  const getExperienceWithSkill = (slug: string) =>
-    experience.filter((exp) => exp.skills.includes(slug));
+  const slug = displaySkill.slug;
+  const skillName = displaySkill.name.toLowerCase();
+  const usedInExperience = experience.filter((exp) => exp.skills.includes(slug));
+  const usedInProjects = projects.filter((proj) => proj.skills.includes(slug));
+  const usedInEducation = education.filter((edu) =>
+    edu.subjects.some((s) => s.toLowerCase().includes(skillName))
+  );
+  const isUsed = usedInExperience.length + usedInProjects.length + usedInEducation.length > 0;
 
-  const getProjectsWithSkill = (slug: string) =>
-    projects.filter((proj) => proj.skills.includes(slug));
-
-  const getEducationWithSkill = (slug: string) => {
-    const skillName = skills.find((sk) => sk.slug === slug)?.name.toLowerCase() ?? slug.toLowerCase();
-    return education.filter((edu) =>
-      edu.subjects?.some((s) => s.toLowerCase().includes(skillName)) ?? false
-    );
-  };
-
-  const getSkillDesc = (slug: string, fallback: string | { pl: string; en: string }) => {
-    if (typeof fallback === 'object' && fallback !== null) {
-      return fallback[lang] || Object.values(fallback)[0];
-    }
-    const descs = t.skills?.descs as Record<string, string> | undefined;
-    return descs?.[slug] || fallback;
-  };
+  const tiles = t.experience.tiles as Record<string, { name: string }>;
+  const projectNames = t.projects.names as Record<string, string>;
+  const degrees = t.education.degree as Record<string, string>;
+  const schools = t.about.schools as Record<string, string>;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -57,34 +48,31 @@ const SkillModal: React.FC<SkillModalProps> = ({ skill, isOpen, onClose }) => {
             </span>
           </div>
         </div>
-        <p>{getSkillDesc(displaySkill.slug, displaySkill.description)}</p>
-        <div className="modal-skill-used-in">
-          <strong>{t.skills.usedIn}</strong>
-          <ul>
-            {getExperienceWithSkill(displaySkill.slug).map((exp) => (
-              <li key={exp.slug}>
-                <span style={{ color: exp.color }}>{exp.name}</span>{' '}
-                <span>({exp.company})</span>
-              </li>
-            ))}
-            {getProjectsWithSkill(displaySkill.slug).map((proj) => (
-              <li key={proj.slug}>
-                <span style={{ color: proj.color }}>{proj.name}</span>{' '}
-                <span>(Project)</span>
-              </li>
-            ))}
-            {getEducationWithSkill(displaySkill.slug).map((edu) => (
-              <li key={edu.slug}>
-                <span style={{ color: 'var(--accent)' }}>
-                  {(t.education.degree as Record<string, string>)[edu.degree] || edu.degree}
-                </span>{' '}
-                <span>
-                  ({(t.about.schools as Record<string, string>)[edu.organization] || edu.organization})
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {isUsed && (
+          <div className="modal-skill-used-in">
+            <strong>{t.skills.usedIn}</strong>
+            <ul>
+              {usedInExperience.map((exp) => (
+                <li key={exp.slug}>
+                  <span style={{ color: exp.color }}>{tiles[exp.slug]?.name ?? exp.name}</span>{' '}
+                  <span>({exp.company})</span>
+                </li>
+              ))}
+              {usedInProjects.map((proj) => (
+                <li key={proj.slug}>
+                  <span style={{ color: proj.color }}>{projectNames[proj.name] || proj.name}</span>{' '}
+                  <span>({t.skills.project})</span>
+                </li>
+              ))}
+              {usedInEducation.map((edu) => (
+                <li key={edu.slug}>
+                  <span style={{ color: 'var(--accent)' }}>{degrees[edu.degree] || edu.degree}</span>{' '}
+                  <span>({schools[edu.organization] || edu.organization})</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </Modal>
   );

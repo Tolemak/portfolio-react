@@ -561,12 +561,7 @@ section > h2::after {
 .skill-item:hover .skill-logo-wrap { transform: scale(1.08); }
 .skill-logo { width: 32px; height: 32px; object-fit: contain; }
 .skill-info { text-align: center; }
-.skill-info strong { display: block; font-size: 0.9rem; font-weight: 600; margin: 0 0 0.4rem; }
-.skill-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
+.skill-info strong { display: block; font-size: 0.9rem; font-weight: 600; }
 
 /* Skill tags */
 .skill-tag {

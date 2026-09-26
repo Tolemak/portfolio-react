@@ -21,7 +21,6 @@ export const translations = {
     experience: {
       title: 'Doświadczenie',
       stack: 'Stack:',
-      usedIn: 'Używane w doświadczeniach:',
       current: 'obecnie',
       tiles: {
         'favourite-computer-systems-developer': {
@@ -37,7 +36,8 @@ export const translations = {
     skills: {
       title: 'Umiejętności',
       all: 'Wszystkie',
-      usedIn: 'Używane w doświadczeniach:',
+      usedIn: 'Gdzie używane:',
+      project: 'projekt',
       categories: {
         'pro-lang': 'Języki programowania',
         'framework': 'Frameworki',
@@ -46,28 +46,6 @@ export const translations = {
         'devtools': 'Narzędzia',
         'db': 'Bazy danych',
         'other': 'Inne'
-      },
-      descs: {
-        js: 'Nowoczesny frontend, interaktywność, animacje, dynamiczne UI.',
-        php: 'Backend, API, integracje, przetwarzanie danych.',
-        python: 'Automatyzacja, przetwarzanie danych, skrypty.',
-        html: 'Semantyczne struktury stron, dostępność, SEO.',
-        css: 'Stylowanie, responsywność, animacje, nowoczesne layouty.',
-        symfony: 'Framework PHP do dużych, skalowalnych aplikacji webowych.',
-        twig: 'System szablonów dla PHP, oddzielenie logiki od widoku.',
-        ts: 'Typowany JavaScript, większe bezpieczeństwo i skalowalność kodu.',
-        react: 'Nowoczesne SPA, komponenty, hooki, zarządzanie stanem.',
-        sql: 'Relacyjne bazy danych, zapytania, optymalizacja wydajności.',
-        docker: 'Konteneryzacja aplikacji, CI/CD, izolacja środowisk.',
-        vite: 'Szybki build tool i dev server dla nowoczesnych aplikacji frontendowych.',
-        mongodb: 'Dokumentowa baza NoSQL, elastyczne schematy, skalowalność.',
-        node: 'Backend w JavaScript/TypeScript, REST API, serwery czasu rzeczywistego.',
-        redis: 'Cache, rate limiting, struktury danych jako główny magazyn — nie tylko cache.',
-        doctrine: 'ORM dla PHP — mapowanie encji, relacje, migracje, optymalizacja zapytań.',
-        phpunit: 'Testy jednostkowe i funkcjonalne backendu, testy API, utrzymywanie pokrycia.',
-        'github-actions': 'Pipeline\'y CI/CD — testy, build i automatyczne wdrożenia na własny serwer.',
-        linux: 'Administracja serwerem VPS — Apache, reverse proxy, SSL, zadania cykliczne.',
-        openapi: 'Projektowanie REST API i dokumentowanie ich specyfikacją OpenAPI.'
       }
     },
     projects: {
@@ -212,7 +190,6 @@ export const translations = {
     experience: {
       title: 'Experience',
       stack: 'Stack:',
-      usedIn: 'Used in experience:',
       current: 'present',
       tiles: {
         'favourite-computer-systems-developer': {
@@ -228,7 +205,8 @@ export const translations = {
     skills: {
       title: 'Skills',
       all: 'All',
-      usedIn: 'Used in experience:',
+      usedIn: 'Used in:',
+      project: 'project',
       categories: {
         'pro-lang': 'Programming Languages',
         'framework': 'Frameworks',
@@ -237,28 +215,6 @@ export const translations = {
         'devtools': 'Dev Tools',
         'db': 'Databases',
         'other': 'Other'
-      },
-      descs: {
-        js: 'JavaScript – modern frontend, interactivity, animation, dynamic UI.',
-        php: 'PHP – backend, APIs, integrations, data processing.',
-        python: 'Python – automation, data processing, scripting.',
-        html: 'HTML – semantic page structures, accessibility.',
-        css: 'CSS – styling, responsiveness, animation.',
-        symfony: 'Symfony – PHP framework for large web apps.',
-        twig: 'Twig – templates, macros, data formatting.',
-        ts: 'TypeScript – typed JavaScript, safety, scalability.',
-        react: 'React – modern SPA, components, hooks.',
-        sql: 'SQL – relational databases, queries, optimization.',
-        docker: 'Docker – containerization, DevOps, CI/CD.',
-        vite: 'Vite – fast build tool and dev server for modern frontend apps.',
-        mongodb: 'MongoDB – document-oriented NoSQL database, flexible schemas, scalability.',
-        node: 'Node.js – JavaScript/TypeScript backend, REST APIs, real-time servers.',
-        redis: 'Caching, rate limiting, data structures as the primary store — not just a cache.',
-        doctrine: 'PHP ORM — entity mapping, relations, migrations, query optimization.',
-        phpunit: 'Unit and functional backend tests, API tests, keeping coverage up.',
-        'github-actions': 'CI/CD pipelines — tests, builds, and automated deployments to my own server.',
-        linux: 'VPS administration — Apache, reverse proxy, SSL, scheduled jobs.',
-        openapi: 'Designing REST APIs and documenting them with an OpenAPI specification.'
       }
     },
     projects: {

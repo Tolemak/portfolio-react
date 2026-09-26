@@ -26,7 +26,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/symfony.svg',
     name: 'File Actions',
     period: { from: new Date('2025-04-01') },
-    skills: ['php','symfony','js', 'ts', 'html', 'css'],
+    skills: ['php', 'symfony', 'twig', 'phpunit', 'ts', 'vite', 'html', 'css', 'docker'],
     type: 'Web Application'
   },
   {
@@ -59,7 +59,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/react.svg',
     name: 'Mathema',
     period: { from: new Date('2025-06-01') },
-    skills: ['react', 'vite', 'ts', 'css', 'node'],
+    skills: ['react', 'vite', 'ts', 'css', 'node', 'docker', 'github-actions'],
     type: 'Web Application'
   },
   {
@@ -74,7 +74,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/mongodb.svg',
     name: 'Lecture Backend',
     period: { from: new Date('2025-06-01') },
-    skills: ['php', 'symfony', 'mongodb', 'docker'],
+    skills: ['php', 'symfony', 'mongodb', 'phpunit', 'openapi', 'docker', 'github-actions'],
     type: 'Web Application'
   },
   {
@@ -90,7 +90,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/redis.svg',
     name: 'CryptoPulse',
     period: { from: new Date('2026-09-09') },
-    skills: ['php', 'symfony', 'redis', 'docker', 'react', 'ts', 'vite'],
+    skills: ['php', 'symfony', 'redis', 'phpunit', 'docker', 'github-actions', 'react', 'ts', 'vite'],
     type: 'Web Application'
   },
   {
@@ -106,7 +106,7 @@ export const projects: ProjectItem[] = [
     logo: '/logos/vite.png',
     name: 'Current Portfolio',
     period: { from: new Date('2025-06-01') },
-    skills: ['react', 'vite', 'ts', 'css'],
+    skills: ['react', 'vite', 'ts', 'css', 'github-actions'],
     type: 'Portfolio'
   }
 ];
