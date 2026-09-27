@@ -26,6 +26,20 @@ function blockLocalStorage() {
 }
 
 describe('ThemeProvider', () => {
+  it('takes the theme chosen in the status bar and keeps it', () => {
+    const { result } = renderHook(() => useTheme(), { wrapper });
+    const event = new CustomEvent('tolemak-theme', { detail: { theme: 'dark' }, bubbles: true, cancelable: true });
+
+    act(() => {
+      document.body.dispatchEvent(event);
+    });
+
+    expect(event.defaultPrevented).toBe(true);
+    expect(result.current.darkMode).toBe(true);
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+    expect(localStorage.getItem('theme')).toBe('dark');
+  });
+
   it('starts from the OS preference when nothing was chosen before', () => {
     vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({ matches: true }));
 

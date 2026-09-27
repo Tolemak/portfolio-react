@@ -16,6 +16,7 @@ import { useTheme } from './contexts/useTheme';
 import { useMode } from './contexts/useMode';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { safeLocalStorage, safeSessionStorage } from './utils/safeStorage';
+import StatusBar from './components/StatusBar';
 
 const About = lazyWithRetry(() => import('./components/About'), 'about');
 const Experience = lazyWithRetry(() => import('./components/Experience'), 'experience');
@@ -77,6 +78,7 @@ const AppContent = () => {
         </Suspense>
         </ErrorBoundary>
       </div>
+      <StatusBar />
     </>
   );
 };
@@ -86,6 +88,21 @@ function App() {
     const stored = safeLocalStorage.get('lang');
     return stored === 'en' ? 'en' : 'pl';
   });
+
+  useEffect(() => {
+    safeLocalStorage.set('lang', lang);
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  // The language button lives in the shared status bar, which only announces the choice.
+  useEffect(() => {
+    const onLang = (event: Event) => {
+      const next = (event as CustomEvent<{ lang: string }>).detail.lang;
+      if (next === 'pl' || next === 'en') setLang(next);
+    };
+    document.addEventListener('tolemak-lang', onLang);
+    return () => document.removeEventListener('tolemak-lang', onLang);
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
