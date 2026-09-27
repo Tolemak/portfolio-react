@@ -54,29 +54,24 @@ async function fetchGltfWithDependencies(path: string): Promise<void> {
   await Promise.all([...uris].map((uri) => fetch(base + decodeURIComponent(uri)).catch(() => undefined)));
 }
 
+/** Share of the 3D models (with their buffers and textures) already downloaded, from 0 to 1. */
 function usePreloadModels(paths: string[]) {
-  const [loaded, setLoaded] = useState(false);
+  const [done, setDone] = useState(0);
   useEffect(() => {
-    if (paths.length === 0) {
-      setLoaded(true);
-      return;
-    }
     let isMounted = true;
-    let loadedCount = 0;
     paths.forEach((path) => {
       useGLTF.preload(path);
       fetchGltfWithDependencies(path)
         .catch(() => undefined)
         .then(() => {
-          loadedCount++;
-          if (loadedCount === paths.length && isMounted) setLoaded(true);
+          if (isMounted) setDone((count) => count + 1);
         });
     });
     return () => {
       isMounted = false;
     };
   }, [paths]);
-  return loaded;
+  return paths.length === 0 ? 1 : done / paths.length;
 }
 
 const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
@@ -87,51 +82,29 @@ const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
     return quotes[Math.floor(Math.random() * quotes.length)];
   });
   const [fadeOut, setFadeOut] = useState(false);
-  const modelsLoaded = usePreloadModels(MODEL_PATHS);
-  const minDuration = 5000;
-  const fakeMax = 90;
+  const loaded = usePreloadModels(MODEL_PATHS);
 
+  // The counter eases towards the real download share instead of running on a fixed timer.
   useEffect(() => {
     let frame: number;
-    let start: number | null = null;
-    function animate(ts: number) {
-      if (start === null) start = ts;
-      const elapsed = ts - start;
-      if (elapsed < minDuration) {
-        const value = (elapsed / minDuration) * fakeMax;
-        setProgress(value);
-        frame = requestAnimationFrame(animate);
-      } else {
-        setProgress(fakeMax);
-      }
+    const target = loaded * 100;
+    function animate() {
+      setProgress((value) => {
+        const next = value + Math.max(0.4, (target - value) * 0.08);
+        return Math.min(target, next);
+      });
+      frame = requestAnimationFrame(animate);
     }
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [loaded]);
 
   useEffect(() => {
-    let frame: number;
-    if (progress >= fakeMax && !modelsLoaded) {
-      let value = fakeMax;
-      function animate() {
-        value += 0.5;
-        setProgress(Math.min(100, value));
-        if (value < 100 && !modelsLoaded) {
-          frame = requestAnimationFrame(animate);
-        }
-      }
-      frame = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [progress, modelsLoaded]);
-
-  useEffect(() => {
-    if (progress >= fakeMax && modelsLoaded) {
-      setProgress(100);
+    if (progress >= 100) {
       const timer = setTimeout(() => setFadeOut(true), 400);
       return () => clearTimeout(timer);
     }
-  }, [progress, modelsLoaded]);
+  }, [progress]);
 
   useEffect(() => {
     if (fadeOut) {
@@ -181,6 +154,9 @@ const StarSplash: React.FC<{ onFadeOut: () => void }> = ({ onFadeOut }) => {
           textAlign: 'center',
           maxWidth: 320,
         }}>{quote}</span>
+        <button type="button" className="splash-skip" onClick={() => setFadeOut(true)}>
+          {t.app.skipSplash}
+        </button>
       </div>
     </div>
   );
