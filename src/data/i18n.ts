@@ -105,8 +105,20 @@ export const translations = {
       projects: 'Projekty',
       education: 'Edukacja',
       skills: 'Umiejętności',
-      switchToWow: 'Włącz tryb WOW',
-      switchToClassic: 'Włącz tryb Classic'
+      switchToWow: 'Włącz tryb 3D',
+      switchToClassic: 'Włącz tryb klasyczny',
+      role: 'Backend PHP/Symfony',
+      route: 'Trasa lotu',
+      modeLabel: 'Tryb strony',
+      classicShort: 'Klasyczny',
+      menu: 'Menu'
+    },
+    bar: {
+      mode: 'tryb',
+      wow: '3D',
+      classic: 'klasyczny',
+      stop: 'przystanek',
+      section: 'sekcja'
     },
     wow: {
       hint: 'Przewiń, by lecieć przez stację. Strzałki i kropki też działają.',
@@ -114,6 +126,7 @@ export const translations = {
       prev: 'Poprzedni przystanek',
       next: 'Następny przystanek',
       jumpTo: 'Przejdź do sekcji',
+      planetHint: 'Wokół satelity krążą moje projekty. Kliknij planetę, żeby zobaczyć szczegóły.',
       teasers: {
         about: 'Poznaj mnie — kim jestem i czym się zajmuję.',
         skills: 'Technologie, z którymi pracuję na co dzień.',
@@ -131,6 +144,7 @@ export const translations = {
     },
     app: {
       skipLink: 'Przejdź do treści',
+      skipSplash: 'Pomiń',
       loading: 'Ładowanie...',
       splashQuotes: [
         'To nie są ćwiczenia, to jest wojna!',
@@ -274,8 +288,20 @@ export const translations = {
       projects: 'Projects',
       education: 'Education',
       skills: 'Skills',
-      switchToWow: 'Switch to WOW mode',
-      switchToClassic: 'Switch to Classic mode'
+      switchToWow: 'Switch to 3D mode',
+      switchToClassic: 'Switch to classic mode',
+      role: 'Backend PHP/Symfony',
+      route: 'Flight route',
+      modeLabel: 'Site mode',
+      classicShort: 'Classic',
+      menu: 'Menu'
+    },
+    bar: {
+      mode: 'mode',
+      wow: '3D',
+      classic: 'classic',
+      stop: 'stop',
+      section: 'section'
     },
     wow: {
       hint: 'Scroll to fly through the station. Arrow keys and dots work too.',
@@ -283,6 +309,7 @@ export const translations = {
       prev: 'Previous stop',
       next: 'Next stop',
       jumpTo: 'Jump to section',
+      planetHint: 'My projects orbit the satellite. Click a planet to see the details.',
       teasers: {
         about: 'Get to know me — who I am and what I do.',
         skills: 'The technologies I work with day to day.',
@@ -300,6 +327,7 @@ export const translations = {
     },
     app: {
       skipLink: 'Skip to content',
+      skipSplash: 'Skip',
       loading: 'Loading...',
       splashQuotes: [
         "This isn't a drill, this is war!",

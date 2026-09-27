@@ -49,6 +49,15 @@ body {
   --radius: 12px;
   --radius-lg: 16px;
   --nav-h: 68px;
+  --hud-bg: rgba(248, 250, 252, 0.82);
+  --hud-node-bg: #f8fafc;
+  --hud-line: rgba(79, 70, 229, 0.32);
+  --hud-glow: #4f46e5;
+  --tb-bg: #ffffff;
+  --tb-fg: var(--text);
+  --tb-muted: var(--text-muted);
+  --tb-line: var(--border-strong);
+  --tb-accent: var(--hud-glow);
 }
 
 [data-theme='dark'] {
@@ -67,6 +76,11 @@ body {
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
   --shadow: 0 4px 16px rgba(0,0,0,0.25);
   --shadow-lg: 0 10px 40px rgba(0,0,0,0.4);
+  --hud-bg: rgba(5, 8, 22, 0.72);
+  --hud-node-bg: #070a18;
+  --hud-line: rgba(125, 211, 252, 0.28);
+  --hud-glow: #7dd3fc;
+  --tb-bg: #070a18;
 }
 
 /* Scrollbar */
@@ -122,177 +136,335 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* ===== NAVBAR ===== */
-.navbar-container {
+/* ===== NAVBAR: the ship's HUD with the flight route ===== */
+.hud {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: var(--nav-h);
   z-index: 500;
-  background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 0 clamp(1rem, 3vw, 2.25rem);
+  background: var(--hud-bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
-.navbar-logo {
-  display: flex;
+/* A hairline that brightens in the middle, like the edge of a cockpit display. */
+.hud::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hud-line) 22%, var(--hud-glow) 50%, var(--hud-line) 78%, transparent);
+  opacity: 0.8;
+}
+
+.hud-id {
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
+  gap: 0.7rem;
+  justify-self: start;
+  min-width: 0;
   color: var(--text);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-  flex-shrink: 0;
+  text-decoration: none;
 }
-.navbar-logo:hover { color: var(--accent); }
 
-.navbar-list {
+.hud-mark {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  overflow: visible;
+}
+
+.hud-mark-orbit {
+  fill: none;
+  stroke: var(--hud-line);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+
+.hud-mark-planet {
+  fill: var(--hud-glow);
+  filter: drop-shadow(0 0 4px var(--hud-glow));
+}
+
+.hud-mark-satellite {
+  fill: var(--text);
+  transform-origin: 16px 16px;
+  animation: hud-orbit 14s linear infinite;
+}
+
+@keyframes hud-orbit {
+  to { transform: rotate(360deg); }
+}
+
+.hud-id-text {
   display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.hud-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.hud-role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hud-id:hover .hud-name {
+  color: var(--hud-glow);
+}
+
+/* The route: labels above, nodes on one line below them. */
+.hud-route ol,
+.hud-menu ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.navbar-item { list-style: none; position: relative; }
-
-.navbar-pill {
-  position: absolute;
-  inset: 0;
-  background: var(--accent-light);
-  border-radius: var(--radius-sm);
-  z-index: 0;
+.hud-route ol {
+  display: flex;
+  align-items: stretch;
 }
 
-.navbar-item a {
+.hud-stop {
+  position: relative;
+}
+
+.hud-route .hud-stop a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 0.35rem clamp(0.55rem, 1.3vw, 1.05rem) 0.2rem;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.hud-route .hud-stop::before,
+.hud-route .hud-stop::after {
+  content: '';
+  position: absolute;
+  bottom: calc(0.2rem + 3.5px);
+  width: 50%;
+  height: 1px;
+  background: var(--hud-line);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.hud-route .hud-stop::before { left: 0; }
+.hud-route .hud-stop::after { right: 0; }
+.hud-route .hud-stop:first-child::before,
+.hud-route .hud-stop:last-child::after { display: none; }
+
+/* The part of the route already flown lights up. */
+.hud-route .hud-stop.is-passed::before,
+.hud-route .hud-stop.is-passed::after,
+.hud-route .hud-stop.is-current::before {
+  background: var(--hud-glow);
+  box-shadow: 0 0 6px var(--hud-glow);
+}
+
+.hud-node {
   position: relative;
   z-index: 1;
-  display: block;
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: color 0.15s, background 0.15s;
-  white-space: nowrap;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--hud-line);
+  border-radius: 50%;
+  background: var(--hud-node-bg);
+  transition: transform 0.25s, background 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
-.navbar-item a:hover {
+
+.hud-stop.is-passed .hud-node {
+  border-color: var(--hud-glow);
+}
+
+.hud-stop.is-current .hud-node {
+  background: var(--hud-glow);
+  border-color: var(--hud-glow);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--hud-glow) 22%, transparent), 0 0 12px var(--hud-glow);
+  transform: scale(1.15);
+}
+
+.hud-stop.is-current .hud-label {
   color: var(--text);
-  background: var(--accent-light);
-}
-.navbar-item.highlighted a,
-.navbar-item.active a {
-  color: var(--accent);
   font-weight: 600;
 }
 
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
+.hud-route .hud-stop a:hover,
+.hud-route .hud-stop.is-hovered a {
+  color: var(--text);
 }
 
-.navbar-btn {
+.hud-route .hud-stop a:hover .hud-node,
+.hud-route .hud-stop.is-hovered .hud-node {
+  border-color: var(--hud-glow);
+  transform: scale(1.3);
+}
+
+.hud-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.hud-mode {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--hud-line);
+  border-radius: 999px;
+}
+
+.hud-mode button {
+  padding: 0.3rem 0.75rem;
+  border: 0;
+  border-radius: 999px;
   background: transparent;
   color: var(--text-muted);
+  font: 600 0.74rem 'Plus Jakarta Sans', system-ui, sans-serif;
+  letter-spacing: 0.03em;
   cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  transition: all 0.15s;
-}
-.navbar-btn:hover {
-  color: var(--text);
-  background: var(--accent-light);
-  border-color: var(--accent);
+  transition: background 0.2s, color 0.2s;
 }
 
-.navbar-hamburger {
+.hud-mode button[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--hud-glow) 18%, transparent);
+  color: var(--text);
+  cursor: default;
+}
+
+.hud-mode button[aria-pressed='false']:hover {
+  color: var(--text);
+}
+
+.hud-menu-btn {
   display: none;
   flex-direction: column;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  align-items: center;
   justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--hud-line);
+  border-radius: 50%;
   background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
   cursor: pointer;
-  flex-shrink: 0;
-}
-.navbar-hamburger span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--text-muted);
-  border-radius: 2px;
-  transition: all 0.2s;
 }
 
-.navbar-mobile-menu {
+.hud-menu-btn span {
+  display: block;
+  height: 1.5px;
+  background: var(--text);
+  transition: transform 0.25s;
+}
+
+.hud-menu-btn[aria-expanded='true'] span:first-child { transform: translateY(3.75px) rotate(45deg); }
+.hud-menu-btn[aria-expanded='true'] span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+
+.hud :focus-visible,
+.hud-menu :focus-visible {
+  outline: 2px solid var(--hud-glow);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* On phones the route drops down as a vertical line of stops. */
+.hud-menu {
   position: fixed;
   top: var(--nav-h);
   left: 0;
   right: 0;
-  background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem;
   z-index: 499;
-  animation: fadeIn 0.15s;
-  display: none;
+  padding: 1.25rem clamp(1rem, 5vw, 2rem) 1.5rem;
+  background: var(--hud-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hud-line);
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
 }
-.navbar-mobile-menu.open { display: block; }
 
-.navbar-mobile-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.hud-menu.open {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 0 0 100vmax rgba(2, 4, 12, 0.45);
 }
-.navbar-mobile-menu li a {
-  display: block;
-  padding: 0.7rem 1rem;
-  border-radius: var(--radius-sm);
+
+.hud-menu .hud-stop a {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
   color: var(--text-muted);
-  text-decoration: none;
+  font-size: 1.05rem;
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.15s;
+  text-decoration: none;
 }
-.navbar-mobile-menu li a:hover,
-.navbar-mobile-menu li.active a {
-  color: var(--accent);
-  background: var(--accent-light);
+
+.hud-menu .hud-stop::before {
+  content: '';
+  position: absolute;
+  left: 3.5px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--hud-line);
 }
-.navbar-mobile-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
+
+.hud-menu .hud-stop:first-child::before { top: 50%; }
+.hud-menu .hud-stop:last-child::before { bottom: 50%; }
+.hud-menu .hud-stop.is-passed::before { background: var(--hud-glow); }
+
+@media (max-width: 1060px) {
+  .hud {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .hud-route { display: none; }
+  .hud-menu-btn { display: flex; }
+}
+
+@media (min-width: 1061px) {
+  .hud-menu { display: none; }
+}
+
+@media (max-width: 420px) {
+  .hud-name { font-size: 0.8rem; letter-spacing: 0.03em; }
+  .hud-mode button { padding: 0.3rem 0.55rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-mark-satellite { animation: none; }
 }
 
 /* ===== MAIN ===== */
@@ -890,7 +1062,7 @@ section > h2::after {
 
 .wow-hint {
   position: absolute;
-  bottom: 5%;
+  bottom: max(5%, 44px);
   left: 50%;
   transform: translateX(-50%);
   color: var(--text);
@@ -901,18 +1073,27 @@ section > h2::after {
   pointer-events: none;
   border: 1px solid var(--border);
   opacity: 0.85;
-  white-space: nowrap;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  text-align: center;
+  text-wrap: balance;
 }
 
 .wow-controls {
   position: absolute;
-  bottom: calc(5% + 48px);
+  bottom: calc(max(5%, 44px) + 48px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 0.75rem;
   z-index: 20;
+  padding: 5px;
+  border: 1px solid var(--hud-line);
+  border-radius: 999px;
+  background: var(--hud-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 .wow-nav-btn {
   display: flex;
@@ -921,10 +1102,8 @@ section > h2::after {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text);
   font-size: 1.2rem;
   line-height: 1;
@@ -932,9 +1111,9 @@ section > h2::after {
   transition: all 0.15s;
 }
 .wow-nav-btn:hover:not(:disabled) {
-  color: #fff;
-  background: var(--accent);
-  border-color: var(--accent);
+  color: var(--hud-node-bg);
+  background: var(--hud-glow);
+  border-color: var(--hud-glow);
 }
 .wow-nav-btn:disabled {
   opacity: 0.35;
@@ -949,15 +1128,19 @@ section > h2::after {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid var(--border-strong);
+  border: 1px solid color-mix(in srgb, var(--text) 45%, transparent);
   background: transparent;
   padding: 0;
   cursor: pointer;
   transition: all 0.15s;
 }
+.wow-dot:hover:not(.active) {
+  border-color: var(--hud-glow);
+}
 .wow-dot.active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--hud-glow);
+  border-color: var(--hud-glow);
+  box-shadow: 0 0 8px var(--hud-glow);
   transform: scale(1.3);
 }
 
@@ -1070,10 +1253,6 @@ section > h2::after {
 @media (max-width: 600px) {
   :root { --nav-h: 60px; }
 
-  .navbar-container { padding: 0 1rem; }
-  .navbar-list { display: none; }
-  .navbar-hamburger { display: flex; }
-
   main {
     padding-top: calc(var(--nav-h) + 1.5rem);
     padding-bottom: 3rem;
@@ -1108,3 +1287,156 @@ h1, h2, h3 { font-weight: 700; }
   -webkit-backdrop-filter: blur(16px);
 }
 .navbar { display: none; }
+
+/* Projects as planets around the satellite of the projects stop. */
+.wow-panel p.wow-panel-hint {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+[data-theme='dark'] .wow-panel p.wow-panel-hint {
+  color: var(--hud-glow);
+}
+
+.planet-label {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--planet-color);
+  border-radius: 999px;
+  background: rgba(5, 6, 20, 0.72);
+  color: #fff;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--planet-color) 60%, transparent);
+}
+
+.planet-panel {
+  position: relative;
+  border-top: 3px solid var(--planet-color);
+}
+
+.planet-panel-type {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.planet-panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.planet-panel-links a {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--planet-color);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.planet-panel-links a:hover {
+  background: color-mix(in srgb, var(--planet-color) 22%, transparent);
+}
+
+.planet-panel-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.splash-skip {
+  margin-top: 2rem;
+  padding: 0.45rem 1.4rem;
+  border: 1px solid rgba(179, 229, 252, 0.5);
+  border-radius: 999px;
+  background: transparent;
+  color: #b3e5fc;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.splash-skip:hover {
+  background: rgba(179, 229, 252, 0.12);
+}
+
+.projects-dock {
+  position: absolute;
+  top: 50%;
+  right: clamp(12px, 4vw, 48px);
+  z-index: 25;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 720px) {
+  .projects-dock {
+    top: auto;
+    bottom: calc(max(5%, 44px) + 128px);
+    left: 16px;
+    right: 16px;
+    transform: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* On a phone the panel stays short so the planets above it remain in view. */
+  .projects-dock .wow-panel {
+    width: min(100%, 420px);
+    padding: 1rem 1.25rem;
+    gap: 0.6rem;
+  }
+
+  .projects-dock .wow-panel-teaser {
+    display: none;
+  }
+
+  .projects-dock .wow-panel p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .projects-dock .wow-enter-btn {
+    padding: 0.45rem 1.25rem;
+  }
+
+  /* The hint wraps to two lines here, so the controls move up to clear it. */
+  .wow-controls {
+    bottom: calc(max(5%, 44px) + 64px);
+  }
+
+  .wow-hint {
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+  }
+}
+
+/* Phones: the HUD already shows the mode, so the bar keeps room for the stop. */
+@media (max-width: 560px) {
+  tolemak-bar::part(app),
+  tolemak-field.bar-mode {
+    display: none;
+  }
+}
+
+/* In the dark scene the call to action takes the HUD colour. */
+[data-theme='dark'] .wow-enter-btn {
+  background: var(--hud-glow);
+  color: #04111f;
+}
+
+[data-theme='dark'] .wow-enter-btn:hover {
+  background: #bae6fd;
+}
