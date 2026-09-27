@@ -21,6 +21,8 @@ export interface SpaceObjectConfig {
   cameraPosition: readonly [number, number, number];
   /** Camera look-at target when settled; defaults to `position` if omitted. */
   cameraLookAt?: readonly [number, number, number];
+  /** Look-at target on tall portrait screens, where a panel beside the subject would not fit. */
+  cameraLookAtPortrait?: readonly [number, number, number];
 }
 
 export const SPACE_OBJECTS: readonly SpaceObjectConfig[] = [
@@ -42,7 +44,12 @@ export const SPACE_OBJECTS: readonly SpaceObjectConfig[] = [
     position: [-20, -80, 50],
     scale: METEOR_SCALE,
     rotation: [0, Math.PI / 5, 0],
-    cameraPosition: [-45, -110, 90],
+    // The camera turns its back on the station and looks out into open space, where the projects orbit as planets.
+    cameraPosition: [25, -56, 51],
+    // Aimed a little right of and below the planetary system, leaving room for the side panel and the controls.
+    cameraLookAt: [-36, -131, 69],
+    // On a phone the panel sits below, so the system is centred and lifted into the upper half.
+    cameraLookAtPortrait: [-31, -140, 79],
   },
   {
     key: 'experience',

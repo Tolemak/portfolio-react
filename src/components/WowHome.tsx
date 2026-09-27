@@ -9,11 +9,16 @@ import MeteorModel from './models/MeteorModel';
 import SatelliteModel from './models/SatelliteModel';
 import SpacemanModel from './models/SpacemanModel';
 import SputnikModel from './models/SputnikModel';
+import ProjectPlanets from './planets/ProjectPlanets';
+import ProjectsDock from './planets/ProjectsDock';
+import { PLANET_SYSTEM_CENTER } from '../data/projectPlanets';
 import { StarBackground } from './StarCanvas';
 import Navbar from './Navbar';
 import { useT } from '../data/i18n';
 import { useTheme } from '../contexts/useTheme';
 import { spaceObjectsInFlightOrder, getSectionPath, maxHitboxRadius, type SectionKey } from '../data/spaceObjects';
+import { setWowStage } from '../utils/wowStage';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const WARP_DURATION_MS = 380;
 const INTRO_DURATION_MS = 2600;
@@ -30,6 +35,7 @@ const MODEL_COMPONENTS: Record<SectionKey, React.ComponentType<Record<string, un
 };
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -48,6 +54,7 @@ interface FlightRigProps {
   curve: CatmullRomCurve3;
   lookAts: Vector3[];
   frozen: boolean;
+  fov: number;
   onStageChange: (stage: number) => void;
   onActiveChange: (stage: number | null) => void;
 }
@@ -58,6 +65,7 @@ const FlightRig: React.FC<FlightRigProps> = ({
   curve,
   lookAts,
   frozen,
+  fov,
   onStageChange,
   onActiveChange,
 }) => {
@@ -114,7 +122,7 @@ const FlightRig: React.FC<FlightRigProps> = ({
     }
   });
 
-  return <PerspectiveCamera ref={camRef} makeDefault position={[0, 0, 10]} fov={40} />;
+  return <PerspectiveCamera ref={camRef} makeDefault position={[0, 0, 10]} fov={fov} />;
 };
 
 const WowHome = () => {
@@ -122,12 +130,20 @@ const WowHome = () => {
   const [warpTo, setWarpTo] = useState<string | null>(null);
   const [currentStage, setCurrentStage] = useState(0);
   const [activeStage, setActiveStage] = useState<number | null>(null);
+  const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const t = useT();
   const { darkMode } = useTheme();
 
   const ordered = useMemo(() => spaceObjectsInFlightOrder(), []);
+  const projectsStop = ordered.find((o) => o.key === 'projects');
+  const atProjects = activeStage !== null && ordered[activeStage]?.key === 'projects';
+
+  // Leaving the projects stop closes any open project.
+  useEffect(() => {
+    if (!atProjects) setSelectedPlanet(null);
+  }, [atProjects]);
   const targetRef = useRef(0);
   const progressRef = useRef(0);
 
@@ -141,10 +157,21 @@ const WowHome = () => {
       ),
     [ordered],
   );
+  const portrait = useMediaQuery('(max-aspect-ratio: 4/5)');
   const lookAts = useMemo(
-    () => ordered.map((o) => new Vector3(...(o.cameraLookAt ?? o.position))),
-    [ordered],
+    () =>
+      ordered.map(
+        (o) => new Vector3(...((portrait && o.cameraLookAtPortrait) || o.cameraLookAt || o.position)),
+      ),
+    [ordered, portrait],
   );
+
+  useEffect(() => {
+    const stop = ordered[currentStage];
+    if (stop) setWowStage({ key: stop.key, index: currentStage, total: ordered.length });
+  }, [currentStage, ordered]);
+
+  useEffect(() => () => setWowStage(null), []);
 
   const handleSelect = (path: string) => {
     if (warpTo) return;
@@ -157,7 +184,11 @@ const WowHome = () => {
     return () => clearTimeout(timer);
   }, [warpTo, navigate]);
 
+  // The hint only teaches the first move; it leaves once the visitor starts flying.
+  const [flown, setFlown] = useState(false);
+
   const stepTo = (stage: number) => {
+    setFlown(true);
     targetRef.current = clamp(stage, 0, ordered.length - 1);
   };
   const step = (delta: number) => stepTo(Math.round(targetRef.current) + delta);
@@ -188,6 +219,7 @@ const WowHome = () => {
     const handler = (e: WheelEvent) => {
       if (warpTo) return;
       e.preventDefault();
+      setFlown(true);
       targetRef.current = clamp(targetRef.current + e.deltaY * WHEEL_SENSITIVITY, 0, ordered.length - 1);
     };
     el.addEventListener('wheel', handler, { passive: false });
@@ -203,6 +235,7 @@ const WowHome = () => {
     const y = e.touches[0]?.clientY ?? touchStartY.current;
     const delta = touchStartY.current - y;
     touchStartY.current = y;
+    setFlown(true);
     targetRef.current = clamp(targetRef.current + delta * TOUCH_SENSITIVITY, 0, ordered.length - 1);
   };
   const onTouchEnd = () => {
@@ -279,6 +312,8 @@ const WowHome = () => {
               curve={curve}
               lookAts={lookAts}
               frozen={!!warpTo}
+              // A phone held upright sees a narrow slice at the desktop angle, so it gets a wider lens.
+              fov={portrait ? 54 : 40}
               onStageChange={setCurrentStage}
               onActiveChange={setActiveStage}
             />
@@ -300,9 +335,23 @@ const WowHome = () => {
               );
             })}
 
+            {projectsStop && (
+              <ProjectPlanets
+                center={PLANET_SYSTEM_CENTER}
+                viewer={projectsStop.cameraPosition}
+                selected={selectedPlanet}
+                onSelect={setSelectedPlanet}
+              />
+            )}
+
             <AnimatePresence>
-              {activeStage !== null && (
-                <Html key={ordered[activeStage].key} position={lookAts[activeStage].toArray()} center occlude={false}>
+              {activeStage !== null && !atProjects && (
+                <Html
+                  key={ordered[activeStage].key}
+                  position={lookAts[activeStage].toArray()}
+                  center
+                  occlude={false}
+                >
                   <motion.div
                     className="wow-panel glass fancy-card"
                     initial={{ opacity: 0, y: 10, scale: 0.96 }}
@@ -324,7 +373,27 @@ const WowHome = () => {
             </AnimatePresence>
           </Canvas>
 
-          <div className="wow-hint glass">🖱️ {hint}</div>
+          {atProjects && (
+            <ProjectsDock
+              selected={selectedPlanet}
+              onClose={() => setSelectedPlanet(null)}
+              onEnter={() => handleSelect(getSectionPath('projects'))}
+            />
+          )}
+
+          <AnimatePresence>
+            {!flown && (
+              <motion.div
+                className="wow-hint glass"
+                initial={{ opacity: 0, y: 6, x: '-50%' }}
+                animate={{ opacity: 0.9, y: 0, x: '-50%' }}
+                exit={{ opacity: 0, y: 6, x: '-50%' }}
+                transition={{ duration: 0.4 }}
+              >
+                {hint}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="wow-controls">
             <button
