@@ -94,6 +94,22 @@ export const projects: ProjectItem[] = [
     type: 'Web Application'
   },
   {
+    slug: 'faultline',
+    color: '#1b6f63',
+    description:
+      'A self-hosted error tracker that speaks the Sentry protocol, so apps report to it with the official Sentry SDKs and a DSN. Events are grouped into issues with regression detection, ingestion runs asynchronously on Symfony Messenger, and throttled notifications go to Telegram. Symfony 8 with PostgreSQL, a Twig/Turbo UI in PL/EN, near-full test coverage, Dockerized and deployed by GitHub Actions; the demo is read-only with synthetic data.',
+    shortDescription: 'Self-hosted error tracker speaking the Sentry protocol — Symfony, PostgreSQL, Messenger.',
+    links: [
+      { to: 'https://faultline-demo.tolemak.pl/demo', label: 'Live Demo' },
+      { to: 'https://github.com/Tolemak/faultline', label: 'GitHub' }
+    ],
+    logo: '/logos/symfony.svg',
+    name: 'Faultline',
+    period: { from: new Date('2026-09-27') },
+    skills: ['php', 'symfony', 'doctrine', 'sql', 'twig', 'phpunit', 'docker', 'github-actions'],
+    type: 'Web Application'
+  },
+  {
     slug: 'current-portfolio',
     color: '#6A0DAD',
     description:

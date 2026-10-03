@@ -47,9 +47,9 @@ export const SPACE_OBJECTS: readonly SpaceObjectConfig[] = [
     // The camera turns its back on the station and looks out into open space, where the projects orbit as planets.
     cameraPosition: [25, -56, 51],
     // Aimed a little right of and below the planetary system, leaving room for the side panel and the controls.
-    cameraLookAt: [-36, -131, 69],
+    cameraLookAt: [-43, -139, 72],
     // On a phone the panel sits below, so the system is centred and lifted into the upper half.
-    cameraLookAtPortrait: [-31, -140, 79],
+    cameraLookAtPortrait: [-38, -155.5, 82],
   },
   {
     key: 'experience',

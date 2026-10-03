@@ -143,13 +143,15 @@ export interface ProjectPlanetsProps {
   center: readonly [number, number, number];
   /** Where the camera stands at the projects stop; the orbits turn towards it. */
   viewer: readonly [number, number, number];
+  /** Shrinks the whole system, so it fits between the station, the panel and the controls. */
+  scale?: number;
   /** Slug of the project open in the side panel; the system holds still while one is open. */
   selected: string | null;
   onSelect: (slug: string | null) => void;
 }
 
 /** The projects as a small planetary system around a star, out in open space past the satellite. */
-export default function ProjectPlanets({ center, viewer, selected, onSelect }: ProjectPlanetsProps) {
+export default function ProjectPlanets({ center, viewer, scale = 1, selected, onSelect }: ProjectPlanetsProps) {
   const pairs = useMemo(planetsWithProjects, []);
   const orientation = useMemo(() => orbitOrientation(center, viewer), [center, viewer]);
   const elapsed = useRef(0);
@@ -162,7 +164,7 @@ export default function ProjectPlanets({ center, viewer, selected, onSelect }: P
   });
 
   return (
-    <group position={center as [number, number, number]} quaternion={orientation}>
+    <group position={center as [number, number, number]} quaternion={orientation} scale={scale}>
       <Star />
       {pairs.map(({ planet, project }) => (
         <OrbitLine key={`orbit-${planet.slug}`} radius={planet.orbit} color={project.color} />

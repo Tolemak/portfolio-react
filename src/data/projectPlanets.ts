@@ -3,12 +3,12 @@ import { projects } from './projects';
 /**
  * How a project looks as a planet in the WOW scene. Each surface borrows the identity of the app
  * itself: the squared notebook of Mathema, CryptoPulse's LED rate board, the cutting mat of
- * File Actions, the layers of the Lecture API.
+ * File Actions, the layers of the Lecture API, the seismograph paper of Faultline.
  */
 /** Middle of the planetary system, out past the projects satellite, away from the station. */
-export const PLANET_SYSTEM_CENTER: readonly [number, number, number] = [-31, -126, 79];
+export const PLANET_SYSTEM_CENTER: readonly [number, number, number] = [-38, -134, 82];
 
-export type PlanetSurface = 'notebook' | 'led' | 'mat' | 'strata' | 'craters' | 'nebula';
+export type PlanetSurface = 'notebook' | 'led' | 'mat' | 'strata' | 'craters' | 'nebula' | 'seismograph';
 
 export interface ProjectPlanet {
   slug: string;
@@ -25,12 +25,13 @@ export interface ProjectPlanet {
 }
 
 export const PROJECT_PLANETS: readonly ProjectPlanet[] = [
-  { slug: 'mathema', surface: 'notebook', radius: 1.5, orbit: 6, phase: 0.4, speed: 0.16 },
-  { slug: 'crypto-pulse', surface: 'led', radius: 1.85, orbit: 9.8, phase: 2.2, speed: 0.12 },
-  { slug: 'file-actions', surface: 'mat', radius: 1.6, orbit: 13.6, phase: 4.1, speed: 0.095 },
-  { slug: 'lecture-backend', surface: 'strata', radius: 2.05, orbit: 17.6, phase: 1.3, speed: -0.075 },
-  { slug: 'current-portfolio', surface: 'nebula', radius: 1.35, orbit: 22.6, phase: 5.2, speed: 0.06, ring: true },
-  { slug: 'old-portfolio', surface: 'craters', radius: 1.25, orbit: 26.8, phase: 3.3, speed: -0.05 },
+  { slug: 'mathema', surface: 'notebook', radius: 1.15, orbit: 5.4, phase: 0.4, speed: 0.16 },
+  { slug: 'crypto-pulse', surface: 'led', radius: 1.4, orbit: 8.15, phase: 2.2, speed: 0.12 },
+  { slug: 'file-actions', surface: 'mat', radius: 1.2, orbit: 11, phase: 4.1, speed: 0.095 },
+  { slug: 'lecture-backend', surface: 'strata', radius: 1.55, orbit: 14, phase: 1.3, speed: -0.075 },
+  { slug: 'faultline', surface: 'seismograph', radius: 1.3, orbit: 17.1, phase: 3.9, speed: 0.065 },
+  { slug: 'current-portfolio', surface: 'nebula', radius: 1, orbit: 20.75, phase: 5.2, speed: 0.05, ring: true },
+  { slug: 'old-portfolio', surface: 'craters', radius: 0.95, orbit: 24, phase: 0.6, speed: -0.042 },
 ];
 
 /** Outer edge of a planet, its ring included. */

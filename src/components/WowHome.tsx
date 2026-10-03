@@ -339,6 +339,7 @@ const WowHome = () => {
               <ProjectPlanets
                 center={PLANET_SYSTEM_CENTER}
                 viewer={projectsStop.cameraPosition}
+                scale={portrait ? 0.82 : 0.92}
                 selected={selectedPlanet}
                 onSelect={setSelectedPlanet}
               />

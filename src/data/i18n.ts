@@ -61,6 +61,7 @@ export const translations = {
         'Mathema': 'Mathema',
         'Lecture Backend': 'Lecture Backend',
         'CryptoPulse': 'CryptoPulse',
+        'Faultline': 'Faultline',
         'Current Portfolio': 'Aktualne Portfolio'
       },
       tiles: {
@@ -83,6 +84,10 @@ export const translations = {
         'Lecture Backend': {
           short: 'REST API do zarządzania wykładami — Symfony, MongoDB, architektura warstwowa.',
           desc: 'REST API do zarządzania wykładami i zapisami studentów, zbudowane w Symfony z bazą MongoDB. Architektura warstwowa z wyraźnym rozdzieleniem logiki domenowej, persystencji i warstwy API, pokryta testami i udokumentowana specyfikacją OpenAPI.'
+        },
+        'Faultline': {
+          short: 'Własny tracker błędów zgodny z protokołem Sentry — Symfony, PostgreSQL, Messenger.',
+          desc: 'Samodzielnie hostowany tracker błędów zgodny z protokołem Sentry: aplikacje wysyłają do niego zdarzenia oficjalnymi SDK Sentry przez DSN. Zdarzenia są grupowane w zgłoszenia z wykrywaniem regresji, przyjmowanie działa asynchronicznie na Symfony Messenger, a powiadomienia z ograniczaniem częstotliwości trafiają na Telegram. Symfony 8 z PostgreSQL, interfejs Twig/Turbo po polsku i angielsku, niemal pełne pokrycie testami, Docker i wdrożenie przez GitHub Actions; demo działa tylko do odczytu na syntetycznych danych.'
         },
         'Current Portfolio': {
           short: 'Portfolio, które właśnie przeglądasz — React, TypeScript, dwa tryby przeglądania.',
@@ -244,6 +249,7 @@ export const translations = {
         'Mathema': 'Mathema',
         'Lecture Backend': 'Lecture Backend',
         'CryptoPulse': 'CryptoPulse',
+        'Faultline': 'Faultline',
         'Current Portfolio': 'Current Portfolio'
       },
       tiles: {
@@ -266,6 +272,10 @@ export const translations = {
         'Lecture Backend': {
           short: 'REST API for lecture management — Symfony, MongoDB, layered architecture.',
           desc: 'A REST API for managing lectures and student enrollment, built with Symfony and MongoDB. Layered architecture with a clear separation of domain logic, persistence, and the API layer, covered by tests and documented with an OpenAPI spec.'
+        },
+        'Faultline': {
+          short: 'Self-hosted error tracker speaking the Sentry protocol — Symfony, PostgreSQL, Messenger.',
+          desc: 'A self-hosted error tracker that speaks the Sentry protocol, so apps report to it with the official Sentry SDKs and a DSN. Events are grouped into issues with regression detection, ingestion runs asynchronously on Symfony Messenger, and throttled notifications go to Telegram. Symfony 8 with PostgreSQL, a Twig/Turbo UI in PL/EN, near-full test coverage, Dockerized and deployed by GitHub Actions; the demo is read-only with synthetic data.'
         },
         'Current Portfolio': {
           short: 'The portfolio you are looking at — React, TypeScript, two browsing modes.',

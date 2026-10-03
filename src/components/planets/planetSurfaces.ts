@@ -173,12 +173,36 @@ const nebula: Painter = (ctx, random) => {
   }
 };
 
-const PAINTERS: Record<PlanetSurface, Painter> = { notebook, led, mat, strata, craters, nebula };
+/** Faultline: seismograph paper with ink traces, quiet until a red spike of an error burst. */
+const seismograph: Painter = (ctx, random) => {
+  ctx.fillStyle = '#ebe4d1';
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  grid(ctx, 32, '#b9c4b9');
+  const rows = 8;
+  const gap = HEIGHT / rows;
+  for (let row = 0; row < rows; row += 1) {
+    const base = gap * (row + 0.5);
+    const burst = random() * WIDTH;
+    const loud = random() > 0.45;
+    ctx.strokeStyle = loud ? '#c8372d' : '#1f2428';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(0, base);
+    for (let x = 0; x <= WIDTH; x += 3) {
+      const near = Math.max(0, 1 - Math.abs(x - burst) / 90);
+      const amplitude = 2 + (loud ? near * near * gap * 0.45 : near * 6);
+      ctx.lineTo(x, base + (random() * 2 - 1) * amplitude);
+    }
+    ctx.stroke();
+  }
+};
+
+const PAINTERS: Record<PlanetSurface, Painter> = { notebook, led, mat, strata, craters, nebula, seismograph };
 
 export function paintSurface(surface: PlanetSurface, seed: number): SurfaceTextures {
   const map = canvas(PAINTERS[surface], seed);
   if (surface === 'led') {
     return { map, emissiveMap: canvas(ledGlow, seed), emissiveIntensity: 2.2, roughness: 0.4 };
   }
-  return { map, emissiveIntensity: 0, roughness: surface === 'notebook' ? 0.95 : 0.75 };
+  return { map, emissiveIntensity: 0, roughness: surface === 'notebook' || surface === 'seismograph' ? 0.95 : 0.75 };
 }
